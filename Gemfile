@@ -40,3 +40,4 @@ gem 'spring',        group: :development
 
 gem 'tzinfo-data';
 gem 'rails_12factor', group: :production
+gem 'unicorn'
