@@ -1,0 +1,26 @@
+%table.table.table-condensed.table-striped.table-hover
+  %tr
+    %th Name:
+    %td= @child.name
+  %tr
+    %th Gender:
+    %td= @child.gender
+  %tr
+    %th Date of birth
+    %td= @child.date_of_birth
+  %tr
+    %th Address
+    %td= @child.address
+  %tr
+    %th Postcode
+    %td= @child.postcode
+  %tr
+    %th Medical Conditions
+    %td= @child.medical_conditions
+  %tr
+    %th Special Needs
+    %td= @child.special_needs
+  %tr
+    %th Registered Date
+    %td= @child.registered_date
+= link_to 'View All Children', children_path

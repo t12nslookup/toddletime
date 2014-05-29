@@ -1,0 +1,14 @@
+%h1 All Leaders
+%table.table.table-condensed.table-striped.table-hover
+  %thead
+    %tr
+      %th Name
+      %th Email
+      %th Edit
+  %tbody
+    - @leaders.each do |leader|
+      %tr
+        %td= leader.name
+        %td= leader.email
+        %td= link_to 'Edit', edit_leader_path(leader)
+= link_to 'New Leader', new_leader_path

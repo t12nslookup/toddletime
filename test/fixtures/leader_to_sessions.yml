@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  leader_id: 
+  job_id: 
+  session_id: 
+  expired: false
+
+two:
+  leader_id: 
+  job_id: 
+  session_id: 
+  expired: false

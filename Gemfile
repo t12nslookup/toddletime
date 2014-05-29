@@ -38,6 +38,9 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'tzinfo-data';
+gem 'tzinfo-data'
 gem 'rails_12factor', group: :production
 gem 'unicorn'
+gem 'devise'
+gem 'haml-rails'
+gem 'bootstrap-sass'

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  child_id: 
+  carer_id: 
+  relationship: MyString
+
+two:
+  child_id: 
+  carer_id: 
+  relationship: MyString

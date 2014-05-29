@@ -1,0 +1,36 @@
+= form_for @child do |f|
+  %table.table.table-condensed
+    %tr
+      %th.required= f.label :name
+      %td= f.text_field :name
+    %tr
+      %th= f.label :gender
+      %td= f.select(:gender, ['Boy', 'Girl'])
+    %tr
+      %th= f.label :date_of_birth
+      %td= f.date_select :date_of_birth, :order => [:day, :month, :year], :end_year => Time.now.year
+    %tr
+      %th= f.label :address
+      %td= f.text_area :address
+    %tr
+      %th= f.label :postcode
+      %td= f.text_field :postcode
+    %tr
+      %th= f.label :medical_conditions
+      %td= f.text_area :medical_conditions
+    %tr
+      %th= f.label :special_needs
+      %td= f.text_area :special_needs
+    %tr
+      %th= f.label :registered_date
+      %td= f.date_select :registered_date, :order => [:day, :month, :year], :end_year => Time.now.year
+    %tr
+      %td{:colspan => 2,:align => 'center'}= f.submit
+  %para
+  - if @child.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@Child.errors.count, "error")
+        prevented the creation of this child:
+      - @Child.errors.full_messages.each do |msg|
+        %li= msg

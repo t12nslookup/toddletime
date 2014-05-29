@@ -1,0 +1,33 @@
+!!!
+%html
+  %head
+    %title Toddletime
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    / [if lt IE 9]
+      %script(src="http://html5shiv.googlecode.com/svn/trunk/html5.js")
+  %body
+    .container
+      #header.navbar-fixed-top.navbar-inverse
+        .container.inner.navbar-text
+          - if user_signed_in?
+            Logged in as
+            %strong= current_user.email
+            .pull-right
+              = link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link'
+              |
+              = link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'
+          - else
+            .pull-right
+              = link_to "Sign up", new_user_registration_path, :class => 'navbar-link'
+              |
+              = link_to "Login", new_user_session_path, :class => 'navbar-link'
+      #body
+        #logo.pull-right
+        .container
+          = yield
+        .container
+          %p.notice= notice
+          %p.alert= alert
+

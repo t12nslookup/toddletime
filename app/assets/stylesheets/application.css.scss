@@ -10,6 +10,50 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
  *= require_self
  */
+
+// Add bootstrap variables here
+@import "bootstrap";
+
+.container-fluid {
+  margin-top: 20px;
+
+}
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  padding-top: 60px;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+}
+
+.center h1 {
+  margin-bottom: 10px;
+}
+
+#logo {
+  background-image: url("peachlogo.png");
+  background-repeat: no-repeat;
+  height: 96px;
+  width: 96px;
+  float: left;
+}
+
+#logo:hover {
+  color: #fff;
+  text-decoration: none;
+}

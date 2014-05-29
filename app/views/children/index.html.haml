@@ -1,0 +1,20 @@
+%h1 All Children
+%table.table.table-condensed.table-striped.table-hover
+  %thead
+    %tr
+      %th Name:
+      %th Gender:
+      %th Postcode
+      %th Medical Conditions
+      %th Special Needs
+      %th Edit
+  %tbody
+    - @children.each do |child|
+      %tr
+        %td= child.name
+        %td= child.gender
+        %td= child.postcode
+        %td= child.medical_conditions
+        %td= child.special_needs
+        %td= link_to 'Edit', edit_child_path(child)
+= link_to 'New Child', new_child_path
