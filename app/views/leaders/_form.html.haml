@@ -1,18 +1,12 @@
-= form_for @leader do |f|
-  %table.table.table-condensed
-    %tr
-      %th.required= f.label :name
-      %td= f.text_field :name
-    %tr
-      %th= f.label :email
-      %td= f.email_field :email
-    %tr
-      %td{:colspan => 2,:align => 'center'}= f.submit
-  %para
-  - if @leader.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@leader.errors.count, "error")
-        prevented the creation of this Leader:
-      - @leader.errors.full_messages.each do |msg|
-        %li= msg
+= bootstrap_form_for(@leader, layout: :horizontal) do |f|
+  = f.text_field :name
+  = f.email_field :email
+  = f.submit
+%para
+- if @leader.errors.any?
+  #error_explanation
+    %h2
+      = pluralize(@leader.errors.count, "error")
+      prevented the creation of this Leader:
+    - @leader.errors.full_messages.each do |msg|
+      %li= msg

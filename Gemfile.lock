@@ -31,6 +31,7 @@ GEM
     bcrypt (3.1.7)
     bootstrap-sass (3.1.1.1)
       sass (~> 3.2)
+    bootstrap_form (2.1.1)
     builder (3.2.2)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -146,6 +147,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-sass
+  bootstrap_form
   coffee-rails (~> 4.0.0)
   devise
   haml-rails

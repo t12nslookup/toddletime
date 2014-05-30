@@ -16,6 +16,10 @@
 // Add bootstrap variables here
 @import "bootstrap";
 
+/*
+ *= require rails_bootstrap_forms
+ */
+
 .container-fluid {
   margin-top: 20px;
 
@@ -27,6 +31,11 @@ html {
 
 body {
   padding-top: 60px;
+  background: image-url("peachlogo.png");
+  background-position: right 20px top 70px;
+  background-repeat: no-repeat;
+  background-height: 96px;
+  background-width: 96px;
 }
 
 section {
@@ -45,15 +54,13 @@ textarea {
   margin-bottom: 10px;
 }
 
-#logo {
-  background-image: image-url("peachlogo.png");
-  background-repeat: no-repeat;
-  height: 96px;
-  width: 96px;
-  float: left;
+select.date-select {
+  width: auto;
+  display: inline;
 }
 
-#logo:hover {
-  color: #fff;
-  text-decoration: none;
+#error_explanation {
+  @extend .alert-warning;
+  @extend .alert;
 }
+
