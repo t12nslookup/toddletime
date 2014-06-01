@@ -7,7 +7,8 @@
   = f.text_area :medical_conditions
   = f.text_area :special_needs
   = f.date_select :registered_date, {:order => [:day, :month, :year], :end_year => Time.now.year}, :class => 'date-select'
-  = f.submit
+  = f.form_group do
+    = f.primary
 %para
 - if @child.errors.any?
   #error_explanation

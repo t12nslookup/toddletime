@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20140528101359) do
     t.string   "name"
     t.string   "phone"
     t.string   "email"
-    t.boolean  "can_contact"
+    t.integer  "can_contact"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

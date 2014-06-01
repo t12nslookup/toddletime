@@ -1,0 +1,14 @@
+%table.table.table-condensed.table-striped.table-hover
+  %tr
+    %th Name:
+    %td= @carer.name
+  %tr
+    %th Phone:
+    %td= @carer.phone
+  %tr
+    %th Permission to Contact
+    %td= {0 => 'No', 1 => 'Yes'}[@carer.can_contact]
+  %tr
+    %th Email
+    %td= @carer.email
+= link_to 'View All Carers', carers_path

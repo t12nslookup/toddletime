@@ -4,7 +4,7 @@ class CreateCarers < ActiveRecord::Migration
       t.string :name
       t.string :phone
       t.string :email
-      t.boolean :can_contact
+      t.integer :can_contact
 
       t.timestamps
     end

@@ -1,7 +1,8 @@
 = bootstrap_form_for(@leader, layout: :horizontal) do |f|
   = f.text_field :name
   = f.email_field :email
-  = f.submit
+  = f.form_group do
+    = f.primary
 %para
 - if @leader.errors.any?
   #error_explanation

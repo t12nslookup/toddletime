@@ -1,0 +1,18 @@
+%h1 All Carers
+%table.table.table-condensed.table-striped.table-hover
+  %thead
+    %tr
+      %th Name:
+      %th Phone:
+      %th Permission
+      %th Email
+      %th Edit
+  %tbody
+    - @carers.each do |carer|
+      %tr
+        %td= carer.name
+        %td= carer.phone
+        %td= {0 => 'No', 1 => 'Yes'}[carer.can_contact]
+        %td= carer.email
+        %td= link_to 'Edit', edit_carer_path(carer)
+= link_to 'New Carer', new_carer_path
