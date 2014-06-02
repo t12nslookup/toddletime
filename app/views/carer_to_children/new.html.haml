@@ -1,0 +1,25 @@
+%h1 Child to Carer Relationship
+%table.table.table-condensed.table-striped.table-hover
+  %tr
+    %th Carer
+    %td= @carer_to_child.carer.name
+  %tr
+    %th Child
+    %td= @carer_to_child.child.name
+
+= bootstrap_form_for(@carer_to_child, layout: :horizontal) do |f|
+  = hidden_field_tag "from", params[:from]
+  = f.hidden_field :carer_id
+  = f.hidden_field :child_id
+  = f.text_field :relationship
+  = f.form_group do
+    = f.primary
+%para
+- if @carer_to_child.errors.any?
+  #error_explanation
+    %h2
+      = pluralize(@carer_to_child.errors.count, "error")
+      prevented the creation of this carer:
+    - @carer_to_child.errors.full_messages.each do |msg|
+      %li= msg
+

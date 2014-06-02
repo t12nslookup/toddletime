@@ -1,4 +1,5 @@
 class LeadersController < ApplicationController
+  before_action :load_leader, only: [:update, :edit, :show]
   def new
     @leader = Leader.new
   end
@@ -12,10 +13,8 @@ class LeadersController < ApplicationController
     end
   end
   def edit
-    @leader = Leader.find(params[:id])
   end
   def update
-    @leader = Leader.find(params[:id])
     if @leader.update(leader_params)
       redirect_to @leader
     else
@@ -23,13 +22,15 @@ class LeadersController < ApplicationController
     end
   end
   def show
-    @leader = Leader.find(params[:id])
   end
   def index
-    @leaders = Leader.order('name')
+    @leaders = Leader.in_order
   end
   private
     def leader_params
       params.require(:leader).permit(:name, :email)
+    end
+    def load_leader
+      @leader = Leader.find(params[:id])
     end
 end

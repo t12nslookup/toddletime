@@ -1,0 +1,22 @@
+%h1
+  Children for 
+  = @carer.name
+= bootstrap_form_for(@carer, url: '', method: :get, layout: :horizontal) do |f|
+  = f.form_group :find_text, label: {text: 'Filter Children'} do
+    = text_field_tag :find_text, params[:find_text]
+    = f.primary "Find Children"
+%table.table.table-condensed.table-striped.table-hover
+  %thead
+    %tr
+      %th Name:
+      %th Gender:
+      %th Postcode
+      %th Select
+  %tbody
+    - @children.each do |child|
+      %tr
+        %td= child.name
+        %td= child.gender
+        %td= child.postcode
+        %td= link_to 'Select', new_carer_to_child_path(:carer_id => @carer.id, :child_id => child, :from => 'carer')
+= link_to 'New Child', new_child_path

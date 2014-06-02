@@ -1,3 +1,4 @@
+%h1 Carer Details
 %table.table.table-condensed.table-striped.table-hover
   %tr
     %th Name:
@@ -11,4 +12,17 @@
   %tr
     %th Email
     %td= @carer.email
+%h1 Child Details
+%table.table.table-condensed.table-striped.table-hover
+  %thead
+    %tr
+      %th Name
+      %th Relationship
+  %tbody
+    - @carer.carer_to_children.includes(:child).each do |carer2child|
+      %tr
+        %td= carer2child.child.name
+        %td= carer2child.relationship
+    %tr
+      %td{:align => 'center', :colspan => 2}= link_to 'Add a Child', add_child_carer_path
 = link_to 'View All Carers', carers_path

@@ -1,4 +1,7 @@
 class CarersController < ApplicationController
+
+  before_action :load_carer , only: [:update, :edit, :show, :add_child]
+
   def new
     @carer = Carer.new
   end
@@ -12,10 +15,8 @@ class CarersController < ApplicationController
     end
   end
   def edit
-    @carer = Carer.find(params[:id])
   end
   def update
-    @carer = Carer.find(params[:id])
     if @carer.update(carer_params)
       redirect_to @carer
     else
@@ -23,14 +24,23 @@ class CarersController < ApplicationController
     end
   end
   def show
-    @carer = Carer.find(params[:id])
   end
   def index
-    @carers = Carer.order('name')
+    @carers = Carer.in_order
+  end
+  def add_child
+    @children = Child.in_order
+    if params[:find_text].present? 
+      @children = @children.search(params[:find_text])
+    end
   end
   private
     def carer_params
       params.require(:carer).permit(:name, :phone, :email,
                                     :can_contact)
+    end
+
+    def load_carer
+      @carer = Carer.find(params[:id])
     end
 end

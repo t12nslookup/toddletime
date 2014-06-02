@@ -3,4 +3,6 @@ class Leader < ActiveRecord::Base
   has_many :session, through: :leader_to_session
   validates :name, presence: true,
                    length: { minimum: 5 }
+
+  scope :in_order, ->{ order("name") }
 end

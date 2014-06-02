@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :leaders
-  resources :children
-  resources :carers
+  resources :children do
+    get 'add_carer', on: :member
+  end
+  resources :carers do
+    get 'add_child', on: :member
+  end
+  resources :carer_to_children
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
