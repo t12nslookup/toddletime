@@ -1,0 +1,26 @@
+%h1 Users
+= link_to "All Users", :action => "index"
+|
+= link_to "Users awaiting approval", :action => "index", :approved => "false"
+%p
+%table.table.table-condensed.table-striped.table-hover
+  %thead
+    %tr
+      %th Username
+      %th Email
+      %th Status
+      %th Action
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.username
+        %td= user.email
+        - if !user.approved?
+          %td Not Approved
+          %td= link_to "Approve", approve_user_path(user), :class => "btn btn-xs btn-primary"
+        - elsif user.locked_at?
+          %td Locked
+          %td= link_to "Unlock", unlock_user_path(user), :class => "btn btn-xs btn-warning"
+        - else
+          %td Working
+          %td= link_to "Lock", lock_user_path(user), :class => "btn btn-xs btn-warning"

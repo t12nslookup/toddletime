@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users
+  resources :users, only: [:index, :approve, :lock, :unlock] do
+    member do
+      get 'approve'
+      get 'lock'
+      get 'unlock'
+    end
+  end
+
   resources :leaders
   resources :children do
     get 'add_carer', on: :member
