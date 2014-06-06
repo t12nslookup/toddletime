@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
          :authentication_keys => [:login]
 
   attr_accessor :login
-  after_create :send_admin_mail
+#  after_create :send_admin_mail
 
   scope :find_by_approval, ->(approval) { where('approved = ?', approval) }
   scope :find_locked, ->{ where('locked_at is not null') }
@@ -21,9 +21,9 @@ class User < ActiveRecord::Base
 #    @login || self.username || self.email
 #  end
 
-  def send_admin_mail
-    AdminMailer.new_user_waiting_for_approval(self).deliver
-  end
+#  def send_admin_mail
+#    AdminMailer.new_user_waiting_for_approval(self).deliver
+#  end
 
   def active_for_authentication? 
     super && approved? 
