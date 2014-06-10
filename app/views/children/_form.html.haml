@@ -1,14 +1,31 @@
 = bootstrap_form_for(@child, layout: :horizontal) do |f|
   = f.text_field :name
   = f.select(:gender, ['Boy', 'Girl'])
-  = f.date_select :date_of_birth, {:order => [:day, :month, :year], :end_year => Time.now.year}, :class => 'date-select'
+  #date-container
+    = f.form_group :date_of_birth, label: {text: 'Date of Birth'} do
+      .input-group.date
+        = text_field_tag('child[date_of_birth]', @child.date_of_birth.try(:strftime, "%d/%b/%Y"), class: 'form-control')
+        %span.input-group-addon
+          %i.glyphicon.glyphicon-th
   = f.text_area :address
   = f.text_field :postcode
   = f.text_area :medical_conditions
   = f.text_area :special_needs
-  = f.date_select :registered_date, {:order => [:day, :month, :year], :end_year => Time.now.year}, :class => 'date-select'
+  #date-container
+    = f.form_group :registered_date, label: {text: 'Registered Date'} do
+      .input-group.date
+        = text_field_tag('child[registered_date]', @child.registered_date.try(:strftime, "%d/%b/%Y"), class: 'form-control')
+        %span.input-group-addon
+          %i.glyphicon.glyphicon-th
   = f.form_group do
     = f.primary
+:javascript
+  $('#date-container .input-group.date').datepicker({
+    format: "dd/M/yyyy",
+    orientation: "top auto",
+    autoclose: true,
+    todayHighlight: true
+  });
 %para
 - if @child.errors.any?
   #error_explanation

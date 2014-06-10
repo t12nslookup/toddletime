@@ -7,7 +7,7 @@ class LeadersController < ApplicationController
     @leader = Leader.new(leader_params)
 
     if @leader.save
-      redirect_to @leader
+      redirect_to leaders_path
     else
       render 'new'
     end
@@ -16,7 +16,7 @@ class LeadersController < ApplicationController
   end
   def update
     if @leader.update(leader_params)
-      redirect_to @leader
+      redirect_to leaders_path
     else
       render 'edit'
     end

@@ -25,6 +25,8 @@
             = link_to "Login", new_user_session_path, :class => 'navbar-link'
     .container
       .row
+        = render 'layouts/navbar'
+      .row
         = yield
       .row
         %p.notice= notice

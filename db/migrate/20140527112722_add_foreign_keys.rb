@@ -1,33 +1,33 @@
 class AddForeignKeys < ActiveRecord::Migration
   def change
     execute <<-SQL
-      ALTER TABLE leader_to_sessions
-        ADD CONSTRAINT fk_leader_to_session_leader
+      ALTER TABLE leader_to_meets
+        ADD CONSTRAINT fk_leader_to_meet_leader
         FOREIGN KEY (leader_id)
         REFERENCES leaders(id)
     SQL
     execute <<-SQL
-      ALTER TABLE leader_to_sessions
-        ADD CONSTRAINT fk_leader_to_session_session
-        FOREIGN KEY (session_id)
-        REFERENCES sessions(id)
+      ALTER TABLE leader_to_meets
+        ADD CONSTRAINT fk_leader_to_meet_meet
+        FOREIGN KEY (meet_id)
+        REFERENCES meets(id)
     SQL
     execute <<-SQL
-      ALTER TABLE leader_to_sessions
-        ADD CONSTRAINT fk_leader_to_session_job
+      ALTER TABLE leader_to_meets
+        ADD CONSTRAINT fk_leader_to_meet_job
         FOREIGN KEY (job_id)
         REFERENCES jobs(id)
     SQL
 
     execute <<-SQL
-      ALTER TABLE child_to_sessions
-        ADD CONSTRAINT fk_child_to_session_session
-        FOREIGN KEY (session_id)
-        REFERENCES sessions(id)
+      ALTER TABLE child_to_meets
+        ADD CONSTRAINT fk_child_to_meet_meet
+        FOREIGN KEY (meet_id)
+        REFERENCES meets(id)
     SQL
     execute <<-SQL
-      ALTER TABLE child_to_sessions
-        ADD CONSTRAINT fk_child_to_session_child
+      ALTER TABLE child_to_meets
+        ADD CONSTRAINT fk_child_to_meet_child
         FOREIGN KEY (child_id)
         REFERENCES children(id)
     SQL

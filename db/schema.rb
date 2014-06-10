@@ -36,15 +36,15 @@ ActiveRecord::Schema.define(version: 20140603130301) do
     t.datetime "updated_at"
   end
 
-  create_table "child_to_sessions", force: true do |t|
+  create_table "child_to_meets", force: true do |t|
     t.integer  "child_id"
-    t.integer  "session_id"
+    t.integer  "meet_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "child_to_sessions", ["child_id"], name: "index_child_to_sessions_on_child_id", using: :btree
-  add_index "child_to_sessions", ["session_id"], name: "index_child_to_sessions_on_session_id", using: :btree
+  add_index "child_to_meets", ["child_id"], name: "index_child_to_meets_on_child_id", using: :btree
+  add_index "child_to_meets", ["meet_id"], name: "index_child_to_meets_on_meet_id", using: :btree
 
   create_table "children", force: true do |t|
     t.string   "name"
@@ -65,18 +65,18 @@ ActiveRecord::Schema.define(version: 20140603130301) do
     t.datetime "updated_at"
   end
 
-  create_table "leader_to_sessions", force: true do |t|
+  create_table "leader_to_meets", force: true do |t|
     t.integer  "leader_id"
     t.integer  "job_id"
-    t.integer  "session_id"
+    t.integer  "meet_id"
     t.boolean  "expired",    default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "leader_to_sessions", ["job_id"], name: "index_leader_to_sessions_on_job_id", using: :btree
-  add_index "leader_to_sessions", ["leader_id"], name: "index_leader_to_sessions_on_leader_id", using: :btree
-  add_index "leader_to_sessions", ["session_id"], name: "index_leader_to_sessions_on_session_id", using: :btree
+  add_index "leader_to_meets", ["job_id"], name: "index_leader_to_meets_on_job_id", using: :btree
+  add_index "leader_to_meets", ["leader_id"], name: "index_leader_to_meets_on_leader_id", using: :btree
+  add_index "leader_to_meets", ["meet_id"], name: "index_leader_to_meets_on_meet_id", using: :btree
 
   create_table "leaders", force: true do |t|
     t.string   "name"
@@ -86,8 +86,8 @@ ActiveRecord::Schema.define(version: 20140603130301) do
     t.datetime "updated_at"
   end
 
-  create_table "sessions", force: true do |t|
-    t.date     "session_date"
+  create_table "meets", force: true do |t|
+    t.date     "meet_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

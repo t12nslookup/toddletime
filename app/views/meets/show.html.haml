@@ -1,0 +1,20 @@
+%h1 Meet Details
+%table.table.table-condensed.table-striped.table-hover
+  %tr
+    %th Date of meet
+    %td= @meet.meet_date.strftime("%A #{@meet.meet_date.day.ordinalize} %b %Y")
+
+%h1 Leader Details
+%table.table.table-condensed.table-striped.table-hover
+  %thead
+    %tr
+      %th Name
+      %th Job
+  %tbody
+    - @meet.leader_to_meet.includes(:leaders).includes(:jobs).each do |leader2meet|
+      %tr
+        %td= leader2meet.leaders.name
+        %td= leader2meet.jobs.name
+    %tr
+      %td{:align => 'center', :colspan => 3}= link_to 'Add a Leader', add_carer_child_path
+= link_to 'View All Meets', meets_path

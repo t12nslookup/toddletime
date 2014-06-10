@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     get 'add_child', on: :member
   end
   resources :carer_to_children
+  resources :meets
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

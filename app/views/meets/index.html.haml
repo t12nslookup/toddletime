@@ -1,0 +1,12 @@
+%h1 Meets
+%table.table.table-condensed.table-striped.table-hover
+  %thead
+    %tr
+      %th Date:
+      %th Details
+  %tbody
+    - @meets.each do |meet|
+      %tr
+        %td= meet.meet_date.strftime("%A #{meet.meet_date.day.ordinalize} %b %Y")
+        %td= link_to 'Details', meet_path(meet)
+= link_to 'New Meet', new_meet_path

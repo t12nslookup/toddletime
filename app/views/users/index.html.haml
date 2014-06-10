@@ -2,6 +2,8 @@
 = link_to "All Users", :action => "index"
 |
 = link_to "Users awaiting approval", :action => "index", :approved => "false"
+|
+= link_to "Locked Users", :action => "index", :locked => "true"
 %p
 %table.table.table-condensed.table-striped.table-hover
   %thead

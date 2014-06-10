@@ -3,6 +3,7 @@ class ChildrenController < ApplicationController
 
   def new
     @child = Child.new
+    @child.registered_date = Time.now
   end
   def create
     @child = Child.new(child_params)
