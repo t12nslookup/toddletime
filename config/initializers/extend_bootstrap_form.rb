@@ -12,6 +12,12 @@ module BootstrapForm
         input
       end
 
+      def date_picker(name, options = {})
+        options[:append] = content_tag(:i, nil, class: 'glyphicon glyphicon-th')
+        options[:input_group_class] = 'date'
+        options[:readonly] = true
+        text_field(name, options)
+      end
     end
   end
 end

@@ -1,11 +1,6 @@
 = bootstrap_form_for(@meet, layout: :horizontal) do |f|
   #date-container
-    = f.text_field :meet_date, {input_group_class: 'date', append: content_tag(:i, nil, class: 'glyphicon glyphicon-th')}
-    = f.form_group :meet_date, label: {text: 'Meet date'} do
-      .input-group.date
-        = text_field_tag('meet[meet_date]', nil, class: 'form-control')
-        %span.input-group-addon
-          %i.glyphicon.glyphicon-th
+    = f.date_picker :meet_date
   = f.form_group do
     = f.primary
 :javascript
