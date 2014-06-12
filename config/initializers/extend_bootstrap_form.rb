@@ -13,6 +13,9 @@ module BootstrapForm
       end
 
       def date_picker(name, options = {})
+        date = self.object.send(name)
+        format = options.delete(:format) || "%d/%b/%Y"
+        options[:value] = date.strftime(format) if date
         options[:append] = content_tag(:i, nil, class: 'glyphicon glyphicon-th')
         options[:input_group_class] = 'date'
         options[:readonly] = true

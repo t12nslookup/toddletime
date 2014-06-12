@@ -2,7 +2,7 @@
 %table.table.table-condensed.table-striped.table-hover
   %tr
     %th Date of meet
-    %td= @meet.meet_date.strftime("%A #{@meet.meet_date.day.ordinalize} %b %Y")
+    %td= @meet.meet_date.to_s(:long_ordinal)
 
 %h1 Leader Details
 %table.table.table-condensed.table-striped.table-hover

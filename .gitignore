@@ -16,3 +16,8 @@
 /tmp
 .env
 /leaders.txt
+
+# Vi(m) temporary files
+*~
+*.swp
+*.swo

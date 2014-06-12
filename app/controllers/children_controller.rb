@@ -2,8 +2,7 @@ class ChildrenController < ApplicationController
   before_action :load_child , only: [:update, :edit, :show, :add_carer]
 
   def new
-    @child = Child.new
-    @child.registered_date = Time.now
+    @child = Child.new registered_date: Time.now
   end
   def create
     @child = Child.new(child_params)

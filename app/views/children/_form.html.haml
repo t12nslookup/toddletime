@@ -2,13 +2,13 @@
   = f.text_field :name
   = f.select(:gender, ['Boy', 'Girl'])
   #date-container
-    = f.date_picker :date_of_birth, value: @child.date_of_birth.try(:strftime, "%d/%b/%Y")
+    = f.date_picker :date_of_birth
   = f.text_area :address
   = f.text_field :postcode
   = f.text_area :medical_conditions
   = f.text_area :special_needs
   #date-container
-    = f.date_picker :registered_date, value: @child.registered_date.try(:strftime, "%d/%b/%Y")
+    = f.date_picker :registered_date
   = f.form_group do
     = f.primary
 :javascript
