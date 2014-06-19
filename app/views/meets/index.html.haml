@@ -9,4 +9,5 @@
       %tr
         %td= meet.meet_date.to_s(:long_ordinal)
         %td= link_to 'Details', meet_path(meet)
+        %td= link_to 'Register', register_meet_path(meet)
 = link_to 'New Meet', new_meet_path

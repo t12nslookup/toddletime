@@ -3,6 +3,11 @@ class ChildrenController < ApplicationController
 
   def new
     @child = Child.new registered_date: Time.now
+    if params[:id].present?
+      @lastchild = Child.find(params[:id])
+      @child.address = @lastchild.address
+      @child.postcode = @lastchild.postcode
+    end
   end
   def create
     @child = Child.new(child_params)

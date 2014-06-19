@@ -24,6 +24,8 @@
   %tr
     %th Registered Date
     %td= @child.registered_date
+  %tr
+    %td{:align => 'center', :colspan => 2}= link_to 'New child at this address', copy_child_path(@child)
 
 %h1 Carer Details
 %table.table.table-condensed.table-striped.table-hover

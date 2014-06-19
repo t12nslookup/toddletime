@@ -19,10 +19,4 @@
     todayHighlight: true
   });
 %para
-- if @child.errors.any?
-  #error_explanation
-    %h2
-      = pluralize(@child.errors.count, "error")
-      prevented the creation of this child:
-    - @child.errors.full_messages.each do |msg|
-      %li= msg
+= errors_for @child

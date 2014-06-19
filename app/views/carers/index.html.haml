@@ -6,6 +6,7 @@
       %th Phone:
       %th Permission
       %th Email
+      %th Details
       %th Edit
   %tbody
     - @carers.each do |carer|
@@ -14,5 +15,6 @@
         %td= carer.phone
         %td= {0 => 'No', 1 => 'Yes'}[carer.can_contact]
         %td= carer.email
+        %td= link_to 'Details', carer_path(carer)
         %td= link_to 'Edit', edit_carer_path(carer)
 = link_to 'New Carer', new_carer_path

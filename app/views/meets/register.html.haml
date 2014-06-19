@@ -1,0 +1,28 @@
+%h1 Meet Details
+%table.table.table-condensed.table-striped.table-hover
+  %tr
+    %th Date of meet
+    %td= @meet.meet_date.to_s(:long_ordinal)
+
+%h1 Registered Children
+%table.table.table-condensed.table-striped.table-hover
+  %thead
+    %tr
+      %th Name
+      %th Gender
+      %th Medical Conditions
+      %th Special Needs
+      %th Contact Details
+  %tbody
+    - @children.includes(:carers).each do |child|
+      %tr
+        %td= child.name
+        %td= child.gender
+        %td= child.medical_conditions
+        %td= child.special_needs
+        - child.carers.each do |carer|
+          %td= carer.phone
+    - if (Date.today == @meet.meet_date)
+      %tr
+        %td{:align => 'center', :colspan => 5}= link_to 'Register a Child', new_meet_register_child_path(@meet)
+= link_to 'View All Meets', meets_path

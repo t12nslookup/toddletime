@@ -7,10 +7,4 @@
   = f.form_group do
     = f.primary
 %para
-- if @carer.errors.any?
-  #error_explanation
-    %h2
-      = pluralize(@carer.errors.count, "error")
-      prevented the creation of this carer:
-    - @carer.errors.full_messages.each do |msg|
-      %li= msg
+= errors_for @carer

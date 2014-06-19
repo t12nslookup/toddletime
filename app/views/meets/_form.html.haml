@@ -11,10 +11,4 @@
     todayHighlight: true
   });
 %para
-- if @meet.errors.any?
-  #error_explanation
-    %h2
-      = pluralize(@meet.errors.count, "error")
-      prevented the creation of this meet:
-    - @meet.errors.full_messages.each do |msg|
-      %li= msg
+= errors_for @meet

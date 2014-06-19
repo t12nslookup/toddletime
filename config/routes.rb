@@ -10,13 +10,19 @@ Rails.application.routes.draw do
 
   resources :leaders
   resources :children do
-    get 'add_carer', on: :member
+    member do
+      get 'add_carer'
+      get 'new', as: :copy
+    end
   end
   resources :carers do
     get 'add_child', on: :member
   end
-  resources :carer_to_children
-  resources :meets
+  resources :carer_to_children, only: [:new, :create]
+  resources :meets, only: [:new, :create, :show, :index] do
+    resources :register_children, only: [:new, :create]
+    get 'register', on: :member
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
