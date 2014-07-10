@@ -1,0 +1,2 @@
+class RotasController < ApplicationController
+end

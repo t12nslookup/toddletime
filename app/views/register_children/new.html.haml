@@ -6,6 +6,7 @@
     = text_field_tag :find_text, params[:find_text]
     = f.primary "Find Children"
 %hr
+
 = bootstrap_form_for(:child_to_meet, url: meet_register_children_path, layout: :horizontal) do |f|
   %table.table.table-condensed.table-striped.table-hover
     %thead

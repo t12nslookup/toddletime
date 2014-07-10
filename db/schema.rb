@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140603130301) do
+ActiveRecord::Schema.define(version: 20140622150502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,16 @@ ActiveRecord::Schema.define(version: 20140603130301) do
   add_index "carer_to_children", ["carer_id"], name: "index_carer_to_children_on_carer_id", using: :btree
   add_index "carer_to_children", ["child_id"], name: "index_carer_to_children_on_child_id", using: :btree
 
+  create_table "carer_to_meets", force: true do |t|
+    t.integer  "carer_id"
+    t.integer  "meet_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "carer_to_meets", ["carer_id"], name: "index_carer_to_meets_on_carer_id", using: :btree
+  add_index "carer_to_meets", ["meet_id"], name: "index_carer_to_meets_on_meet_id", using: :btree
+
   create_table "carers", force: true do |t|
     t.string   "name"
     t.string   "phone"
@@ -34,6 +44,8 @@ ActiveRecord::Schema.define(version: 20140603130301) do
     t.integer  "can_contact"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "address"
+    t.string   "postcode"
   end
 
   create_table "child_to_meets", force: true do |t|
@@ -65,6 +77,17 @@ ActiveRecord::Schema.define(version: 20140603130301) do
     t.datetime "updated_at"
   end
 
+  create_table "leader_meet_types", force: true do |t|
+    t.integer  "leader_id"
+    t.integer  "meet_type_id"
+    t.integer  "expired",      default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "leader_meet_types", ["leader_id"], name: "index_leader_meet_types_on_leader_id", using: :btree
+  add_index "leader_meet_types", ["meet_type_id"], name: "index_leader_meet_types_on_meet_type_id", using: :btree
+
   create_table "leader_to_meets", force: true do |t|
     t.integer  "leader_id"
     t.integer  "job_id"
@@ -84,13 +107,35 @@ ActiveRecord::Schema.define(version: 20140603130301) do
     t.date     "expired"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "dbs"
+  end
+
+  create_table "meet_type_jobs", force: true do |t|
+    t.integer  "job_id"
+    t.integer  "meet_type_id"
+    t.integer  "count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "meet_type_jobs", ["job_id"], name: "index_meet_type_jobs_on_job_id", using: :btree
+  add_index "meet_type_jobs", ["meet_type_id"], name: "index_meet_type_jobs_on_meet_type_id", using: :btree
+
+  create_table "meet_types", force: true do |t|
+    t.string   "name"
+    t.integer  "deleted"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "meets", force: true do |t|
     t.date     "meet_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "meet_type_id"
   end
+
+  add_index "meets", ["meet_type_id"], name: "index_meets_on_meet_type_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",    null: false

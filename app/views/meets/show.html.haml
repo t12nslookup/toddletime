@@ -3,6 +3,10 @@
   %tr
     %th Date of meet
     %td= @meet.meet_date.try :to_s, :long_ordinal
+  - if @meet.meet_type.present?
+    %tr
+      %th Meet Type
+      %td= @meet.meet_type.name
 
 %h1 Leader Details
 %table.table.table-condensed.table-striped.table-hover

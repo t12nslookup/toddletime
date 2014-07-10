@@ -1,7 +1,21 @@
 = bootstrap_form_for(@leader, layout: :horizontal) do |f|
   = f.text_field :name
   = f.email_field :email
+  #date-container
+    = f.date_picker :dbs
+  = f.form_group :meet_type, label: {text: 'Meet Types:'} do
+    - @meet_types.each do |mt|
+      = f.form_group :meet_type do
+        = check_box_tag 'meet_type_id[]', mt.id, @leader.meet_types.include?(mt)
+        = mt.name
   = f.form_group do
     = f.primary
+:javascript
+  $('#date-container .input-group.date').datepicker({
+    format: "dd/M/yyyy",
+    orientation: "top auto",
+    autoclose: true,
+    todayHighlight: true
+  });
 %para
 = errors_for @leader

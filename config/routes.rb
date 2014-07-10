@@ -9,18 +9,28 @@ Rails.application.routes.draw do
   end
 
   resources :leaders
+  resources :carer_to_children, only: [:new, :create]
+  resources :jobs
+  resources :meet_types do
+    resources :rotas, only: [:index]
+  end
+  resources :rotas
+
   resources :children do
     member do
       get 'add_carer'
       get 'new', as: :copy
     end
   end
+
   resources :carers do
     get 'add_child', on: :member
   end
-  resources :carer_to_children, only: [:new, :create]
+
   resources :meets, only: [:new, :create, :show, :index] do
     resources :register_children, only: [:new, :create]
+    resources :register_carers, only: [:new, :create]
+
     get 'register', on: :member
   end
 

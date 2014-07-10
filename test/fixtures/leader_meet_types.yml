@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  leader_id: 
+  meet_type_id: 
+  expired: 1
+
+two:
+  leader_id: 
+  meet_type_id: 
+  expired: 1

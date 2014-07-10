@@ -3,11 +3,13 @@
   %thead
     %tr
       %th Date:
+      %th Type:
       %th Details
   %tbody
-    - @meets.each do |meet|
+    - @meets.includes(:meet_type).each do |meet|
       %tr
         %td= meet.meet_date.to_s(:long_ordinal)
+        %td= meet.meet_type.try(:name)
         %td= link_to 'Details', meet_path(meet)
         %td= link_to 'Register', register_meet_path(meet)
 = link_to 'New Meet', new_meet_path

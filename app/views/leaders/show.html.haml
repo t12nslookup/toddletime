@@ -5,4 +5,8 @@
   %tr
     %th Email:
     %td= @leader.email
+  - if @leader.meet_type.exists?
+    %tr
+      %th Meet Types:
+      %td= @leader.meet_types.map{ |mt| mt.name}.join(', ')
 = link_to 'View All Leaders', leaders_path

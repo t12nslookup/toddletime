@@ -7,6 +7,12 @@
     %th Phone:
     %td= @carer.phone
   %tr
+    %th Address:
+    %td= @carer.address
+  %tr
+    %th Postcode:
+    %td= @carer.postcode
+  %tr
     %th Permission to Contact
     %td= {0 => 'No', 1 => 'Yes'}[@carer.can_contact]
   %tr

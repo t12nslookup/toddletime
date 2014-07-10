@@ -1,0 +1,14 @@
+%h1 All Types of Meet
+%table.table.table-condensed.table-striped.table-hover
+  %thead
+    %tr
+      %th Name
+      %th Job Types
+      %th Edit
+  %tbody
+    - @meet_types.each do |type|
+      %tr
+        %td= type.name
+        %td= type.meet_type_jobs.map{ |mt| mt.job.name + " x " + mt.count.to_s}.join(', ')
+        %td= link_to 'Edit', edit_meet_type_path(type)
+= link_to 'New Meet Type', new_meet_type_path

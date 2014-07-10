@@ -18,6 +18,7 @@ class MeetsController < ApplicationController
 
   def register
     @children = @meet.children.in_order
+    @carers = @meet.carers.in_order
 #    @carers = @meet.carers.in_order
   end
 
@@ -30,7 +31,7 @@ class MeetsController < ApplicationController
 
   private
     def meet_params
-      params.require(:meet).permit(:meet_date)
+      params.require(:meet).permit(:meet_date, :meet_type_id)
     end
 
     def load_meet

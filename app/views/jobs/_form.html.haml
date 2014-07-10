@@ -1,0 +1,6 @@
+= bootstrap_form_for(@job, layout: :horizontal) do |f|
+  = f.text_field :name
+  = f.form_group do
+    = f.primary
+%para
+= errors_for @job

@@ -36,8 +36,8 @@ class CarersController < ApplicationController
   end
   private
     def carer_params
-      params.require(:carer).permit(:name, :phone, :email,
-                                    :can_contact)
+      params.require(:carer).permit(:name, :phone, :address, :postcode,
+                                    :email, :can_contact)
     end
 
     def load_carer

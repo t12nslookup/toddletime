@@ -1,6 +1,7 @@
 = bootstrap_form_for(@meet, layout: :horizontal) do |f|
   #date-container
     = f.date_picker :meet_date
+  = f.collection_select :meet_type_id, MeetType.all, :id, :name
   = f.form_group do
     = f.primary
 :javascript

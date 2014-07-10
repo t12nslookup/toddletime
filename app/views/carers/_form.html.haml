@@ -1,6 +1,8 @@
 = bootstrap_form_for(@carer, layout: :horizontal) do |f|
   = f.text_field :name
   = f.telephone_field :phone
+  = f.text_area :address
+  = f.text_field :postcode
   = f.form_group :can_contact, label: { text: 'Can we contact you' } do
     = f.check_box(:can_contact, hide_label: true)
   = f.email_field :email

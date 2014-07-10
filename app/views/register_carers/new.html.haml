@@ -1,0 +1,26 @@
+%h1
+  Carers for 
+  = @meet.meet_date.to_s(:long_ordinal)
+= bootstrap_form_for(:carer_to_meet, url: '', method: :get, layout: :horizontal) do |f|
+  = f.form_group :find_text, label: {text: 'Filter Carers'} do
+    = text_field_tag :find_text, params[:find_text]
+    = f.primary "Find Carers"
+%hr
+
+= bootstrap_form_for(:carer_to_meet, url: meet_register_carers_path, layout: :horizontal) do |f|
+  %table.table.table-condensed.table-striped.table-hover
+    %thead
+      %tr
+        %th Name
+        %th Postcode
+        %th{:class => 'text-align: center'} Select
+    %tbody
+      - @carers.each do |carer|
+        %tr
+          %td= carer.name
+          %td= carer.postcode
+          %td{:align => 'center'}= check_box_tag 'carer_id[]', carer.id
+      %tr
+        %td{:colspan => 2}
+        %td{:align => 'center'}= f.primary "Add Carers"
+= link_to 'New Carer', new_carer_path

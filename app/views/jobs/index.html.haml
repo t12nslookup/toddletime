@@ -1,0 +1,11 @@
+%h1 All Jobs
+%table.table.table-condensed.table-striped.table-hover
+  %thead
+    %tr
+      %th Name
+  %tbody
+    - @jobs.each do |job|
+      %tr
+        %td= job.name
+        %td= link_to 'Edit', edit_job_path(job)
+= link_to 'New Job', new_job_path
