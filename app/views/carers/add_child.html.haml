@@ -19,4 +19,5 @@
         %td= child.gender
         %td= child.postcode
         %td= link_to 'Select', new_carer_to_child_path(:carer_id => @carer.id, :child_id => child, :from => 'carer')
-= link_to 'New Child', new_child_path
+%ul.nav.nav-pills
+  %li= link_to "New Child", new_child_path

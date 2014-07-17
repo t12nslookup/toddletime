@@ -1,5 +1,5 @@
 class MeetTypesController < ApplicationController
-  before_action :load_meet_type, only: [:update, :edit, :show, :jobs]
+  before_action :load_meet_type, only: [:update, :edit, :show]
 
   def new
     @meet_type = MeetType.new
@@ -7,6 +7,7 @@ class MeetTypesController < ApplicationController
     Job.all.each do |job|
       @meet_type.meet_type_jobs.build(job: job, count: 0)
     end
+    @meet_type.meet_type_jobs.sort_by{ |mtj| mtj.job.name }
   end
 
   def create
@@ -23,10 +24,10 @@ class MeetTypesController < ApplicationController
     (Job.all - @meet_type.jobs).each do |job|
       @meet_type.meet_type_jobs.build(job: job, count: 0)
     end
+    @meet_type.meet_type_jobs.sort_by{ |mtj| mtj.job.name }
   end
 
   def update
-    #raise @meet_type.inspect
 
     if @meet_type.update(meet_type_params)
       redirect_to meet_types_path
@@ -40,11 +41,6 @@ class MeetTypesController < ApplicationController
 
   def index
     @meet_types = MeetType.in_order
-    @meet_types.each do |meet_type|
-      meet_type.meet_type_jobs.each do |mtj|
-        mtj.delete if mtj.count <= 0
-      end
-    end
   end
 
 private

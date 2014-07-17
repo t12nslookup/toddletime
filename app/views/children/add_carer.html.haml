@@ -17,4 +17,5 @@
         %td= carer.name
         %td= carer.phone
         %td= link_to 'Select', new_carer_to_child_path(:carer_id => carer, :child_id => @child.id, :from => 'child')
-= link_to 'New Carer', new_carer_path
+%ul.nav.nav-pills
+  %li= link_to 'New Carer', new_carer_path

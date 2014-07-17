@@ -42,4 +42,5 @@
         %td= carer2child.carer.phone
     %tr
       %td{:align => 'center', :colspan => 3}= link_to 'Add a Carer', add_carer_child_path
-= link_to 'View All Children', children_path
+%ul.nav.nav-pills
+  %li= link_to 'View All Children', children_path

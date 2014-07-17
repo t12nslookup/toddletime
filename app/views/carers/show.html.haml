@@ -31,4 +31,5 @@
         %td= carer2child.relationship
     %tr
       %td{:align => 'center', :colspan => 2}= link_to 'Add a Child', add_child_carer_path
-= link_to 'View All Carers', carers_path
+%ul.nav.nav-pills
+  %li= link_to 'View All Carers', carers_path

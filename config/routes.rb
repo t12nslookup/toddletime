@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     get 'add_child', on: :member
   end
 
-  resources :meets, only: [:new, :create, :show, :index] do
+  resources :meets do
     resources :register_children, only: [:new, :create]
     resources :register_carers, only: [:new, :create]
 

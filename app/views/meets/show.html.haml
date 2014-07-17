@@ -15,10 +15,11 @@
       %th Name
       %th Job
   %tbody
-    - @meet.leader_to_meet.includes(:leaders).includes(:jobs).each do |leader2meet|
+    - @meet.leader_to_meets.includes(:leaders).includes(:jobs).each do |leader2meet|
       %tr
         %td= leader2meet.leaders.name
         %td= leader2meet.jobs.name
     %tr
-      %td{:align => 'center', :colspan => 3}= link_to 'Add a Leader', add_carer_child_path
-= link_to 'View All Meets', meets_path
+      %td{:align => 'center', :colspan => 3}= link_to 'Set Leaders', edit_meet_path(@meet)
+%ul.nav.nav-pills
+  %li= link_to 'View All Meets', meets_path

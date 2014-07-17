@@ -1,6 +1,6 @@
 class MeetsController < ApplicationController
 
-  before_action :load_meet, only: [:show, :register]
+  before_action :load_meet, only: [:edit, :show, :register]
 
   def new
     @meet = Meet.new
@@ -10,6 +10,26 @@ class MeetsController < ApplicationController
     @meet = Meet.new(meet_params)
 
     if @meet.save
+      redirect_to @meet
+    else
+      render 'new'
+    end
+  end
+
+  def edit
+    if (@meet.leader_to_meets.count == 0)
+      MeetType.find(@meet.meet_type).meet_type_jobs.has_count.each do |mtj|
+        mtj.count.times do
+          @meet.leader_to_meets.build(job: mtj.job)
+        end
+      end
+    end
+
+    @leaders = Leader.joins(:leader_meet_types).where(leader_meet_types: {meet_type_id: @meet.meet_type})
+  end
+
+  def update
+    if @meet.update(meet_params)
       redirect_to @meet
     else
       render 'new'

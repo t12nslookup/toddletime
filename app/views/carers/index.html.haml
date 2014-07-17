@@ -17,4 +17,5 @@
         %td= carer.email
         %td= link_to 'Details', carer_path(carer)
         %td= link_to 'Edit', edit_carer_path(carer)
-= link_to 'New Carer', new_carer_path
+%ul.nav.nav-pills
+  %li= link_to "New Carer", new_carer_path

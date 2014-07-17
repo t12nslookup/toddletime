@@ -1,9 +1,8 @@
 %h1 Users
-= link_to "All Users", :action => "index"
-|
-= link_to "Users awaiting approval", :action => "index", :approved => "false"
-|
-= link_to "Locked Users", :action => "index", :locked => "true"
+%ul.pagination
+  %li{:class => ('active' if (params[:approved].blank? && params[:locked].blank?))}= link_to "All Users", :action => "index"
+  %li{:class => ('active' if params[:approved] == 'false')}= link_to "Users awaiting approval", :action => "index", :approved => "false"
+  %li{:class => ('active' if params[:locked] == 'true')}= link_to "Locked Users", :action => "index", :locked => "true"
 %p
 %table.table.table-condensed.table-striped.table-hover
   %thead

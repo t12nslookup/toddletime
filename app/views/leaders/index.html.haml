@@ -15,4 +15,5 @@
         %td= leader.dbs.try :to_s, :short_ordinal
         %td= leader.meet_types.map{ |mt| mt.name}.join(', ')
         %td= link_to 'Edit', edit_leader_path(leader)
-= link_to 'New Leader', new_leader_path
+%ul.nav.nav-pills
+  %li= link_to 'New Leader', new_leader_path

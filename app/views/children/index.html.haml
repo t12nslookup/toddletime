@@ -19,4 +19,5 @@
         %td= child.special_needs
         %td= link_to 'Details', child_path(child)
         %td= link_to 'Edit', edit_child_path(child)
-= link_to 'New Child', new_child_path
+%ul.nav.nav-pills
+  %li= link_to "New Child", new_child_path

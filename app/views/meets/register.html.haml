@@ -39,4 +39,5 @@
     - if (Date.today == @meet.meet_date)
       %tr
         %td{:align => 'center', :colspan => 5}= link_to 'Register a Carer', new_meet_register_carer_path(@meet)
-= link_to 'View All Meets', meets_path
+%ul.nav.nav-pills
+  %li= link_to 'View All Meets', meets_path

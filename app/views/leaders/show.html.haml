@@ -9,4 +9,5 @@
     %tr
       %th Meet Types:
       %td= @leader.meet_types.map{ |mt| mt.name}.join(', ')
-= link_to 'View All Leaders', leaders_path
+%ul.nav.nav-pills
+  %li= link_to 'View All Leaders', leaders_path

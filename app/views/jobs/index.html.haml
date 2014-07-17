@@ -8,4 +8,5 @@
       %tr
         %td= job.name
         %td= link_to 'Edit', edit_job_path(job)
-= link_to 'New Job', new_job_path
+%ul.nav.nav-pills
+  %li= link_to 'New Job', new_job_path

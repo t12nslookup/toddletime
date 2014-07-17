@@ -9,6 +9,7 @@
     - @meet_types.each do |type|
       %tr
         %td= type.name
-        %td= type.meet_type_jobs.map{ |mt| mt.job.name + " x " + mt.count.to_s}.join(', ')
+        %td= type.meet_type_jobs.has_count.map{ |mt| mt.job.name + " x " + mt.count.to_s}.join(', ')
         %td= link_to 'Edit', edit_meet_type_path(type)
-= link_to 'New Meet Type', new_meet_type_path
+%ul.nav.nav-pills
+  %li= link_to 'New Meet Type', new_meet_type_path

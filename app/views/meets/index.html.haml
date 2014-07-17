@@ -12,4 +12,6 @@
         %td= meet.meet_type.try(:name)
         %td= link_to 'Details', meet_path(meet)
         %td= link_to 'Register', register_meet_path(meet)
-= link_to 'New Meet', new_meet_path
+%ul.nav.nav-pills
+  %li= link_to "New Meet", new_meet_path
+  %li= link_to "Meet Types", meet_types_path
