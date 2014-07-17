@@ -47,6 +47,11 @@ class MeetsController < ApplicationController
 
   def index
     @meets = Meet.in_order
+    if params[:historic] == "true"
+      @meets = @meets.find_historic
+    else
+      @meets = @meets.find_future
+    end
   end
 
   private
