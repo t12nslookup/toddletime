@@ -1,6 +1,6 @@
-%ul.nav.nav-pills
+%ul.nav.nav-tabs
   %li{:class => ('active' if params[:controller] == 'meets')}= link_to "Meets", meets_path
-  %li{:class => ('active' if params[:controller] == 'leaders')}= link_to "Leaders", leaders_path
   %li{:class => ('active' if params[:controller] == 'children')}= link_to "Children", children_path
   %li{:class => ('active' if params[:controller] == 'carers')}= link_to "Carers", carers_path
+  %li{:class => ('active' if params[:controller] == 'leaders')}= link_to "Leaders", leaders_path
   %li{:class => ('active' if params[:controller] == 'users')}= link_to "Users", users_path

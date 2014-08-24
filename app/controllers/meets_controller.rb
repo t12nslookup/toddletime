@@ -1,6 +1,6 @@
 class MeetsController < ApplicationController
 
-  before_action :load_meet, only: [:edit, :show, :register]
+  before_action :load_meet, only: [:edit, :show, :register, :update]
 
   def new
     @meet = Meet.new
@@ -17,7 +17,7 @@ class MeetsController < ApplicationController
   end
 
   def edit
-    if (@meet.leader_to_meets.count == 0)
+    if (@meet.leader_to_meets.count == 0 && @meet.meet_type.present?)
       MeetType.find(@meet.meet_type).meet_type_jobs.has_count.each do |mtj|
         mtj.count.times do
           @meet.leader_to_meets.build(job: mtj.job)
@@ -25,7 +25,7 @@ class MeetsController < ApplicationController
       end
     end
 
-    @leaders = Leader.joins(:leader_meet_types).where(leader_meet_types: {meet_type_id: @meet.meet_type})
+    @leaders = Leader.joins(:leader_meet_types).where(leader_meet_types: {meet_type_id: @meet.meet_type}).in_order
   end
 
   def update
@@ -43,6 +43,7 @@ class MeetsController < ApplicationController
   end
 
   def show
+    @myleaders = @meet.leader_to_meets.has_leader.select("leader_id").uniq
   end
 
   def index
@@ -56,7 +57,7 @@ class MeetsController < ApplicationController
 
   private
     def meet_params
-      params.require(:meet).permit(:meet_date, :meet_type_id)
+      params.require(:meet).permit(:meet_date, :meet_type_id, leader_to_meets_attributes: [:id, :job_id, :leader_id])
     end
 
     def load_meet

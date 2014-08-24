@@ -1,0 +1,9 @@
+%h1 Set Leaders for meet
+= bootstrap_form_for(@meet, layout: :horizontal) do |f|
+  = f.fields_for :leader_to_meets do |jf|
+    = jf.hidden_field :job_id
+    = jf.collection_select :leader_id, @leaders, :id, :name, {label: jf.object.job.name, include_blank: true }
+  = f.form_group do
+    = f.primary
+%para
+= errors_for @meet

@@ -15,10 +15,10 @@
       %th Name
       %th Job
   %tbody
-    - @meet.leader_to_meets.includes(:leaders).includes(:jobs).each do |leader2meet|
+    - @myleaders.each do |ml|
       %tr
-        %td= leader2meet.leaders.name
-        %td= leader2meet.jobs.name
+        %td= ml.leader.name
+        %td= @meet.leader_to_meets.filter_leader(ml.leader).map{ |l2m| l2m.job.name}.join(', ')
     %tr
       %td{:align => 'center', :colspan => 3}= link_to 'Set Leaders', edit_meet_path(@meet)
 %ul.nav.nav-pills
