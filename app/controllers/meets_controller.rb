@@ -43,7 +43,7 @@ class MeetsController < ApplicationController
   end
 
   def show
-    @myleaders = @meet.leader_to_meets.has_leader.select("leader_id").uniq
+    @leaders = @meet.leaders.uniq
   end
 
   def index
