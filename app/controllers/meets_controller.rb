@@ -39,11 +39,13 @@ class MeetsController < ApplicationController
   def register
     @children = @meet.children.in_order
     @carers = @meet.carers.in_order
-#    @carers = @meet.carers.in_order
   end
 
   def show
-    @leaders = @meet.leaders.uniq
+    @leaders = @meet.leader_to_meets.has_leader.by_leader.includes(:leader,:job).group_by(&:leader)
+#    @leaders = @meet.leader_to_meets.has_leader.includes(:leader,:job).
+#      sort_by{|l| l.leader.name}.
+#      group_by(&:leader)
   end
 
   def index
