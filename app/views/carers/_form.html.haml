@@ -6,6 +6,8 @@
   = f.form_group :can_contact, label: { text: 'Can we contact you' } do
     = f.check_box(:can_contact, hide_label: true)
   = f.email_field :email
+  = f.collection_select :how_heard, @how_heards, :id, :location_name, {label: "How did you heard about us", include_blank: true }
+  = f.text_field :other_heard
   = f.form_group do
     = f.primary
 %para

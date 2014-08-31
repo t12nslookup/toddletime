@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20140831180213) do
     t.string   "address"
     t.string   "postcode"
     t.integer  "how_heard_id"
-    t.string   "other_header"
+    t.string   "other_heard"
   end
 
   add_index "carers", ["how_heard_id"], name: "index_carers_on_how_heard_id", using: :btree

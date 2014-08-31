@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :leaders
   resources :carer_to_children, only: [:new, :create]
   resources :jobs
+  resources :how_heard
   resources :meet_types do
     resources :rotas, only: [:index]
   end

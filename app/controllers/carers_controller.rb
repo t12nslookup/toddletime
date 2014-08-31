@@ -1,6 +1,7 @@
 class CarersController < ApplicationController
 
   before_action :load_carer , only: [:update, :edit, :show, :add_child]
+  before_action :load_how_heard, only: [:new, :edit]
 
   def new
     @carer = Carer.new
@@ -38,6 +39,10 @@ class CarersController < ApplicationController
     def carer_params
       params.require(:carer).permit(:name, :phone, :address, :postcode,
                                     :email, :can_contact)
+    end
+
+    def load_how_heard
+      @how_heards = HowHeard.in_order
     end
 
     def load_carer

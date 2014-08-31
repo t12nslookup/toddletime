@@ -1,0 +1,12 @@
+%h1 All Locations for "How did you hear about us"
+%table.table.table-condensed.table-striped.table-hover
+  %thead
+    %tr
+      %th Location Name
+  %tbody
+    - @how_heards.each do |how_heard|
+      %tr
+        %td= how_heard.location_name
+        %td= link_to 'Edit', edit_how_heard_path(how_heard)
+%ul.nav.nav-pills
+  %li= link_to 'New Location', new_how_heard_path
