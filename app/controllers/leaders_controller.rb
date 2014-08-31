@@ -8,7 +8,11 @@ class LeadersController < ApplicationController
 
   def create
     @leader = Leader.new(leader_params)
-    @leader.meet_types=MeetType.find(params[:meet_type_id])
+    if params[:meet_type_id] then
+      @leader.meet_types=MeetType.find(params[:meet_type_id])
+    else
+      @leader.meet_types.destroy_all
+    end
 
     if @leader.save
       redirect_to leaders_path
@@ -22,7 +26,11 @@ class LeadersController < ApplicationController
 
   def update
 #    raise params.inspect
-    @leader.meet_types=MeetType.find(params[:meet_type_id])
+    if params[:meet_type_id] then
+      @leader.meet_types=MeetType.find(params[:meet_type_id])
+    else
+      @leader.meet_types.destroy_all
+    end
     if @leader.update(leader_params)
       redirect_to leaders_path
     else
