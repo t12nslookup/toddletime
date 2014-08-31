@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   before_action :authenticate_user!
+
+  before_action :get_needs_registration
 protected
 
   def configure_permitted_parameters
@@ -13,4 +15,8 @@ protected
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :email, :password, :password_confirmation, :current_password) }
   end
 
+private
+  def get_needs_registration
+    @todaymeets=Meet.meets_today
+  end
 end

@@ -18,6 +18,12 @@
   %tr
     %th Email
     %td= @carer.email
+  %tr
+    %th How did you hear about us?
+    %td= @carer.how_heard.try(:location_name)
+  %tr
+    %th Other
+    %td= @carer.other_heard
 %h1 Child Details
 %table.table.table-condensed.table-striped.table-hover
   %thead

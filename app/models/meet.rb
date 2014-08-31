@@ -12,6 +12,7 @@ class Meet < ActiveRecord::Base
 
   scope :in_order, ->{ order("meet_date") }
 
+  scope :meets_today, ->{ where('meet_date = :today', {today: Date.today.to_s})}
   scope :find_historic, ->{ where('meet_date < :today', {today: Date.today.to_s}) }
   scope :find_future, ->{ where('meet_date >= :today', {today: Date.today.to_s}) }
 
