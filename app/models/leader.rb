@@ -1,6 +1,6 @@
 class Leader < ActiveRecord::Base
-  has_many :leader_to_meets
-  has_many :meets, through: :leader_to_meets
+  has_many :rota_leaders
+  has_many :meets, through: :rota_leaders
   has_many :leader_meet_types
   has_many :meet_types, through: :leader_meet_types
 

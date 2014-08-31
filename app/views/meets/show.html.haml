@@ -15,10 +15,10 @@
       %th Name
       %th Job
   %tbody
-    - @leaders.each do |leader, leader_to_meets|
+    - @leaders.each do |leader, rota_leaders|
       %tr
         %td= leader.name
-        %td= leader_to_meets.map{ |l2m| l2m.job.name}.join(', ')
+        %td= rota_leaders.map{ |l2m| l2m.job.name}.join(', ')
     %tr
       %td{:align => 'center', :colspan => 3}= link_to 'Set Leaders', edit_meet_path(@meet)
 %ul.nav.nav-pills

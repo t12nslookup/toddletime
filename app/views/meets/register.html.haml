@@ -3,8 +3,14 @@
   %tr
     %th Date of meet
     %td= @meet.meet_date.to_s(:long_ordinal)
+  - if @meet.meet_type.present?
+    %tr
+      %th Meet Type
+      %td= @meet.meet_type.name
 
-%h1 Registered Children
+%h1
+  Registered children
+  %ul.label.label-info= @children.count
 %table.table.table-condensed.table-striped.table-hover
   %thead
     %tr
@@ -25,7 +31,9 @@
     - if (Date.today == @meet.meet_date)
       %tr
         %td{:align => 'center', :colspan => 5}= link_to 'Register a Child', new_meet_register_child_path(@meet)
-%h1 Registered Carers
+%h1
+  Registered Carers
+  %ul.label.label-info= @carers.count
 %table.table.table-condensed.table-striped.table-hover
   %thead
     %tr
@@ -39,5 +47,21 @@
     - if (Date.today == @meet.meet_date)
       %tr
         %td{:align => 'center', :colspan => 5}= link_to 'Register a Carer', new_meet_register_carer_path(@meet)
+%h1
+  Registered Leaders
+  %ul.label.label-info= @leaders.count
+%table.table.table-condensed.table-striped.table-hover
+  %thead
+    %tr
+      %th Name
+      %th Email
+  %tbody
+    - @leaders.each do |leader|
+      %tr
+        %td= leader.name
+        %td= leader.email
+    - if (Date.today == @meet.meet_date)
+      %tr
+        %td{:align => 'center', :colspan => 5}= link_to 'Register a Leader', new_meet_register_leader_path(@meet)
 %ul.nav.nav-pills
   %li= link_to 'View All Meets', meets_path

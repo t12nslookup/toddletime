@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   resources :meets do
     resources :register_children, only: [:new, :create]
     resources :register_carers, only: [:new, :create]
+    resources :register_leaders, only: [:new, :create]
 
     get 'register', on: :member
   end

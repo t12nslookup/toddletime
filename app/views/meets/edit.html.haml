@@ -1,6 +1,9 @@
-%h1 Set Leaders for meet
+%h1
+  Rota Leaders for
+  = @meet.meet_type.name + ","
+  = @meet.meet_date.to_s(:long_ordinal)
 = bootstrap_form_for(@meet, layout: :horizontal) do |f|
-  = f.fields_for :leader_to_meets do |jf|
+  = f.fields_for :rota_leaders do |jf|
     = jf.hidden_field :job_id
     = jf.collection_select :leader_id, @leaders, :id, :name, {label: jf.object.job.name, include_blank: true }
   = f.form_group do

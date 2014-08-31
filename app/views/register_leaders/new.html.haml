@@ -1,0 +1,25 @@
+%h1
+  Leaders for 
+  = @meet.meet_date.to_s(:long_ordinal)
+= bootstrap_form_for(:leader_to_meet, url: '', method: :get, layout: :horizontal) do |f|
+  = f.form_group :find_text, label: {text: 'Filter Leaders'} do
+    = text_field_tag :find_text, params[:find_text]
+    = f.primary "Find Leaders"
+%hr
+
+= bootstrap_form_for(:leader_to_meet, url: meet_register_leaders_path, layout: :horizontal) do |f|
+  %table.table.table-condensed.table-striped.table-hover
+    %thead
+      %tr
+        %th Name
+        %th{:class => 'text-align: center'} Select
+    %tbody
+      - @leaders.each do |leader|
+        %tr
+          %td= leader.name
+          %td{:align => 'center'}= check_box_tag 'leader_id[]', leader.id
+      %tr
+        %td
+        %td{:align => 'center'}= f.primary "Add Leaders"
+%ul.nav.nav-pills
+  %li= link_to 'New Leader', new_leader_path

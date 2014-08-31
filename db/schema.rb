@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140622150502) do
+ActiveRecord::Schema.define(version: 20140831164529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,15 +89,12 @@ ActiveRecord::Schema.define(version: 20140622150502) do
   add_index "leader_meet_types", ["meet_type_id"], name: "index_leader_meet_types_on_meet_type_id", using: :btree
 
   create_table "leader_to_meets", force: true do |t|
-    t.integer  "leader_id"
-    t.integer  "job_id"
     t.integer  "meet_id"
-    t.boolean  "expired",    default: false
+    t.integer  "leader_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "leader_to_meets", ["job_id"], name: "index_leader_to_meets_on_job_id", using: :btree
   add_index "leader_to_meets", ["leader_id"], name: "index_leader_to_meets_on_leader_id", using: :btree
   add_index "leader_to_meets", ["meet_id"], name: "index_leader_to_meets_on_meet_id", using: :btree
 
@@ -113,7 +110,7 @@ ActiveRecord::Schema.define(version: 20140622150502) do
   create_table "meet_type_jobs", force: true do |t|
     t.integer  "job_id"
     t.integer  "meet_type_id"
-    t.integer  "count"
+    t.integer  "count",        default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -123,7 +120,7 @@ ActiveRecord::Schema.define(version: 20140622150502) do
 
   create_table "meet_types", force: true do |t|
     t.string   "name"
-    t.integer  "deleted"
+    t.integer  "deleted",    default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -136,6 +133,19 @@ ActiveRecord::Schema.define(version: 20140622150502) do
   end
 
   add_index "meets", ["meet_type_id"], name: "index_meets_on_meet_type_id", using: :btree
+
+  create_table "rota_leaders", force: true do |t|
+    t.integer  "leader_id"
+    t.integer  "job_id"
+    t.integer  "meet_id"
+    t.boolean  "expired",    default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rota_leaders", ["job_id"], name: "index_rota_leaders_on_job_id", using: :btree
+  add_index "rota_leaders", ["leader_id"], name: "index_rota_leaders_on_leader_id", using: :btree
+  add_index "rota_leaders", ["meet_id"], name: "index_rota_leaders_on_meet_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",    null: false

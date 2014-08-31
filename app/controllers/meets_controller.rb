@@ -17,10 +17,10 @@ class MeetsController < ApplicationController
   end
 
   def edit
-    if (@meet.leader_to_meets.count == 0 && @meet.meet_type.present?)
+    if (@meet.rota_leaders.count == 0 && @meet.meet_type.present?)
       MeetType.find(@meet.meet_type).meet_type_jobs.has_count.each do |mtj|
         mtj.count.times do
-          @meet.leader_to_meets.build(job: mtj.job)
+          @meet.rota_leaders.build(job: mtj.job)
         end
       end
     end
@@ -39,11 +39,12 @@ class MeetsController < ApplicationController
   def register
     @children = @meet.children.in_order
     @carers = @meet.carers.in_order
+    @leaders = @meet.leaders.in_order
   end
 
   def show
-    @leaders = @meet.leader_to_meets.has_leader.by_leader.includes(:leader,:job).group_by(&:leader)
-#    @leaders = @meet.leader_to_meets.has_leader.includes(:leader,:job).
+    @leaders = @meet.rota_leaders.has_leader.by_leader.includes(:leader,:job).group_by(&:leader)
+#    @leaders = @meet.rota_leaders.has_leader.includes(:leader,:job).
 #      sort_by{|l| l.leader.name}.
 #      group_by(&:leader)
   end
@@ -59,7 +60,7 @@ class MeetsController < ApplicationController
 
   private
     def meet_params
-      params.require(:meet).permit(:meet_date, :meet_type_id, leader_to_meets_attributes: [:id, :job_id, :leader_id])
+      params.require(:meet).permit(:meet_date, :meet_type_id, rota_leaders_attributes: [:id, :job_id, :leader_id])
     end
 
     def load_meet
