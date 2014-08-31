@@ -24,8 +24,16 @@
       %tr
         %td= child.name
         %td= child.gender
-        %td= child.medical_conditions
-        %td= child.special_needs
+        - if child.medical_conditions.blank?
+          %td
+        - else
+          %td
+            = link_to content_tag(:i, nil, class: 'glyphicon glyphicon-plus'), child_path(child)
+        - if child.special_needs.blank?
+          %td
+        - else
+          %td
+            = link_to content_tag(:i, nil, class: 'glyphicon glyphicon-plus'), child_path(child)
         - child.carers.each do |carer|
           %td= carer.phone
     - if (Date.today == @meet.meet_date)

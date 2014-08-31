@@ -15,8 +15,16 @@
         %td= child.name
         %td= child.gender
         %td= child.postcode
-        %td= child.medical_conditions
-        %td= child.special_needs
+        - if child.medical_conditions.blank?
+          %td
+        - else
+          %td
+            = link_to content_tag(:i, nil, class: 'glyphicon glyphicon-plus'), child_path(child)
+        - if child.special_needs.blank?
+          %td
+        - else
+          %td
+            = link_to content_tag(:i, nil, class: 'glyphicon glyphicon-plus'), child_path(child)
         %td= link_to 'Details', child_path(child)
         %td= link_to 'Edit', edit_child_path(child)
 %ul.nav.nav-pills
