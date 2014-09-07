@@ -1,6 +1,6 @@
 %h1 Editing Meet Type
 = bootstrap_form_for(@meet_type, layout: :horizontal) do |f|
-  = f.text_field :name
+  = f.text_field :name, autocomplete: :off
   %h2 Count of Jobs
   = f.fields_for :meet_type_jobs do |jf|
     = jf.hidden_field :job_id

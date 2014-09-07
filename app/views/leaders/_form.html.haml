@@ -1,6 +1,6 @@
 = bootstrap_form_for(@leader, layout: :horizontal) do |f|
-  = f.text_field :name
-  = f.email_field :email
+  = f.text_field :name, autocomplete: :off
+  = f.email_field :email, autocomplete: :off
   #date-container
     = f.date_picker :dbs
   - if @meet_types.count > 0

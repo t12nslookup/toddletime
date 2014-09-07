@@ -11,7 +11,7 @@
   = hidden_field_tag "from", params[:from]
   = f.hidden_field :carer_id
   = f.hidden_field :child_id
-  = f.text_field :relationship
+  = f.text_field :relationship, autocomplete: :off
   = f.form_group do
     = f.primary
 %para

@@ -1,6 +1,6 @@
 %h1 New Meet Type
 = bootstrap_form_for(@meet_type, layout: :horizontal) do |f|
-  = f.text_field :name
+  = f.text_field :name, autocomplete: :off
   = f.form_group do
     = f.primary
 %para

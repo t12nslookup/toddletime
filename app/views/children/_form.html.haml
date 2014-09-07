@@ -1,10 +1,10 @@
 = bootstrap_form_for(@child, layout: :horizontal) do |f|
-  = f.text_field :name
+  = f.text_field :name, autocomplete: :off
   = f.select(:gender, ['Boy', 'Girl'])
   #date-container
     = f.date_picker :date_of_birth
   = f.text_area :address
-  = f.text_field :postcode
+  = f.text_field :postcode, autocomplete: :off
   = f.text_area :medical_conditions
   = f.text_area :special_needs
   #date-container
