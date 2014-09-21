@@ -5,6 +5,7 @@
   = f.form_group :find_text, label: {text: 'Filter Children'} do
     = text_field_tag :find_text, params[:find_text]
     = f.primary "Find Children"
+    .btn.btn-default= link_to 'New Child', new_child_path
 %hr
 
 = bootstrap_form_for(:child_to_meet, url: meet_register_children_path, layout: :horizontal) do |f|

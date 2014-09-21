@@ -5,6 +5,7 @@
   = f.form_group :find_text, label: {text: 'Filter Carers'} do
     = text_field_tag :find_text, params[:find_text]
     = f.primary "Find Carers"
+    .btn.btn-default= link_to 'New Carer', new_carer_path
 %hr
 
 = bootstrap_form_for(:carer_to_meet, url: meet_register_carers_path, layout: :horizontal) do |f|
@@ -13,7 +14,7 @@
       %tr
         %th Name
         %th Postcode
-        %th{:class => 'text-align: center'} Select
+        %th{class: 'text-align: center'} Select
     %tbody
       - @carers.each do |carer|
         %tr

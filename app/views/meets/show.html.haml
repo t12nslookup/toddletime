@@ -8,7 +8,9 @@
       %th Meet Type
       %td= @meet.meet_type.name
 
-%h1 Leader Details
+%h1
+  Leader Details
+  .btn.btn-default= link_to 'Rota Leaders', edit_meet_path(@meet)
 %table.table.table-condensed.table-striped.table-hover
   %thead
     %tr
@@ -19,7 +21,5 @@
       %tr
         %td= leader.name
         %td= rota_leaders.map{ |l2m| l2m.job.name}.join(', ')
-    %tr
-      %td{:align => 'center', :colspan => 3}= link_to 'Set Leaders', edit_meet_path(@meet)
 %ul.nav.nav-pills
   %li= link_to 'View All Meets', meets_path
