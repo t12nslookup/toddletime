@@ -15,6 +15,7 @@ class Meet < ActiveRecord::Base
   scope :meets_today, ->{ where('meet_date = :today', {today: Date.today.to_s})}
   scope :find_historic, ->{ where('meet_date < :today', {today: Date.today.to_s}) }
   scope :find_future, ->{ where('meet_date >= :today', {today: Date.today.to_s}) }
+#  scope :recent, ->{ where('meet_date >= :recent', {recent: (Date.today - 6.months).to_s}) }
 
   validates :meet_date, presence: true, uniqueness: true
   accepts_nested_attributes_for :rota_leaders

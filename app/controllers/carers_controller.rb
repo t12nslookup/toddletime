@@ -28,6 +28,9 @@ class CarersController < ApplicationController
   end
   def index
     @carers = Carer.in_order
+    if params[:historic].blank?
+      @carers = @carers.recent
+    end
   end
   def add_child
     @children = Child.in_order

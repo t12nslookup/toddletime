@@ -3,6 +3,9 @@ class RegisterCarersController < ApplicationController
 
   def new
     @carers = Carer.in_order
+    if params[:historic].blank?
+      @carers = @carers.recent
+    end
     if params[:find_text].present? 
       @carers = @carers.search(params[:find_text])
     end

@@ -1,4 +1,7 @@
-%h1 All Carers
+%ul.pagination
+  %li{:class => ('active' if (params[:historic].blank?))}= link_to "Recent Carers", action: "index"
+  %li{:class => ('active' if params[:historic] == 'true')}= link_to "All Carers", action: "index", historic: "true"
+%p
 %table.table.table-condensed.table-striped.table-hover
   %thead
     %tr

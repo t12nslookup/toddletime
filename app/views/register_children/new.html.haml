@@ -1,9 +1,13 @@
 %h1
   Children for 
   = @meet.meet_date.to_s(:long_ordinal)
+%ul.pagination
+  %li{:class => ('active' if (params[:historic].blank?))}= link_to "Recent Children", action: "new"
+  %li{:class => ('active' if params[:historic] == 'true')}= link_to "All Children", action: "new", historic: "true"
 = bootstrap_form_for(:child_to_meet, url: '', method: :get, layout: :horizontal) do |f|
   = f.form_group :find_text, label: {text: 'Filter Children'} do
     = text_field_tag :find_text, params[:find_text]
+    = hidden_field_tag :historic, params[:historic] if (not params[:historic].blank?)
     = f.primary "Find Children"
     .btn.btn-default= link_to 'New Child', new_child_path
 %hr

@@ -31,6 +31,9 @@ class ChildrenController < ApplicationController
   end
   def index
     @children = Child.in_order
+    if params[:historic].blank?
+      @children = @children.recent
+    end
   end
   def add_carer
     @carers = Carer.in_order

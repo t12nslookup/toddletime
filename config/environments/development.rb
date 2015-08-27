@@ -35,4 +35,12 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
+
+  # Use a different logger for distributed setups.
+#  Rails.logger = Logger.new(STDOUT)
+
+  # Use default logging formatter so that PID and timestamp are not suppressed.
+  config.log_formatter = ::Logger::Formatter.new
+#  config_level = :debug
+
 end

@@ -4,6 +4,9 @@ class RegisterChildrenController < ApplicationController
 
   def new
     @children = Child.in_order
+    if params[:historic].blank?
+      @children = @children.recent
+    end
     if params[:find_text].present? 
       @children = @children.search(params[:find_text])
     end
