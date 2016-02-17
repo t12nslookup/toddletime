@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+gem 'ruby', '~> 2.2.4'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
 # Use postgresql as the database for Active Record
@@ -49,4 +49,4 @@ gem 'bootstrap-datepicker-rails'
 # gem 'sanitize'
 gem 'rails-html-sanitizer'
 gem 'carrierwave'
-gem 'aws-sdk'
+gem 'aws-sdk-rails'
