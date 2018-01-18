@@ -19,11 +19,11 @@ en:
       not_approved: 'Your account has not been approved by your administrator yet.'
     mailer:
       confirmation_instructions:
-        subject: "Confirmation instructions"
+        subject: "Toddletime: Confirmation instructions"
       reset_password_instructions:
-        subject: "Reset password instructions"
+        subject: "Toddletime: Reset password instructions"
       unlock_instructions:
-        subject: "Unlock Instructions"
+        subject: "Toddletime: Unlock instructions"
     omniauth_callbacks:
       failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
       success: "Successfully authenticated from %{kind} account."
