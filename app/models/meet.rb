@@ -10,10 +10,11 @@ class Meet < ActiveRecord::Base
   has_many :leaders, through: :leader_to_meets
   belongs_to :meet_type
 
-  scope :in_order, ->{ order("meet_date") }
+  scope :in_order, ->{ order(:meet_date) }
+  scope :in_reverse, ->{ order(meet_date: :desc) }
 
   scope :meets_today, ->{ where('meet_date = :today', {today: Date.today.to_s})}
-  scope :find_historic, ->{ where('meet_date < :today', {today: Date.today.to_s}) }
+  scope :find_historic, ->{ where('meet_date < :today', {today: Date.today.to_s})}
   scope :find_future, ->{ where('meet_date >= :today', {today: Date.today.to_s}) }
 #  scope :recent, ->{ where('meet_date >= :recent', {recent: (Date.today - 6.months).to_s}) }
 

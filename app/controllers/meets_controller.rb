@@ -50,11 +50,11 @@ class MeetsController < ApplicationController
   end
 
   def index
-    @meets = Meet.in_order
+    @meets = Meet
     if params[:historic] == "true"
-      @meets = @meets.find_historic
+      @meets = @meets.in_reverse.find_historic
     else
-      @meets = @meets.find_future
+      @meets = @meets.in_order.find_future
     end
   end
 
