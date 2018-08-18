@@ -1,0 +1,12 @@
+%h1 All Types for "What can we contact you about"
+%table.table.table-condensed.table-striped.table-hover
+  %thead
+    %tr
+      %th Contact Types
+  %tbody
+    - @what_contacts.each do |what_contact|
+      %tr
+        %td= what_contact.contact_type
+        %td= link_to 'Edit', edit_what_contact_path(what_contact)
+%ul.nav.nav-pills
+  %li= link_to 'New Contact Type', new_what_contact_path

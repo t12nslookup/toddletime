@@ -4,26 +4,30 @@
     %th Name:
     %td= @carer.name
   %tr
-    %th Phone:
-    %td= @carer.phone
-  %tr
     %th Address:
     %td= @carer.address
   %tr
     %th Postcode:
     %td= @carer.postcode
   %tr
-    %th Permission to Contact
-    %td= {0 => 'No', 1 => 'Yes'}[@carer.can_contact]
+    %th Phone:
+    %td= @carer.phone
   %tr
     %th Email
     %td= @carer.email
   %tr
-    %th How did you hear about us?
-    %td= @carer.how_heard.try(:location_name)
+    %th What can we send
+    %td= @carer.what_contact.try(:contact_type)
   %tr
-    %th Other
-    %td= @carer.other_heard
+    %th Permission to Contact
+    %td= @carer.how_contact.try(:contact_type)
+  /
+    %tr
+      %th How did you hear about us?
+      %td= @carer.how_heard.try(:location_name)
+    %tr
+      %th Other
+      %td= @carer.other_heard
 %h1 Child Details
 %table.table.table-condensed.table-striped.table-hover
   %thead

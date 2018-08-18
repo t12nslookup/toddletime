@@ -1,0 +1,2 @@
+module WhatContactsHelper
+end

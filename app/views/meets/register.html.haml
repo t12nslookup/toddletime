@@ -11,7 +11,8 @@
 %h1
   Registered children
   .label.label-info= @children.count
-  - if (Date.today == @meet.meet_date)
+  -# if (Date.today == @meet.meet_date)
+  - if (@meet.meet_date >= Date.today-6 && @meet.meet_date <= Date.today)
     .btn.btn-default= link_to 'Register a Child', new_meet_register_child_path(@meet)
 %table.table.table-condensed.table-striped.table-hover
   %thead
@@ -20,7 +21,7 @@
       %th Gender
       %th Medical Conditions
       %th Special Needs
-      %th Contact Details
+      %th Emergency Contact
   %tbody
     - @children.includes(:carers).each do |child|
       %tr
@@ -36,12 +37,16 @@
         - else
           %td
             = link_to content_tag(:i, nil, class: 'glyphicon glyphicon-plus'), child_path(child)
-        - child.carers.each do |carer|
-          %td= carer.phone
+        - if child.emergency_contact.blank?
+          %td
+        - else
+          %td
+            = link_to content_tag(:i, nil, class: 'glyphicon glyphicon-plus'), child_path(child)
 %h1
   Registered Carers
   .label.label-info= @carers.count
-  - if (Date.today == @meet.meet_date)
+  -# if (Date.today == @meet.meet_date)
+  - if (@meet.meet_date >= Date.today-6 && @meet.meet_date <= Date.today)
     .btn.btn-default= link_to 'Register a Carer', new_meet_register_carer_path(@meet)
 %table.table.table-condensed.table-striped.table-hover
   %thead
@@ -56,7 +61,8 @@
 %h1
   Registered Leaders
   .label.label-info= @leaders.count
-  - if (Date.today == @meet.meet_date)
+  -# if (Date.today == @meet.meet_date)
+  - if (@meet.meet_date >= Date.today-6 && @meet.meet_date <= Date.today)
     .btn.btn-default= link_to 'Register a Leader', new_meet_register_leader_path(@meet)
 %table.table.table-condensed.table-striped.table-hover
   %thead

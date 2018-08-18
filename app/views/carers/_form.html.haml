@@ -1,13 +1,14 @@
 = bootstrap_form_for(@carer, layout: :horizontal) do |f|
   = f.text_field :name, autocomplete: :off
-  = f.telephone_field :phone, autocomplete: :off
   = f.text_area :address
   = f.text_field :postcode, autocomplete: :off
-  = f.form_group :can_contact, label: { text: 'Can we contact you' } do
-    = f.check_box(:can_contact, hide_label: true)
+  = f.collection_select :what_contact_id, @what_contacts, :id, :contact_type, {label: "What can we send you", include_blank: true }
+  = f.collection_select :how_contact_id, @how_contacts, :id, :contact_type, {label: "How can we contact you", include_blank: true }
+  = f.telephone_field :phone, autocomplete: :off
   = f.email_field :email, autocomplete: :off
-  = f.collection_select :how_heard_id, @how_heards, :id, :location_name, {label: "How did you heard about us", include_blank: true }
-  = f.text_field :other_heard
+  /
+    = f.collection_select :how_heard_id, @how_heards, :id, :location_name, {label: "How did you heard about us", include_blank: true }
+    = f.text_field :other_heard
   = f.form_group do
     = f.primary
 %para

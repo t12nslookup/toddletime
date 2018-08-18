@@ -5,9 +5,9 @@ class MeetType < ActiveRecord::Base
   has_many :meet_type_jobs
   has_many :jobs, through: :meet_type_jobs
 
-  scope :in_order, ->{ order("name") }
+  scope :in_order, -> { order('name') }
 
   validates :name, presence: true, uniqueness: true
   accepts_nested_attributes_for :meet_type_jobs
-  #, reject_if: proc {|mtj| mtj.count < 0}
+  # , reject_if: proc {|mtj| mtj.count < 0}
 end

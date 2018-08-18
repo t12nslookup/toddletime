@@ -50,3 +50,11 @@ gem 'bootstrap-datepicker-rails'
 gem 'rails-html-sanitizer'
 gem 'carrierwave'
 gem 'aws-sdk-rails'
+
+# useful tools
+group :development do
+  gem 'rails-erd'
+  # http://docs.rubocop.org/en/latest/
+  gem 'rubocop', '~> 0.58.1', require: false
+end
+

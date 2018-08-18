@@ -1,5 +1,5 @@
 class RegisterCarersController < ApplicationController
-  before_action :load_meet, only: [:new, :create]
+  before_action :load_meet, only: %i[new create]
 
   def new
     @carers = Carer.in_order
@@ -17,12 +17,13 @@ class RegisterCarersController < ApplicationController
     if params[:carer_id].present?
       @meet.carers << Carer.find(params[:carer_id])
     end
-#    raise params.inspect
+    # raise params.inspect
     redirect_to register_meet_path(@meet)
   end
 
   private
-    def load_meet
-      @meet = Meet.find(params[:meet_id])
-    end
+
+  def load_meet
+    @meet = Meet.find(params[:meet_id])
+  end
 end

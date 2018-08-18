@@ -1,0 +1,6 @@
+= bootstrap_form_for(@how_contact, layout: :horizontal) do |f|
+  = f.text_field :contact_type, autocomplete: :off
+  = f.form_group do
+    = f.primary
+%para
+= errors_for @how_contact

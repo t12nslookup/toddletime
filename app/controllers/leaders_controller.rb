@@ -1,6 +1,6 @@
 class LeadersController < ApplicationController
-  before_action :load_leader, only: [:update, :edit, :show]
-  before_action :load_meet_types, only: [:new, :edit]
+  before_action :load_leader, only: %i[update edit show]
+  before_action :load_meet_types, only: %i[new edit]
 
   def new
     @leader = Leader.new
@@ -8,8 +8,8 @@ class LeadersController < ApplicationController
 
   def create
     @leader = Leader.new(leader_params)
-    if params[:meet_type_id] then
-      @leader.meet_types=MeetType.find(params[:meet_type_id])
+    if params[:meet_type_id]
+      @leader.meet_types = MeetType.find(params[:meet_type_id])
     else
       @leader.meet_types.destroy_all
     end
@@ -21,13 +21,12 @@ class LeadersController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
-#    raise params.inspect
-    if params[:meet_type_id] then
-      @leader.meet_types=MeetType.find(params[:meet_type_id])
+    # raise params.inspect
+    if params[:meet_type_id]
+      @leader.meet_types = MeetType.find(params[:meet_type_id])
     else
       @leader.meet_types.destroy_all
     end
@@ -38,23 +37,23 @@ class LeadersController < ApplicationController
     end
   end
 
-  def show
-  end
+  def show; end
 
   def index
     @leaders = Leader.in_order
   end
 
   private
-    def leader_params
-      params.require(:leader).permit(:name, :email, :dbs)
-    end
 
-    def load_leader
-      @leader = Leader.find(params[:id])
-    end
+  def leader_params
+    params.require(:leader).permit(:name, :email, :dbs)
+  end
 
-    def load_meet_types
-      @meet_types = MeetType.all
-    end
+  def load_leader
+    @leader = Leader.find(params[:id])
+  end
+
+  def load_meet_types
+    @meet_types = MeetType.all
+  end
 end

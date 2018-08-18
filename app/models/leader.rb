@@ -8,8 +8,8 @@ class Leader < ActiveRecord::Base
 # , :reject_if => lambda { |a| a[:meet_type_id] == 0}, :allow_destroy => true
 # , :reject_if => lambda { |a| a[:id].blank? }
 
-  scope :search, ->(text) { where('upper(name) like ?', '%'+text.upcase+'%') }
-  scope :in_order, ->{ order(:name) }
+  scope :search, ->(text) { where('upper(name) like ?', '%' + text.upcase + '%') }
+  scope :in_order, -> { order(:name) }
 
   validates :name, presence: true,
                    length: { minimum: 5 }

@@ -1,5 +1,5 @@
 class RegisterLeadersController < ApplicationController
-  before_action :load_meet, only: [:new, :create]
+  before_action :load_meet, only: %i[new create]
 
   def new
     @leaders = Leader.in_order
@@ -14,12 +14,13 @@ class RegisterLeadersController < ApplicationController
     if params[:leader_id].present?
       @meet.leaders << Leader.find(params[:leader_id])
     end
-#    raise params.inspect
+    # raise params.inspect
     redirect_to register_meet_path(@meet)
   end
 
   private
-    def load_meet
-      @meet = Meet.find(params[:meet_id])
-    end
+
+  def load_meet
+    @meet = Meet.find(params[:meet_id])
+  end
 end

@@ -6,8 +6,9 @@
   %thead
     %tr
       %th Name:
-      %th Phone:
+      %th What
       %th Permission
+      %th Phone:
       %th Email
       %th Details
       %th Edit
@@ -15,10 +16,13 @@
     - @carers.each do |carer|
       %tr
         %td= carer.name
+        %td= carer.what_contact.try(:contact_type)
+        %td= carer.how_contact.try(:contact_type)
         %td= carer.phone
-        %td= {0 => 'No', 1 => 'Yes'}[carer.can_contact]
         %td= carer.email
         %td= link_to 'Details', carer_path(carer)
         %td= link_to 'Edit', edit_carer_path(carer)
 %ul.nav.nav-pills
-  %li= link_to "New Carer", new_carer_path
+  %li= link_to 'New Carer', new_carer_path
+  %li= link_to 'How Contact', how_contacts_path
+  %li= link_to 'What Contact', what_contacts_path

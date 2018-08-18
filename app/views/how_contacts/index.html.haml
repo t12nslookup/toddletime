@@ -1,0 +1,12 @@
+%h1 All Types for "How can we contact you"
+%table.table.table-condensed.table-striped.table-hover
+  %thead
+    %tr
+      %th Contact Types
+  %tbody
+    - @how_contacts.each do |how_contact|
+      %tr
+        %td= how_contact.contact_type
+        %td= link_to 'Edit', edit_how_contact_path(how_contact)
+%ul.nav.nav-pills
+  %li= link_to 'New Contact Type', new_how_contact_path

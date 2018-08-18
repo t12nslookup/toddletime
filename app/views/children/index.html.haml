@@ -7,7 +7,7 @@
     %tr
       %th Name:
       %th Gender:
-      %th Postcode
+      %th Emergency Contact
       %th Medical Conditions
       %th Special Needs
       %th Details
@@ -17,7 +17,11 @@
       %tr
         %td= child.name
         %td= child.gender
-        %td= child.postcode
+        - if child.emergency_contact.blank?
+          %td
+        - else
+          %td
+            = link_to content_tag(:i, nil, class: 'glyphicon glyphicon-plus'), child_path(child)
         - if child.medical_conditions.blank?
           %td
         - else

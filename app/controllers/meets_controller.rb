@@ -1,6 +1,5 @@
 class MeetsController < ApplicationController
-
-  before_action :load_meet, only: [:edit, :show, :register, :update]
+  before_action :load_meet, only: %i[edit show register update]
 
   def new
     @meet = Meet.new
@@ -44,9 +43,9 @@ class MeetsController < ApplicationController
 
   def show
     @leaders = @meet.rota_leaders.has_leader.by_leader.includes(:leader,:job).group_by(&:leader)
-#    @leaders = @meet.rota_leaders.has_leader.includes(:leader,:job).
-#      sort_by{|l| l.leader.name}.
-#      group_by(&:leader)
+    # @leaders = @meet.rota_leaders.has_leader.includes(:leader,:job).
+    #    sort_by{|l| l.leader.name}.
+    #    group_by(&:leader)
   end
 
   def index
@@ -59,11 +58,12 @@ class MeetsController < ApplicationController
   end
 
   private
-    def meet_params
-      params.require(:meet).permit(:meet_date, :meet_type_id, rota_leaders_attributes: [:id, :job_id, :leader_id])
-    end
 
-    def load_meet
-      @meet = Meet.find(params[:id])
-    end
+  def meet_params
+    params.require(:meet).permit(:meet_date, :meet_type_id, rota_leaders_attributes: [:id, :job_id, :leader_id])
+  end
+
+  def load_meet
+    @meet = Meet.find(params[:id])
+  end
 end

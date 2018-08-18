@@ -9,12 +9,16 @@
   %tr
     %th Date of birth
     %td= @child.date_of_birth
+  /
+    %tr
+      %th Address
+      %td= @child.address
+    %tr
+      %th Postcode
+      %td= @child.postcode
   %tr
-    %th Address
-    %td= @child.address
-  %tr
-    %th Postcode
-    %td= @child.postcode
+    %th Emergency Contact
+    %td= @child.emergency_contact
   %tr
     %th Medical Conditions
     %td= @child.medical_conditions

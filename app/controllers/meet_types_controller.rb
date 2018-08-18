@@ -1,5 +1,5 @@
 class MeetTypesController < ApplicationController
-  before_action :load_meet_type, only: [:update, :edit, :show]
+  before_action :load_meet_type, only: %i[update edit show]
 
   def new
     @meet_type = MeetType.new
@@ -36,14 +36,14 @@ class MeetTypesController < ApplicationController
     end
   end
 
-  def show
-  end
+  def show; end
 
   def index
     @meet_types = MeetType.in_order
   end
 
-private
+  private
+
   def meet_type_params
     params.require(:meet_type).permit(:name, meet_type_jobs_attributes: [:id, :job_id, :count])
   end

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :users, only: [:index, :approve, :lock, :unlock] do
+  resources :users, only: %i[index approve lock unlock] do
     member do
       get 'approve'
       get 'lock'
@@ -9,9 +9,12 @@ Rails.application.routes.draw do
   end
 
   resources :leaders
-  resources :carer_to_children, only: [:new, :create]
+  resources :carer_to_children, only: %i[new create]
   resources :jobs
-  resources :how_heard
+  resources :how_heards, only: %i[index new show create edit update]
+  resources :how_contacts, only: %i[index new show create edit update]
+  resources :what_contacts, only: %i[index new show create edit update]
+
   resources :meet_types do
     resources :rotas, only: [:index]
   end
@@ -43,52 +46,4 @@ Rails.application.routes.draw do
   # root 'welcome#index'
   root 'welcome#index'
 
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
 end
