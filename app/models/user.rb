@@ -40,14 +40,14 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.find_first_by_auth_conditions(warden_conditions)
-    conditions = warden_conditions.dup
-    if login == conditions.delete(:login)
-      where(conditions.to_h).where(['lower(username) = :value OR lower(email) = :value', { :value => login.downcase }]).first
-    else
-      where(conditions.to_h).first
-    end
-  end
+  # def self.find_first_by_auth_conditions(warden_conditions)
+  #   conditions = warden_conditions.dup
+  #   if login == conditions.delete(:login)
+  #     where(conditions.to_h).where(['lower(username) = :value OR lower(email) = :value', { :value => login.downcase }]).first
+  #   else
+  #     where(conditions.to_h).first
+  #   end
+  # end
 
   def self.send_reset_password_instructions(attributes={})
     recoverable = find_or_initialize_with_errors(reset_password_keys, attributes, :not_found)
