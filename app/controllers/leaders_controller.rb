@@ -40,7 +40,7 @@ class LeadersController < ApplicationController
   def show; end
 
   def index
-    @leaders = Leader.in_order
+    @leaders = Leader.active.in_order
   end
 
   private
