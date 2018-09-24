@@ -17,6 +17,7 @@ class LeadersController < ApplicationController
     if @leader.save
       redirect_to leaders_path
     else
+      load_meet_types
       render 'new'
     end
   end
