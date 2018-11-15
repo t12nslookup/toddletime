@@ -27,12 +27,12 @@
       %tr
         %td= child.name
         %td= child.gender
-        - if child.medical_conditions.blank?
+        - if child.medical_conditions.blank? || child.medical_conditions == "none"
           %td
         - else
           %td
             = link_to content_tag(:i, nil, class: 'glyphicon glyphicon-plus'), child_path(child)
-        - if child.special_needs.blank?
+        - if child.special_needs.blank? || child.special_needs == "none"
           %td
         - else
           %td

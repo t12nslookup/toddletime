@@ -7,9 +7,9 @@
     %tr
       %th Name:
       %th Gender:
-      %th Emergency Contact
       %th Medical Conditions
       %th Special Needs
+      %th Emergency Contact
       %th Details
       %th Edit
   %tbody
@@ -17,17 +17,17 @@
       %tr
         %td= child.name
         %td= child.gender
+        - if child.medical_conditions.blank? || child.medical_conditions == "none"
+          %td
+        - else
+          %td
+            = link_to content_tag(:i, nil, class: 'glyphicon glyphicon-plus'), child_path(child)
+        - if child.special_needs.blank? || child.special_needs == "none"
+          %td
+        - else
+          %td
+            = link_to content_tag(:i, nil, class: 'glyphicon glyphicon-plus'), child_path(child)
         - if child.emergency_contact.blank?
-          %td
-        - else
-          %td
-            = link_to content_tag(:i, nil, class: 'glyphicon glyphicon-plus'), child_path(child)
-        - if child.medical_conditions.blank?
-          %td
-        - else
-          %td
-            = link_to content_tag(:i, nil, class: 'glyphicon glyphicon-plus'), child_path(child)
-        - if child.special_needs.blank?
           %td
         - else
           %td
