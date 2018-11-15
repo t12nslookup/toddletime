@@ -1,0 +1,28 @@
+%h1 Meet Details
+%table.table.table-condensed.table-striped.table-hover
+  %tr
+    %th Date of meet
+    %td= @meet.meet_date.to_s(:long_ordinal)
+  - if @meet.meet_type.present?
+    %tr
+      %th Meet Type
+      %td= @meet.meet_type.name
+
+%h1
+  Registered children with Conditions
+  .label.label-info= @children.count
+  -# if (Date.today == @meet.meet_date)
+%table.table.table-condensed.table-striped.table-hover
+  %thead
+    %tr
+      %th Name
+      %th Gender
+      %th Medical Conditions
+  %tbody
+    - @children.includes(:carers).each do |child|
+      %tr
+        %td= child.name
+        %td= child.gender
+        %td= child.medical_conditions
+%ul.nav.nav-pills
+  %li= link_to 'View All Meets', meets_path

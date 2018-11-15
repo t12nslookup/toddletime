@@ -1,5 +1,5 @@
 class MeetsController < ApplicationController
-  before_action :load_meet, only: %i[edit show register update]
+  before_action :load_meet, only: %i[edit show register update medical_conditions]
 
   def new
     @meet = Meet.new
@@ -16,7 +16,7 @@ class MeetsController < ApplicationController
   end
 
   def edit
-    if (@meet.rota_leaders.count == 0 && @meet.meet_type.present?)
+    if @meet.rota_leaders.count.zero? && @meet.meet_type.present?
       MeetType.find(@meet.meet_type).meet_type_jobs.has_count.each do |mtj|
         mtj.count.times do
           @meet.rota_leaders.build(job: mtj.job)
@@ -41,6 +41,10 @@ class MeetsController < ApplicationController
     @leaders = @meet.leaders.in_order
   end
 
+  def medical_conditions
+    @children = @meet.children.with_condition.in_order
+  end
+
   def show
     @leaders = @meet.rota_leaders.has_leader.by_leader.includes(:leader,:job).group_by(&:leader)
     # @leaders = @meet.rota_leaders.has_leader.includes(:leader,:job).
@@ -50,7 +54,7 @@ class MeetsController < ApplicationController
 
   def index
     @meets = Meet
-    if params[:historic] == "true"
+    if params[:historic] == 'true'
       @meets = @meets.in_reverse.find_historic
     else
       @meets = @meets.in_order.find_future

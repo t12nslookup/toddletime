@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     resources :register_leaders, only: [:new, :create]
 
     get 'register', on: :member
+    get 'medical_conditions', on: :member
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

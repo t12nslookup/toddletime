@@ -6,4 +6,5 @@
   %li{:class => ('active' if params[:controller] == 'users')}= link_to "Users", users_path
   - if @todaymeets.exists?
     - @todaymeets.each do |meet|
-      %li= link_to "Register " + meet.meet_type.try(:name), register_meet_path(meet)
+      %li= link_to 'Register ' + meet.meet_type.try(:name), register_meet_path(meet)
+      %li= link_to 'Medical Conditions', medical_conditions_meet_path(meet)
