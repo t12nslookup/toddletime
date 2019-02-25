@@ -10,7 +10,7 @@ class CarerToChildrenController < ApplicationController
     @carer_to_child = CarerToChild.new(carertochild_params)
 
     if @carer_to_child.save
-      if params[:from] == "carer"
+      if params[:from] == 'carer'
         redirect_to @carer_to_child.carer
       else
         redirect_to @carer_to_child.child
