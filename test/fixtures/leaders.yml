@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: leaders
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  email      :string(255)
+#  expired    :date
+#  created_at :datetime
+#  updated_at :datetime
+#  dbs        :date
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:

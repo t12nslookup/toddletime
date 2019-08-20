@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: leaders
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  email      :string(255)
+#  expired    :date
+#  created_at :datetime
+#  updated_at :datetime
+#  dbs        :date
+#
+
 class Leader < ActiveRecord::Base
   has_many :rota_leaders
   has_many :meets, through: :rota_leaders

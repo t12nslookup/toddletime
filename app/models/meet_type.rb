@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: meet_types
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  deleted    :integer          default(0)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class MeetType < ActiveRecord::Base
   has_many :meets
   has_many :leader_meet_types

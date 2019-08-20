@@ -53,5 +53,6 @@ group :development do
   gem 'rails-erd'
   # http://docs.rubocop.org/en/latest/
   gem 'rubocop', '~> 0.58.1', require: false
+  gem 'annotate'
 end
 
