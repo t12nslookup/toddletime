@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  addresses: MyString
+  subject: MyString
+  body: MyString
+  meet_type_id: 
+  state: 1
+
+two:
+  addresses: MyString
+  subject: MyString
+  body: MyString
+  meet_type_id: 
+  state: 1

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180818211122) do
+ActiveRecord::Schema.define(version: 20200126154504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -170,6 +170,18 @@ ActiveRecord::Schema.define(version: 20180818211122) do
   add_index "rota_leaders", ["leader_id"], name: "index_rota_leaders_on_leader_id", using: :btree
   add_index "rota_leaders", ["meet_id"], name: "index_rota_leaders_on_meet_id", using: :btree
 
+  create_table "send_emails", force: :cascade do |t|
+    t.string   "addresses"
+    t.string   "subject"
+    t.string   "body"
+    t.integer  "meet_type_id"
+    t.integer  "state",        default: 0
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "send_emails", ["meet_type_id"], name: "index_send_emails_on_meet_type_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",    null: false
     t.string   "encrypted_password",     limit: 255, default: "",    null: false
@@ -221,4 +233,5 @@ ActiveRecord::Schema.define(version: 20180818211122) do
   add_foreign_key "rota_leaders", "jobs", name: "fk_rota_leader_job"
   add_foreign_key "rota_leaders", "leaders", name: "fk_rota_leader_leader"
   add_foreign_key "rota_leaders", "meets", name: "fk_rota_leader_meet"
+  add_foreign_key "send_emails", "meet_types"
 end
