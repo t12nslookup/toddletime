@@ -16,8 +16,8 @@
 #
 
 class MeetTypeJob < ActiveRecord::Base
-  belongs_to :job
-  belongs_to :meet_type
+  belongs_to :job, inverse_of: :meet_type_jobs
+  belongs_to :meet_type, inverse_of: :meet_type_jobs
 
   scope :has_count, -> { where('count > 0') }
 

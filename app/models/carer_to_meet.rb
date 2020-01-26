@@ -15,8 +15,8 @@
 #
 
 class CarerToMeet < ActiveRecord::Base
-  belongs_to :carer
-  belongs_to :meet
+  belongs_to :carer, inverse_of: :carer_to_meets
+  belongs_to :meet, inverse_of: :carer_to_meets
 
   validates_uniqueness_of :meet_id, scope: :carer_id
 end

@@ -17,10 +17,10 @@
 #
 
 class Child < ActiveRecord::Base
-  has_many :carer_to_children
+  has_many :carer_to_children, inverse_of: :child
   has_many :carers, through: :carer_to_children
-  has_many :child_to_meet
-  has_many :meet, through: :child_to_meet
+  has_many :child_to_meets, inverse_of: :child
+  has_many :meet, through: :child_to_meets
 
   validates :name, presence: true,
                    length: { minimum: 5 }

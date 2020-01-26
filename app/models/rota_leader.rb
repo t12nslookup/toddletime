@@ -18,9 +18,9 @@
 #
 
 class RotaLeader < ActiveRecord::Base
-  belongs_to :leader
-  belongs_to :job
-  belongs_to :meet
+  belongs_to :leader, inverse_of: :rota_leaders
+  belongs_to :job, inverse_of: :rota_leaders
+  belongs_to :meet, inverse_of: :rota_leaders
 
   # validates_uniqueness_of :leader_id, scope: :meet_id
   scope :has_leader, -> { where('leader_id is not null') }

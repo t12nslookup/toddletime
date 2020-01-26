@@ -15,8 +15,8 @@
 #
 
 class LeaderToMeet < ActiveRecord::Base
-  belongs_to :meet
-  belongs_to :leader
+  belongs_to :meet, inverse_of: :leader_to_meets
+  belongs_to :leader, inverse_of: :leader_to_meets
 
   validates_uniqueness_of :meet_id, scope: :leader_id
 end

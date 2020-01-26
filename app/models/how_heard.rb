@@ -10,7 +10,7 @@
 #
 
 class HowHeard < ActiveRecord::Base
-  has_many :carers
+  has_many :carers, inverse_of: :how_heard
 
   scope :in_order, -> { order('location_name') }
 

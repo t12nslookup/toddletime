@@ -15,8 +15,8 @@
 #
 
 class ChildToMeet < ActiveRecord::Base
-  belongs_to :child
-  belongs_to :meet
+  belongs_to :child, inverse_of: :child_to_meets
+  belongs_to :meet, inverse_of: :child_to_meets
 
   validates_uniqueness_of :meet_id, scope: :child_id
 end

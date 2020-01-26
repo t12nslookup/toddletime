@@ -16,8 +16,8 @@
 #
 
 class CarerToChild < ActiveRecord::Base
-  belongs_to :child
-  belongs_to :carer
+  belongs_to :child, inverse_of: :carer_to_children
+  belongs_to :carer, inverse_of: :carer_to_children
 
   validates :relationship, presence: true
   validates_uniqueness_of :child_id, scope: :carer_id

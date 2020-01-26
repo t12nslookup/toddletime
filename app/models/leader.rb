@@ -12,10 +12,11 @@
 #
 
 class Leader < ActiveRecord::Base
-  has_many :rota_leaders
+  has_many :rota_leaders, inverse_of: :leader
   has_many :meets, through: :rota_leaders
-  has_many :leader_meet_types
+  has_many :leader_meet_types, inverse_of: :leader
   has_many :meet_types, through: :leader_meet_types
+  has_many :leader_to_meets, inverse_of: :leader
 
 #  accepts_nested_attributes_for :leader_meet_type
 # , :reject_if => lambda { |a| a[:meet_type_id] == 0}, :allow_destroy => true

@@ -10,11 +10,12 @@
 #
 
 class MeetType < ActiveRecord::Base
-  has_many :meets
-  has_many :leader_meet_types
+  has_many :meets, inverse_of: :meet_type
+  has_many :leader_meet_types, inverse_of: :meet_type
   has_many :leaders, through: :leader_meet_types
-  has_many :meet_type_jobs
+  has_many :meet_type_jobs, inverse_of: :meet_type
   has_many :jobs, through: :meet_type_jobs
+  has_many :send_emails, inverse_of: :meet_type
 
   scope :in_order, -> { order('name') }
 

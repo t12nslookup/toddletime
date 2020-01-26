@@ -10,7 +10,7 @@
 #
 
 class WhatContact < ActiveRecord::Base
-  has_many :carers
+  has_many :carers, inverse_of: :what_contact
 
   scope :in_order, -> { order('contact_type') }
 
