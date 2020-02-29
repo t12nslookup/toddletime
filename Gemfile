@@ -4,7 +4,7 @@ ruby '2.5.7'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2.5'
 # Use postgresql as the database for Active Record
-gem 'pg', "~>0.21.0"
+gem 'pg', '~>0.21.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -35,24 +35,24 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'tzinfo-data'
-gem 'rails_12factor', group: :production
-gem 'puma'
-gem 'devise'
-gem 'haml-rails'
+gem 'aws-sdk-rails'
+gem 'bootstrap-datepicker-rails'
 gem 'bootstrap-sass'
 gem 'bootstrap_form'
-gem 'bootstrap-datepicker-rails'
-# gem 'sanitize'
-gem 'rails-html-sanitizer'
 gem 'carrierwave'
-gem 'aws-sdk-rails'
+gem 'devise'
+gem 'haml-rails'
+gem 'puma'
+gem 'rails-html-sanitizer'
+gem 'rails_12factor', group: :production
+# gem 'sanitize'
+gem 'tzinfo-data'
 
 # useful tools
 group :development do
+  gem 'annotate'
   gem 'rails-erd'
   # http://docs.rubocop.org/en/latest/
+  gem 'letter_opener_web'
   gem 'rubocop', '~> 0.58.1', require: false
-  gem 'annotate'
 end
-
