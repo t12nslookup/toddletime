@@ -86,7 +86,7 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'toddletime.herokuapp.com' }
   config.action_mailer.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
-    address: "smtp.sendgrid.net",
+    address: 'smtp.sendgrid.net',
     port: 25,
     user_name: ENV['SENDGRID_USERNAME'],
     password: ENV['SENDGRID_PASSWORD'],
