@@ -1,0 +1,33 @@
+%ul.pagination
+  %li{:class => ('active' if (params[:historic].blank?))}= link_to "Recent Emails", action: "index"
+  %li{:class => ('active' if params[:historic] == 'true')}= link_to "All Emails", action: "index", historic: "true"
+%p
+%table.table.table-condensed.table-striped.table-hover
+  %thead
+    %tr
+      %th Action
+      %th When
+      %th Group
+      %th Subject
+      %th Delivered
+  %tbody
+    - @emails.each do |email|
+      %tr
+        - if email.delivered_at.nil?
+          %td
+            = link_to 'Edit', edit_send_email_path(email)
+            %p
+            = link_to 'Preview', send_email_path(email)
+        - else
+          %td= link_to 'Show', send_email_path(email)
+        %td= email.created_at
+        %td= email.meet_name
+        %td= email.subject
+        - if email.delivered_at.nil?
+          %td
+            = link_to 'Deliver Now', deliver_send_email_path(email)
+            / = link_to 'Cancel', deliver_send_email_path(email)
+        - else
+          %td= email.delivered_at
+%ul.nav.nav-pills
+  %li= link_to 'New Email', new_send_email_path

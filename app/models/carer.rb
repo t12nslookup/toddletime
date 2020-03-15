@@ -32,7 +32,22 @@ class Carer < ActiveRecord::Base
 
   scope :search, ->(text) { where('upper(name) like ?', '%' + text.upcase + '%') }
   scope :recent, -> { eager_load(:meet).where('meet_date > :recent or carers.created_at > :recent', { recent: (Date.today - 6.months) }) }
+  scope :email_recent, -> { eager_load(:meet).where('meet_date > :recent or carers.created_at > :recent', { recent: (Date.today - 2.months) }) }
   scope :in_order, -> { order('name') }
   validates :name, :phone, presence: true
 
+  def meet_email?(meet_type_id)
+    meet_type = MeetType.find(meet_type_id).name.downcase.delete(' ')
+    ['all', meet_type].include?(what_contact.contact_type.downcase.delete(' ')) &&
+      %w[email all].include?(how_contact.contact_type.downcase)
+  end
+
+  def events_email?
+    %w[all specialevents].include?(what_contact.contact_type.downcase.delete(' ')) &&
+      %w[email all].include?(how_contact.contact_type.downcase)
+  end
+
+  def full_email
+    '"' + name + '" <' + email + '>'
+  end
 end

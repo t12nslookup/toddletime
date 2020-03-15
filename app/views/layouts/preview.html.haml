@@ -1,0 +1,27 @@
+%html
+  %body
+    %table
+      %tr{valign: :top}
+        %th{align: :left} To:
+        %td= @send_email.addresses.scan(/"([^",]*?)"/).flatten.join(', ')
+      %tr
+        %td{colspan: 2} &nbsp;
+      %tr{valign: :top}
+        %th{align: :left} Subject:
+        %td= @send_email.subject
+    %para
+    %hr
+    %br
+    Hello,
+    %p
+    = yield
+    %p
+    %hr
+    %p
+    St Matthew's Church, Grenville Street, Edgeley, Stockport. SK3 9EE
+    %br
+    Registered Charity 1153830
+    %br
+    web site: https://www.edgeleyandcheadleheath.org.uk/
+    %br
+    e-mail: info@edgeleyandcheadleheath.org.uk

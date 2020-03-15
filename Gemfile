@@ -51,6 +51,7 @@ gem 'tzinfo-data'
 # useful tools
 group :development do
   gem 'annotate'
+  gem 'byebug'
   gem 'rails-erd'
   # http://docs.rubocop.org/en/latest/
   gem 'letter_opener_web'

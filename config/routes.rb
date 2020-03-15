@@ -136,7 +136,9 @@ Rails.application.routes.draw do
   resources :how_heards, only: %i[index new show create edit update]
   resources :how_contacts, only: %i[index new show create edit update]
   resources :what_contacts, only: %i[index new show create edit update]
-  resources :send_emails, only: %i[new create]
+  resources :send_emails, only: %i[index new show create edit update] do
+    get :deliver, on: :member
+  end
 
   resources :meet_types do
     resources :rotas, only: %i[index]

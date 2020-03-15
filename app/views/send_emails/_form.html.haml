@@ -1,0 +1,18 @@
+= bootstrap_form_for(@send_email, layout: :horizontal) do |f|
+  - if @send_email.id.present?
+    - if @send_email.meet_type.present?
+      = hidden_field_tag 'send_email[meet_type_id]', @send_email.meet_type.id
+      = f.form_group :meet_type_id, label: {text: 'Meet type'} do
+        = label_tag :meet_type, @send_email.meet_type.name, {class: 'control-label'}
+
+    - else
+      = f.form_group :meet_type_id, label: {text: 'Meet type'} do
+        = label_tag :meet_type, 'Special Event', {class: 'control-label'}
+  - else
+    = f.collection_select :meet_type_id, @meet_types_list, :id, :name
+  = f.text_field :subject, autocomplete: :nope
+  = f.text_area :body, {rows: 8}
+  = f.form_group do
+    = f.primary 'Save Email'
+%para
+= errors_for @send_email
