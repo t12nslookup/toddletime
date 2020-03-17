@@ -38,12 +38,16 @@ class Carer < ActiveRecord::Base
 
   def meet_email?(meet_type_id)
     meet_type = MeetType.find(meet_type_id).name.downcase.delete(' ')
-    ['all', meet_type].include?(what_contact.contact_type.downcase.delete(' ')) &&
+    what_contact.present? &&
+      how_contact.present? &&
+      ['all', meet_type].include?(what_contact.contact_type.downcase.delete(' ')) &&
       %w[email all].include?(how_contact.contact_type.downcase)
   end
 
   def events_email?
-    %w[all specialevents].include?(what_contact.contact_type.downcase.delete(' ')) &&
+    what_contact.present? &&
+      how_contact.present? &&
+      %w[all specialevents].include?(what_contact.contact_type.downcase.delete(' ')) &&
       %w[email all].include?(how_contact.contact_type.downcase)
   end
 
