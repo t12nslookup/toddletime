@@ -18,6 +18,8 @@
 
 // Add bootstrap variables here
 @import "bootstrap";
+@import "bootstrap-sprockets";
+@import 'bootstrap/glyphicons';
 
 .container-fluid {
   margin-top: 20px;
