@@ -1,4 +1,4 @@
-class AddHowHeardForeignKeys < ActiveRecord::Migration
+class AddHowHeardForeignKeys < ActiveRecord::Migration[5.2]
   def change
     execute <<-SQL
       ALTER TABLE leader_to_meets

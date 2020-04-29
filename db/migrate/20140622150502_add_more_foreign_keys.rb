@@ -1,4 +1,4 @@
-class AddMoreForeignKeys < ActiveRecord::Migration
+class AddMoreForeignKeys < ActiveRecord::Migration[5.2]
   def change
     execute <<-SQL
       ALTER TABLE meets

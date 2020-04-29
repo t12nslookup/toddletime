@@ -1,4 +1,4 @@
-class CreateLeaderMeetTypes < ActiveRecord::Migration
+class CreateLeaderMeetTypes < ActiveRecord::Migration[5.2]
   def change
     create_table :leader_meet_types do |t|
       t.references :leader, index: true

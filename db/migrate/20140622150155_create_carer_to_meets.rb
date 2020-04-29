@@ -1,4 +1,4 @@
-class CreateCarerToMeets < ActiveRecord::Migration
+class CreateCarerToMeets < ActiveRecord::Migration[5.2]
   def change
     create_table :carer_to_meets do |t|
       t.references :carer, index: true

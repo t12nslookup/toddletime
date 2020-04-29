@@ -1,4 +1,4 @@
-class AddDbsToLeader < ActiveRecord::Migration
+class AddDbsToLeader < ActiveRecord::Migration[5.2]
   def change
     add_column :leaders, :dbs, :date
   end

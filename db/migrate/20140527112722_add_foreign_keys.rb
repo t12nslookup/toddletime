@@ -1,4 +1,4 @@
-class AddForeignKeys < ActiveRecord::Migration
+class AddForeignKeys < ActiveRecord::Migration[5.2]
   def change
     execute <<-SQL
       ALTER TABLE rota_leaders

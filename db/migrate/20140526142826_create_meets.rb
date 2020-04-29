@@ -1,4 +1,4 @@
-class CreateMeets < ActiveRecord::Migration
+class CreateMeets < ActiveRecord::Migration[5.2]
   def change
     create_table :meets do |t|
       t.date :meet_date

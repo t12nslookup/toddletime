@@ -1,4 +1,4 @@
-class CreateRotaLeaders < ActiveRecord::Migration
+class CreateRotaLeaders < ActiveRecord::Migration[5.2]
   def change
     create_table :rota_leaders do |t|
       t.references :leader, index: true

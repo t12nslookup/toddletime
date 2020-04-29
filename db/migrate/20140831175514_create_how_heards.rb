@@ -1,4 +1,4 @@
-class CreateHowHeards < ActiveRecord::Migration
+class CreateHowHeards < ActiveRecord::Migration[5.2]
   def change
     create_table :how_heards do |t|
       t.string :location_name
