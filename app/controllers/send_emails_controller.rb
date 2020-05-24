@@ -69,6 +69,8 @@ class SendEmailsController < ApplicationController
     carers.map(&:full_email).join(', ')
   end
 
+  # Object to store name to id mappings of "Meet Types", including
+  # a fake nil/"Special Event"
   class MeetList
     attr_accessor :id, :name
 

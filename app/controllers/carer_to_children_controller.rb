@@ -1,5 +1,4 @@
 class CarerToChildrenController < ApplicationController
-
   def new
     @carer_to_child = CarerToChild.new
     @carer_to_child.child_id = params[:child_id]

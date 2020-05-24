@@ -28,7 +28,6 @@ class MeetTypesController < ApplicationController
   end
 
   def update
-
     if @meet_type.update(meet_type_params)
       redirect_to meet_types_path
     else

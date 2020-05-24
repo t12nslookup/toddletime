@@ -18,6 +18,7 @@
 .env
 /leaders.txt
 erd.pdf
+dont.*
 
 # Vi(m) temporary files
 *~
