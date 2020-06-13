@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_10_194155) do
+ActiveRecord::Schema.define(version: 2020_06_13_110131) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -209,7 +209,9 @@ ActiveRecord::Schema.define(version: 2020_03_10_194155) do
   add_foreign_key "carer_to_children", "children", name: "fk_carer_to_child_child"
   add_foreign_key "carer_to_meets", "carers", name: "fk_carer_to_meet_carer"
   add_foreign_key "carer_to_meets", "meets", name: "fk_carer_to_meet_meet"
+  add_foreign_key "carers", "how_contacts", name: "fk_carer_to_how_contact"
   add_foreign_key "carers", "how_heards", name: "fk_carer_to_how_heard"
+  add_foreign_key "carers", "what_contacts", name: "fk_carer_to_what_contact"
   add_foreign_key "child_to_meets", "children", name: "fk_child_to_meet_child"
   add_foreign_key "child_to_meets", "meets", name: "fk_child_to_meet_meet"
   add_foreign_key "leader_meet_types", "leaders", name: "fk_leader_meet_type_leader"
