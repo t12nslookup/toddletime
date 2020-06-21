@@ -3,7 +3,12 @@
   = f.text_area :address
   = f.text_field :postcode, autocomplete: :off
   = f.collection_select :what_contact_id, @what_contacts, :id, :contact_type, {label: "What can we send you", include_blank: true }
-  = f.collection_select :how_contact_id, @how_contacts, :id, :contact_type, {label: "How can we contact you", include_blank: true }
+  - if @how_contacts.count > 0
+    = f.form_group :how_contact, label: {text: 'How can we contact you:'} do
+      - @how_contacts.in_order.each do |hc|
+        = f.form_group :how_contact do
+          = check_box_tag 'how_contact_id[]', hc.id, @carer.how_contacts.include?(hc)
+          = hc.contact_type
   = f.telephone_field :phone, autocomplete: :off
   = f.email_field :email, autocomplete: :off
   /

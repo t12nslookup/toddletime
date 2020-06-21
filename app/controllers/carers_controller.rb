@@ -9,6 +9,12 @@ class CarersController < ApplicationController
   def create
     @carer = Carer.new(carer_params)
 
+    if params[:how_contact_id]
+      @carer.how_contacts = HowContact.find(params[:how_contact_id])
+    else
+      @carer.how_contacts.destroy_all
+    end
+
     if @carer.save
       redirect_to @carer
     else
@@ -19,6 +25,12 @@ class CarersController < ApplicationController
   def edit; end
 
   def update
+    if params[:how_contact_id]
+      @carer.how_contacts = HowContact.find(params[:how_contact_id])
+    else
+      @carer.how_contacts.destroy_all
+    end
+
     if @carer.update(carer_params)
       redirect_to @carer
     else
@@ -43,10 +55,11 @@ class CarersController < ApplicationController
   def carer_params
     params.require(:carer).permit(:name, :phone, :address, :postcode,
                                   :email, :how_contact_id, :what_contact_id,
-                                  :how_heard_id, :other_heard)
+                                  :other_heard)
   end
 
   def load_multi_select
+    # how_heards is no longer used.
     @how_heards = HowHeard.in_order
     @how_contacts = HowContact.in_order
     @what_contacts = WhatContact.in_order

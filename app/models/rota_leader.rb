@@ -6,7 +6,7 @@
 #  leader_id  :integer          indexed
 #  job_id     :integer          indexed
 #  meet_id    :integer          indexed
-#  expired    :boolean          default(FALSE)
+#  expired    :boolean          default("false")
 #  created_at :datetime
 #  updated_at :datetime
 #

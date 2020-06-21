@@ -2,23 +2,25 @@
 #
 # Table name: carers
 #
-#  id              :integer          not null, primary key
-#  name            :string(255)
-#  phone           :string(255)
-#  email           :string(255)
+#  id              :bigint           not null, primary key
+#  name            :string
+#  phone           :string
+#  email           :string
 #  can_contact     :integer
-#  created_at      :datetime
-#  updated_at      :datetime
-#  address         :string(255)
-#  postcode        :string(255)
-#  how_heard_id    :integer          indexed
-#  other_heard     :string(255)
-#  how_contact_id  :integer          indexed
-#  what_contact_id :integer          indexed
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  address         :string
+#  postcode        :string
+#  how_heard_id    :bigint           indexed
+#  other_heard     :string
+#  how_contact_id  :bigint           indexed
+#  what_contact_id :bigint           indexed
 #
 # Foreign Keys
 #
-#  fk_carer_to_how_heard  (how_heard_id => how_heards.id)
+#  fk_carer_to_how_contact   (how_contact_id => how_contacts.id)
+#  fk_carer_to_how_heard     (how_heard_id => how_heards.id)
+#  fk_carer_to_what_contact  (what_contact_id => what_contacts.id)
 #
 
 require 'test_helper'

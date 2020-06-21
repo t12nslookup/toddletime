@@ -20,7 +20,7 @@
     %td= @carer.what_contact.try(:contact_type)
   %tr
     %th Permission to Contact
-    %td= @carer.how_contact.try(:contact_type)
+    %td= @carer.how_contacts.map(&:contact_type).join(', ')
   /
     %tr
       %th How did you hear about us?

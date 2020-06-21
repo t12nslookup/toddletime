@@ -10,26 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_13_110131) do
+ActiveRecord::Schema.define(version: 2020_06_21_162530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "carer_to_children", force: :cascade do |t|
-    t.bigint "child_id"
-    t.bigint "carer_id"
-    t.string "relationship"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "carer_to_children", id: :serial, force: :cascade do |t|
+    t.integer "child_id"
+    t.integer "carer_id"
+    t.string "relationship", limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["carer_id"], name: "index_carer_to_children_on_carer_id"
     t.index ["child_id"], name: "index_carer_to_children_on_child_id"
   end
 
-  create_table "carer_to_meets", force: :cascade do |t|
-    t.bigint "carer_id"
-    t.bigint "meet_id"
+  create_table "carer_to_how_contacts", force: :cascade do |t|
+    t.bigint "carer_id", null: false
+    t.bigint "how_contact_id", null: false
+    t.integer "expired", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["carer_id"], name: "index_carer_to_how_contacts_on_carer_id"
+    t.index ["expired"], name: "index_carer_to_how_contacts_on_expired"
+    t.index ["how_contact_id"], name: "index_carer_to_how_contacts_on_how_contact_id"
+  end
+
+  create_table "carer_to_meets", id: :serial, force: :cascade do |t|
+    t.integer "carer_id"
+    t.integer "meet_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["carer_id"], name: "index_carer_to_meets_on_carer_id"
     t.index ["meet_id"], name: "index_carer_to_meets_on_meet_id"
   end
@@ -52,119 +63,119 @@ ActiveRecord::Schema.define(version: 2020_06_13_110131) do
     t.index ["what_contact_id"], name: "index_carers_on_what_contact_id"
   end
 
-  create_table "child_to_meets", force: :cascade do |t|
-    t.bigint "child_id"
-    t.bigint "meet_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "child_to_meets", id: :serial, force: :cascade do |t|
+    t.integer "child_id"
+    t.integer "meet_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["child_id"], name: "index_child_to_meets_on_child_id"
     t.index ["meet_id"], name: "index_child_to_meets_on_meet_id"
   end
 
-  create_table "children", force: :cascade do |t|
-    t.string "name"
-    t.string "gender"
+  create_table "children", id: :serial, force: :cascade do |t|
+    t.string "name", limit: 255
+    t.string "gender", limit: 255
     t.date "date_of_birth"
-    t.string "address"
-    t.string "postcode"
-    t.string "medical_conditions"
-    t.string "special_needs"
+    t.string "address", limit: 255
+    t.string "postcode", limit: 255
+    t.string "medical_conditions", limit: 255
+    t.string "special_needs", limit: 255
     t.date "registered_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string "emergency_contact"
   end
 
-  create_table "how_contacts", force: :cascade do |t|
+  create_table "how_contacts", id: :serial, force: :cascade do |t|
     t.string "contact_type"
     t.integer "expired", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "how_heards", force: :cascade do |t|
-    t.string "location_name"
+  create_table "how_heards", id: :serial, force: :cascade do |t|
+    t.string "location_name", limit: 255
     t.integer "expired", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "jobs", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "jobs", id: :serial, force: :cascade do |t|
+    t.string "name", limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "leader_meet_types", force: :cascade do |t|
-    t.bigint "leader_id"
-    t.bigint "meet_type_id"
+  create_table "leader_meet_types", id: :serial, force: :cascade do |t|
+    t.integer "leader_id"
+    t.integer "meet_type_id"
     t.integer "expired", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["leader_id"], name: "index_leader_meet_types_on_leader_id"
     t.index ["meet_type_id"], name: "index_leader_meet_types_on_meet_type_id"
   end
 
-  create_table "leader_to_meets", force: :cascade do |t|
-    t.bigint "meet_id"
-    t.bigint "leader_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "leader_to_meets", id: :serial, force: :cascade do |t|
+    t.integer "meet_id"
+    t.integer "leader_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["leader_id"], name: "index_leader_to_meets_on_leader_id"
     t.index ["meet_id"], name: "index_leader_to_meets_on_meet_id"
   end
 
-  create_table "leaders", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
+  create_table "leaders", id: :serial, force: :cascade do |t|
+    t.string "name", limit: 255
+    t.string "email", limit: 255
     t.date "expired"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.date "dbs"
   end
 
-  create_table "meet_type_jobs", force: :cascade do |t|
-    t.bigint "job_id"
-    t.bigint "meet_type_id"
+  create_table "meet_type_jobs", id: :serial, force: :cascade do |t|
+    t.integer "job_id"
+    t.integer "meet_type_id"
     t.integer "count", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["job_id"], name: "index_meet_type_jobs_on_job_id"
     t.index ["meet_type_id"], name: "index_meet_type_jobs_on_meet_type_id"
   end
 
-  create_table "meet_types", force: :cascade do |t|
-    t.string "name"
+  create_table "meet_types", id: :serial, force: :cascade do |t|
+    t.string "name", limit: 255
     t.integer "deleted", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "meets", force: :cascade do |t|
+  create_table "meets", id: :serial, force: :cascade do |t|
     t.date "meet_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "meet_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer "meet_type_id"
     t.index ["meet_type_id"], name: "index_meets_on_meet_type_id"
   end
 
-  create_table "rota_leaders", force: :cascade do |t|
-    t.bigint "leader_id"
-    t.bigint "job_id"
-    t.bigint "meet_id"
+  create_table "rota_leaders", id: :serial, force: :cascade do |t|
+    t.integer "leader_id"
+    t.integer "job_id"
+    t.integer "meet_id"
     t.boolean "expired", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["job_id"], name: "index_rota_leaders_on_job_id"
     t.index ["leader_id"], name: "index_rota_leaders_on_leader_id"
     t.index ["meet_id"], name: "index_rota_leaders_on_meet_id"
   end
 
-  create_table "send_emails", force: :cascade do |t|
+  create_table "send_emails", id: :serial, force: :cascade do |t|
     t.string "addresses"
     t.string "subject"
     t.string "body"
-    t.bigint "meet_type_id"
+    t.integer "meet_type_id"
     t.integer "state", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -173,23 +184,23 @@ ActiveRecord::Schema.define(version: 2020_06_13_110131) do
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
+    t.string "email", limit: 255, default: "", null: false
+    t.string "encrypted_password", limit: 255, default: "", null: false
+    t.string "reset_password_token", limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string "current_sign_in_ip"
-    t.string "last_sign_in_ip"
-    t.string "confirmation_token"
+    t.string "current_sign_in_ip", limit: 255
+    t.string "last_sign_in_ip", limit: 255
+    t.string "confirmation_token", limit: 255
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.datetime "locked_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "username"
+    t.string "username", limit: 255
     t.boolean "approved", default: false, null: false
     t.index ["approved"], name: "index_users_on_approved"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
@@ -207,6 +218,8 @@ ActiveRecord::Schema.define(version: 2020_06_13_110131) do
 
   add_foreign_key "carer_to_children", "carers", name: "fk_carer_to_child_carer"
   add_foreign_key "carer_to_children", "children", name: "fk_carer_to_child_child"
+  add_foreign_key "carer_to_how_contacts", "carers"
+  add_foreign_key "carer_to_how_contacts", "how_contacts"
   add_foreign_key "carer_to_meets", "carers", name: "fk_carer_to_meet_carer"
   add_foreign_key "carer_to_meets", "meets", name: "fk_carer_to_meet_meet"
   add_foreign_key "carers", "how_contacts", name: "fk_carer_to_how_contact"

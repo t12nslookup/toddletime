@@ -17,7 +17,7 @@
       %tr
         %td= carer.name
         %td= carer.what_contact.try(:contact_type)
-        %td= carer.how_contact.try(:contact_type)
+        %td= carer.how_contacts.map(&:contact_type).join(', ')
         %td= carer.phone
         %td= carer.email
         %td= link_to 'Details', carer_path(carer)

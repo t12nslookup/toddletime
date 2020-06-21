@@ -5,7 +5,7 @@
 #  id           :integer          not null, primary key
 #  job_id       :integer          indexed
 #  meet_type_id :integer          indexed
-#  count        :integer          default(0)
+#  count        :integer          default("0")
 #  created_at   :datetime
 #  updated_at   :datetime
 #
