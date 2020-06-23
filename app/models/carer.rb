@@ -27,7 +27,7 @@ class Carer < ActiveRecord::Base
   has_many :carer_to_children, inverse_of: :carer
   has_many :children, through: :carer_to_children
   has_many :carer_to_meets, inverse_of: :carer
-  has_many :meet, through: :carer_to_meets
+  has_many :meets, through: :carer_to_meets
   belongs_to :how_heard, inverse_of: :carers, optional: true
   belongs_to :what_contact, inverse_of: :carers
   has_many :carer_to_how_contacts, inverse_of: :carer
@@ -46,6 +46,19 @@ class Carer < ActiveRecord::Base
       (how_contacts & email_types).any?
   end
 
+  def meet_text?(meet_type_id)
+    meet_type = MeetType.find(meet_type_id).name.downcase.delete(' ')
+    what_contact.present? &&
+      ['all', meet_type].include?(what_contact.contact_type.downcase.delete(' ')) &&
+      (how_contacts & text_types).any?
+  end
+
+  def meet_recent?(meet_type_id)
+    mts = Meet.where('meet_type_id = :meet_type and meet_date > :recent', { meet_type: meet_type_id, recent: (Date.today - 2.months) })
+    mts = Meet.where(meet_type: meet_type_id).in_order.last(6) if mts.count < 6
+    (meets & mts).any?
+  end
+
   def events_email?
     what_contact.present? &&
       %w[all specialevents].include?(what_contact.contact_type.downcase.delete(' ')) &&
@@ -58,8 +71,11 @@ class Carer < ActiveRecord::Base
 
   private
 
-
   def email_types
     @email_types || HowContact.where('lower(contact_type) in (?)', %w[email all])
+  end
+
+  def text_types
+    @text_types || HowContact.where('lower(contact_type) in (?)', %w[text all])
   end
 end

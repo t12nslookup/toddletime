@@ -27,7 +27,8 @@ class SendEmailsController < ApplicationController
     # is this a meet_type specific email, or an event type
     if @send_email.meet_type.present?
       # meet type email
-      @carers = Carer.email_recent.select { |c| c.meet_email?(@send_email.meet_type.id) }
+      @carers = Carer.select { |c| c.meet_recent?(@send_email.meet_type.id) }
+                     .select { |c| c.meet_email?(@send_email.meet_type.id) }
     else
       # special event email
       @carers = Carer.email_recent.select(&:events_email?)
