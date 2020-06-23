@@ -52,6 +52,9 @@ gem 'rails_12factor', group: :production
 # gem 'sanitize'
 gem 'tzinfo-data'
 
+# Gem to allow posting of requests to send texts
+gem 'rest-client'
+
 # useful tools
 group :development do
   gem 'annotate'
