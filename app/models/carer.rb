@@ -34,8 +34,8 @@ class Carer < ActiveRecord::Base
   has_many :how_contacts, through: :carer_to_how_contacts
 
   scope :search, ->(text) { where('upper(name) like ?', '%' + text.upcase + '%') }
-  scope :recent, -> { eager_load(:meet).where('meet_date > :recent or carers.created_at > :recent', { recent: (Date.today - 6.months) }) }
-  scope :email_recent, -> { eager_load(:meet).where('meet_date > :recent or carers.created_at > :recent', { recent: (Date.today - 2.months) }) }
+  scope :recent, -> { eager_load(:meets).where('meet_date > :recent or carers.created_at > :recent', { recent: (Date.today - 6.months) }) }
+  scope :email_recent, -> { eager_load(:meets).where('meet_date > :recent or carers.created_at > :recent', { recent: (Date.today - 2.months) }) }
   scope :in_order, -> { order('name') }
   validates :name, :phone, presence: true
 
