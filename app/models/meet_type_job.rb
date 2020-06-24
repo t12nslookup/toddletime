@@ -15,7 +15,7 @@
 #  fk_meet_type_job_meet_type  (meet_type_id => meet_types.id)
 #
 
-class MeetTypeJob < ActiveRecord::Base
+class MeetTypeJob < ApplicationRecord
   belongs_to :job, inverse_of: :meet_type_jobs
   belongs_to :meet_type, inverse_of: :meet_type_jobs
 

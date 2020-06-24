@@ -14,7 +14,7 @@
 #  fk_leader_to_meet_meet    (meet_id => meets.id)
 #
 
-class LeaderToMeet < ActiveRecord::Base
+class LeaderToMeet < ApplicationRecord
   belongs_to :meet, inverse_of: :leader_to_meets
   belongs_to :leader, inverse_of: :leader_to_meets
 

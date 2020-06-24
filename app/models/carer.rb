@@ -23,7 +23,7 @@
 #  fk_carer_to_what_contact  (what_contact_id => what_contacts.id)
 #
 
-class Carer < ActiveRecord::Base
+class Carer < ApplicationRecord
   has_many :carer_to_children, inverse_of: :carer
   has_many :children, through: :carer_to_children
   has_many :carer_to_meets, inverse_of: :carer
@@ -35,7 +35,7 @@ class Carer < ActiveRecord::Base
 
   scope :search, ->(text) { where('upper(name) like ?', '%' + text.upcase + '%') }
   scope :recent, -> { eager_load(:meets).where('meet_date > :recent or carers.created_at > :recent', { recent: (Date.today - 6.months) }) }
-  scope :email_recent, -> { eager_load(:meets).where('meet_date > :recent or carers.created_at > :recent', { recent: (Date.today - 2.months) }) }
+  scope :meet_recent, -> { eager_load(:meets).where('meet_date > :recent or carers.created_at > :recent', { recent: (Date.today - 2.months) }) }
   scope :in_order, -> { order('name') }
   validates :name, :phone, presence: true
 

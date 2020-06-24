@@ -17,7 +17,7 @@
 #  fk_rota_leader_meet    (meet_id => meets.id)
 #
 
-class RotaLeader < ActiveRecord::Base
+class RotaLeader < ApplicationRecord
   belongs_to :leader, inverse_of: :rota_leaders
   belongs_to :job, inverse_of: :rota_leaders
   belongs_to :meet, inverse_of: :rota_leaders

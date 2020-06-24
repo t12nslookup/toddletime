@@ -9,7 +9,7 @@
 #  updated_at    :datetime
 #
 
-class HowHeard < ActiveRecord::Base
+class HowHeard < ApplicationRecord
   has_many :carers, inverse_of: :how_heard
 
   scope :in_order, -> { order('location_name') }

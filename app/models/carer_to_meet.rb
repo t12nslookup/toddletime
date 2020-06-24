@@ -14,7 +14,7 @@
 #  fk_carer_to_meet_meet   (meet_id => meets.id)
 #
 
-class CarerToMeet < ActiveRecord::Base
+class CarerToMeet < ApplicationRecord
   belongs_to :carer, inverse_of: :carer_to_meets
   belongs_to :meet, inverse_of: :carer_to_meets
 

@@ -15,7 +15,7 @@
 #  fk_carer_to_child_child  (child_id => children.id)
 #
 
-class CarerToChild < ActiveRecord::Base
+class CarerToChild < ApplicationRecord
   belongs_to :child, inverse_of: :carer_to_children
   belongs_to :carer, inverse_of: :carer_to_children
 

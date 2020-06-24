@@ -14,7 +14,7 @@
 #  fk_child_to_meet_meet   (meet_id => meets.id)
 #
 
-class ChildToMeet < ActiveRecord::Base
+class ChildToMeet < ApplicationRecord
   belongs_to :child, inverse_of: :child_to_meets
   belongs_to :meet, inverse_of: :child_to_meets
 

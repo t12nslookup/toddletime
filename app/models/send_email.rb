@@ -17,8 +17,8 @@
 #  fk_rails_...  (meet_type_id => meet_types.id)
 #
 
-class SendEmail < ActiveRecord::Base
-  belongs_to :meet_type, inverse_of: :send_emails
+class SendEmail < ApplicationRecord
+  belongs_to :meet_type, inverse_of: :send_emails, optional: true
 
   scope :in_order, -> { order('created_at desc') }
   scope :recent, -> { where('created_at > :recent', recent: (Date.today - 7.months)) }

@@ -15,7 +15,7 @@
 #  fk_leader_meet_type_meet_type  (meet_type_id => meet_types.id)
 #
 
-class LeaderMeetType < ActiveRecord::Base
+class LeaderMeetType < ApplicationRecord
   belongs_to :leader
   belongs_to :meet_type
   has_many :job

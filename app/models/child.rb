@@ -16,7 +16,7 @@
 #  emergency_contact  :string
 #
 
-class Child < ActiveRecord::Base
+class Child < ApplicationRecord
   has_many :carer_to_children, inverse_of: :child
   has_many :carers, through: :carer_to_children
   has_many :child_to_meets, inverse_of: :child

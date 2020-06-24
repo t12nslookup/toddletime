@@ -8,7 +8,7 @@
 #  updated_at :datetime
 #
 
-class Job < ActiveRecord::Base
+class Job < ApplicationRecord
   # belongs_to :leader_to_job
   # has_many :leaders, through: :leader_to_jobs
   has_many :meet_type_jobs, inverse_of: :job

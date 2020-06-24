@@ -13,7 +13,7 @@
 #  fk_meet_to_meet_type  (meet_type_id => meet_types.id)
 #
 
-class Meet < ActiveRecord::Base
+class Meet < ApplicationRecord
   has_many :rota_leaders, inverse_of: :meet
   has_many :jobs, through: :rota_leaders
   has_many :leaders, through: :rota_leaders

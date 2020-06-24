@@ -11,7 +11,7 @@
 #  dbs        :date
 #
 
-class Leader < ActiveRecord::Base
+class Leader < ApplicationRecord
   has_many :rota_leaders, inverse_of: :leader
   has_many :meets, through: :rota_leaders
   has_many :leader_meet_types, inverse_of: :leader

@@ -9,7 +9,7 @@
 #  updated_at   :datetime         not null
 #
 
-class HowContact < ActiveRecord::Base
+class HowContact < ApplicationRecord
   has_many :carer_to_how_contacts, inverse_of: :how_contact
   has_many :carers, through: :carer_to_how_contacts
 

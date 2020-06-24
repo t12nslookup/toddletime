@@ -9,7 +9,7 @@
 #  updated_at   :datetime         not null
 #
 
-class WhatContact < ActiveRecord::Base
+class WhatContact < ApplicationRecord
   has_many :carers, inverse_of: :what_contact
 
   scope :in_order, -> { order('contact_type') }
