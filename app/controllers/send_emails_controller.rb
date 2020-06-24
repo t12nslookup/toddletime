@@ -31,7 +31,7 @@ class SendEmailsController < ApplicationController
                      .select { |c| c.meet_email?(@send_email.meet_type.id) }
     else
       # special event email
-      @carers = Carer.email_recent.select(&:events_email?)
+      @carers = Carer.meet_recent.select(&:events_email?)
     end
 
     @send_email.addresses = emails(@carers)
