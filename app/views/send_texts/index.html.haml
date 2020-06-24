@@ -1,0 +1,33 @@
+%ul.pagination
+  %li{:class => ('active' if (params[:historic].blank?))}= link_to "Recent Texts", action: "index"
+  %li{:class => ('active' if params[:historic] == 'true')}= link_to "All Texts", action: "index", historic: "true"
+%p
+%table.table.table-condensed.table-striped.table-hover
+  %thead
+    %tr
+      %th Action
+      %th When
+      %th Group
+      %th Subject
+      %th Delivered
+  %tbody
+    - @texts.each do |text|
+      %tr
+        - if text.delivered_at.nil?
+          %td
+            = link_to 'Edit', edit_send_text_path(text)
+            %p
+            = link_to 'View', send_text_path(text)
+        - else
+          %td= link_to 'Show', send_text_path(text)
+        %td= text.created_at
+        %td= text.meet_name
+        %td= text.message
+        - if text.delivered_at.nil?
+          %td
+            = link_to 'Deliver Now', deliver_send_text_path(text)
+            / = link_to 'Cancel', deliver_send_text_path(text)
+        - else
+          %td= text.delivered_at
+%ul.nav.nav-pills
+  %li= link_to 'New Text', new_send_text_path

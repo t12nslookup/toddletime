@@ -1,0 +1,29 @@
+= bootstrap_form_for(@send_text, layout: :horizontal) do |f|
+  - if @send_text.id.present?
+    - if @send_text.meet_type.present?
+      = hidden_field_tag 'send_text[meet_type_id]', @send_text.meet_type.id
+      = f.form_group :meet_type_id, label: {text: 'Meet type'} do
+        = label_tag :meet_type, @send_text.meet_type.name, {class: 'control-label'}
+    - else
+      = f.form_group :meet_type_id, label: {text: 'Meet type'} do
+        = label_tag :meet_type, 'Special Event', {class: 'control-label'}
+  - else
+    = f.collection_select :meet_type_id, @meet_types_list, :id, :name
+  = f.text_field :message, autocomplete: :nope, id: 'text-field'
+  = f.form_group :text_count, label: {text: 'Text Count'} do
+    - if @send_text.message.present?
+      = label_tag :text_count, @send_text.message.length.to_s + ' Characters (' + (@send_text.message.length / 153.0).ceil.to_s + ' Messages per person)', {class: 'control-label', id: 'text-count'}
+    - else
+      = label_tag :text_count, '0 Characters (0 Messages per person)', {class: 'control-label', id: 'text-count'}
+  = f.form_group do
+    = f.primary 'Save Text'
+%para
+= errors_for @send_text
+:javascript
+  $(function() {
+    $("#text-field").on("keyup", function(){
+      var length = $(this).val().length;
+
+      $("#text-count").html(length + ' Characters ('+ Math.ceil(length/153) + ' Messages per person)');
+    });
+  });

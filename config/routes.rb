@@ -70,9 +70,19 @@
 #                send_email GET    /send_emails/:id(.:format)                                                               send_emails#show
 #                           PATCH  /send_emails/:id(.:format)                                                               send_emails#update
 #                           PUT    /send_emails/:id(.:format)                                                               send_emails#update
+#         deliver_send_text GET    /send_texts/:id/deliver(.:format)                                                        send_texts#deliver
+#                send_texts GET    /send_texts(.:format)                                                                    send_texts#index
+#                           POST   /send_texts(.:format)                                                                    send_texts#create
+#             new_send_text GET    /send_texts/new(.:format)                                                                send_texts#new
+#            edit_send_text GET    /send_texts/:id/edit(.:format)                                                           send_texts#edit
+#                 send_text GET    /send_texts/:id(.:format)                                                                send_texts#show
+#                           PATCH  /send_texts/:id(.:format)                                                                send_texts#update
+#                           PUT    /send_texts/:id(.:format)                                                                send_texts#update
 #           meet_type_rotas GET    /meet_types/:meet_type_id/rotas(.:format)                                                rotas#index
 #     meet_type_send_emails POST   /meet_types/:meet_type_id/send_emails(.:format)                                          send_emails#create
 #  new_meet_type_send_email GET    /meet_types/:meet_type_id/send_emails/new(.:format)                                      send_emails#new
+#      meet_type_send_texts POST   /meet_types/:meet_type_id/send_texts(.:format)                                           send_texts#create
+#   new_meet_type_send_text GET    /meet_types/:meet_type_id/send_texts/new(.:format)                                       send_texts#new
 #                meet_types GET    /meet_types(.:format)                                                                    meet_types#index
 #                           POST   /meet_types(.:format)                                                                    meet_types#create
 #             new_meet_type GET    /meet_types/new(.:format)                                                                meet_types#new
@@ -158,10 +168,14 @@ Rails.application.routes.draw do
   resources :send_emails, only: %i[index new show create edit update] do
     get :deliver, on: :member
   end
+  resources :send_texts, only: %i[index new show create edit update] do
+    get :deliver, on: :member
+  end
 
   resources :meet_types do
     resources :rotas, only: %i[index]
     resources :send_emails, only: %i[new create]
+    resources :send_texts, only: %i[new create]
   end
   resources :rotas
 

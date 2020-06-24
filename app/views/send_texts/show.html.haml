@@ -1,0 +1,23 @@
+%h1 Text Details
+%p
+%table.table.table-condensed.table-striped.table-hover
+  %tr
+    %th Group
+    %td= @send_text.meet_name
+  %tr
+    %th From
+    %td Toddletime
+  %tr
+    %th To
+    %td= @send_text.addresses.scan(/"([^",]*?)"/).flatten.join(', ')
+  %tr
+    %th Message
+    %td= @send_text.message
+  %tr
+    %th Text Count
+    %td
+      = @send_text.addresses.scan(/"([^",]*?)"/).flatten.count * (@send_text.message.length / 153.0).ceil
+      Text Credits
+%ul.nav.nav-pills
+  %li= link_to 'All Texts', send_texts_path
+

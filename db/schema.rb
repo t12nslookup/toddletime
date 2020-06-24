@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_21_162530) do
+ActiveRecord::Schema.define(version: 2020_06_23_174616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -183,6 +183,18 @@ ActiveRecord::Schema.define(version: 2020_06_21_162530) do
     t.index ["meet_type_id"], name: "index_send_emails_on_meet_type_id"
   end
 
+  create_table "send_texts", force: :cascade do |t|
+    t.string "addresses"
+    t.string "message"
+    t.bigint "meet_type_id"
+    t.integer "state", default: 0
+    t.datetime "delivered_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meet_type_id"], name: "index_send_texts_on_meet_type_id"
+    t.index ["state"], name: "index_send_texts_on_state"
+  end
+
   create_table "users", id: :serial, force: :cascade do |t|
     t.string "email", limit: 255, default: "", null: false
     t.string "encrypted_password", limit: 255, default: "", null: false
@@ -238,4 +250,5 @@ ActiveRecord::Schema.define(version: 2020_06_21_162530) do
   add_foreign_key "rota_leaders", "leaders", name: "fk_rota_leader_leader"
   add_foreign_key "rota_leaders", "meets", name: "fk_rota_leader_meet"
   add_foreign_key "send_emails", "meet_types"
+  add_foreign_key "send_texts", "meet_types"
 end
