@@ -53,6 +53,13 @@ class Carer < ApplicationRecord
       (how_contacts & text_types).any?
   end
 
+  def meet_phone?(meet_type_id)
+    meet_type = MeetType.find(meet_type_id).name.downcase.delete(' ')
+    what_contact.present? &&
+      ['all', meet_type].include?(what_contact.contact_type.downcase.delete(' ')) &&
+      (how_contacts & phone_types).any?
+  end
+
   def meet_recent?(meet_type_id)
     mts = Meet.where('meet_type_id = :meet_type and meet_date > :recent', { meet_type: meet_type_id, recent: (Date.today - 2.months) })
     mts = Meet.where(meet_type: meet_type_id).in_order.last(6) if mts.count < 6
@@ -65,8 +72,18 @@ class Carer < ApplicationRecord
       (how_contacts & email_types).any?
   end
 
+  def events_text?
+    what_contact.present? &&
+      %w[all specialevents].include?(what_contact.contact_type.downcase.delete(' ')) &&
+      (how_contacts & text_types).any?
+  end
+
   def full_email
     '"' + name + '" <' + email + '>'
+  end
+
+  def name_and_phone
+    '"' + name + '" <' + phone.gsub(/\s+/, '') + '>' 
   end
 
   private
@@ -77,5 +94,9 @@ class Carer < ApplicationRecord
 
   def text_types
     @text_types || HowContact.where('lower(contact_type) in (?)', %w[text all])
+  end
+
+  def phone_types
+    @phone_types || HowContact.where('lower(contact_type) in (?)', %w[text all])
   end
 end

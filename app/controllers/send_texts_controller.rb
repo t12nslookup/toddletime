@@ -29,7 +29,7 @@ class SendTextsController < ApplicationController
       @carers = Carer.meet_recent.select(&:events_text?)
     end
 
-    @send_text.addresses = texts(@carers)
+    @send_text.addresses = phones(@carers)
 
     if @send_text.save
       redirect_to send_texts_path
@@ -55,14 +55,33 @@ class SendTextsController < ApplicationController
     # end
     # @send_text.delivered_at = Time.now
     # @send_text.save
+    url = 'https://api.thesmsworks.co.uk/v1/batch/send'
+    headers = {content_type: :json, accept: :json, 'Authorization': ENV['SMS_KEY'] }
+    payload = JSON.generate(
+      sender: 'Toddletime',
+      destinations: @send_text.addresses.scan(/<([^>,]*?)>/).flatten,
+      content: @send_text.message,
+      schedule: '',
+      tag: @send_text.meet_name + Time.now.strftime('%d%b%Y')
+    )
+    response = RestClient.post url, payload, headers
 
-    redirect_to send_texts_path, notice: 'text was successfully sent.'
+    # the correct response should be 201 from theSMSWorks, but any 200 message should be okay.
+    if response.code.round(-2) == 200
+      @send_text.delivered_at = Time.now
+      @send_text.save
+      redirect_to send_texts_path, notice: 'text message was successfully sent.'
+    else
+      redirect_to send_texts_path, alert: 'text message failed to send.'
+    end
+  rescue RestClient::Forbidden
+    redirect_to send_texts_path, alert: 'text message failed to send.'
   end
 
   private
 
-  def texts(carers)
-    carers.map(&:full_email).join(', ')
+  def phones(carers)
+    carers.map(&:name_and_phone).join(', ')
   end
 
   # Object to store name to id mappings of "Meet Types", including
