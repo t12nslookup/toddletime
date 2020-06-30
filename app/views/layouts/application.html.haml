@@ -29,5 +29,7 @@
       .row
         = yield
       .row
-        %p.notice= notice
-        %p.alert= alert
+        - if notice.present?
+          %p.alert.alert-success= notice
+        - if alert.present?
+          %p.alert.alert-danger= alert
