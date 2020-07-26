@@ -30,7 +30,7 @@ class SendTextsController < ApplicationController
     end
 
     @send_text.addresses = phones(@carers)
-    @send_text.message.gsub!(%r{[^0-9A-Za-z\,\/\s']}, '')
+    @send_text.message.gsub!(%r{[^0-9A-Za-z\,\/\s@;:'.!?]}, '')
     @send_text.message.gsub!(/\s+/, ' ')
     @send_text.message.strip!
 
@@ -43,7 +43,7 @@ class SendTextsController < ApplicationController
   end
 
   def update
-    @send_text.message.gsub!(%r{[^0-9A-Za-z\,\/\s']}, '')
+    @send_text.message.gsub!(%r{[^0-9A-Za-z\,\/\s@;:'.!?]}, '')
     @send_text.message.gsub!(/\s+/, ' ')
     @send_text.message.strip!
 
