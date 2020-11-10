@@ -30,3 +30,4 @@ dont.*
 /config/credentials.yml.enc
 
 public/assets
+sendgrid.env
