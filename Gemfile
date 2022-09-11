@@ -39,12 +39,12 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'aws-sdk-rails'
+# gem 'aws-sdk-rails'
 gem 'bootstrap-datepicker-rails'
 gem 'bootstrap-glyphicons'
 gem 'bootstrap-sass'
 gem 'bootstrap_form'
-gem 'carrierwave'
+# gem 'carrierwave'
 gem 'devise'
 gem 'haml-rails'
 gem 'json'
@@ -56,6 +56,8 @@ gem 'tzinfo-data'
 
 # Gem to allow posting of requests to send texts
 gem 'rest-client'
+
+gem 'execjs'
 
 # useful tools
 group :development do
