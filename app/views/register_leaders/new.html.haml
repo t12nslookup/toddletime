@@ -1,6 +1,6 @@
 %h1
   Leaders for 
-  = @meet.meet_date.to_s(:long_ordinal)
+  = @meet.meet_date.to_formatted_s(:long_ordinal)
 = bootstrap_form_for(:leader_to_meet, url: '', method: :get, layout: :horizontal) do |f|
   = f.form_group :find_text, label: {text: 'Filter Leaders'} do
     = text_field_tag :find_text, params[:find_text]

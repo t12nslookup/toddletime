@@ -1,7 +1,7 @@
 %h1
   Rota Leaders for
   = @meet.meet_type.name + ","
-  = @meet.meet_date.to_s(:long_ordinal)
+  = @meet.meet_date.to_formatted_s(:long_ordinal)
 = bootstrap_form_for(@meet, layout: :horizontal) do |f|
   = f.fields_for :rota_leaders do |jf|
     = jf.hidden_field :job_id

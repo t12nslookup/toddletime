@@ -12,7 +12,7 @@
   %tbody
     - @meets.includes(:meet_type).each do |meet|
       %tr
-        %td= meet.meet_date.to_s(:long_ordinal)
+        %td= meet.meet_date.to_formatted_s(:long_ordinal)
         %td= meet.meet_type.try(:name)
         %td= link_to 'Details', meet_path(meet)
         %td= link_to 'Register', register_meet_path(meet)

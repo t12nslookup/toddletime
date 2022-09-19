@@ -2,7 +2,7 @@
 %table.table.table-condensed.table-striped.table-hover
   %tr
     %th Date of meet
-    %td= @meet.meet_date.try :to_s, :long_ordinal
+    %td= @meet.meet_date.try :to_formatted_s, :long_ordinal
   - if @meet.meet_type.present?
     %tr
       %th Meet Type
