@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -29,12 +31,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable,
          :validatable, :confirmable, :lockable,
-         :authentication_keys => [:login]
+         authentication_keys: [:login]
 
-  validates :username, presence: :true, uniqueness: { case_sensitive: false }
-  validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
+  validates :username, presence: true, uniqueness: { case_sensitive: false }
+  validates_format_of :username, with: /^[a-zA-Z0-9_.]*$/, multiline: true
 
   attr_accessor :login
+
   # after_create :send_admin_mail
 
   scope :find_by_approval, ->(approval) { where('approved = ?', approval) }
@@ -46,7 +49,7 @@ class User < ApplicationRecord
   # end
 
   def login
-    @login || self.username || self.email
+    @login || username || email
   end
 
   # def send_admin_mail
@@ -74,7 +77,7 @@ class User < ApplicationRecord
   #   end
   # end
 
-  def self.send_reset_password_instructions(attributes={})
+  def self.send_reset_password_instructions(attributes = {})
     recoverable = find_or_initialize_with_errors(reset_password_keys, attributes, :not_found)
     if !recoverable.approved?
       recoverable.errors[:base] << I18n.t('devise.failure.not_approved')
@@ -87,8 +90,9 @@ class User < ApplicationRecord
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
-      where(conditions.to_h).where(['lower(username) = :value OR lower(email) = :value', { :value => login.downcase }]).first
-    elsif conditions.has_key?(:username) || conditions.has_key?(:email)
+      where(conditions.to_h).where(['lower(username) = :value OR lower(email) = :value',
+                                    { value: login.downcase }]).first
+    elsif conditions.key?(:username) || conditions.key?(:email)
       where(conditions.to_h).first
     end
   end

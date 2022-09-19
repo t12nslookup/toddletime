@@ -1,22 +1,18 @@
+# frozen_string_literal: true
+
 class RegisterCarersController < ApplicationController
   before_action :load_meet, only: %i[new create]
 
   def new
     @carers = Carer.in_order
-    if params[:historic].blank?
-      @carers = @carers.recent
-    end
-    if params[:find_text].present? 
-      @carers = @carers.search(params[:find_text])
-    end
+    @carers = @carers.recent if params[:historic].blank?
+    @carers = @carers.search(params[:find_text]) if params[:find_text].present?
 
     @carers -= @meet.carers
   end
 
   def create
-    if params[:carer_id].present?
-      @meet.carers << Carer.find(params[:carer_id])
-    end
+    @meet.carers << Carer.find(params[:carer_id]) if params[:carer_id].present?
     # raise params.inspect
     redirect_to register_meet_path(@meet)
   end

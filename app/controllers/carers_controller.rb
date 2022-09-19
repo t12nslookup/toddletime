@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CarersController < ApplicationController
   before_action :load_carer, only: %i[update edit show add_child]
   before_action :load_multi_select, only: %i[new edit create update]

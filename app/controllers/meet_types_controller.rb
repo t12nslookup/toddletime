@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MeetTypesController < ApplicationController
   before_action :load_meet_type, only: %i[update edit show]
 
@@ -5,9 +7,9 @@ class MeetTypesController < ApplicationController
     @meet_type = MeetType.new
 
     Job.all.each do |job|
-      @meet_type.meet_type_jobs.build(job: job, count: 0)
+      @meet_type.meet_type_jobs.build(job:, count: 0)
     end
-    @meet_type.meet_type_jobs.sort_by{ |mtj| mtj.job.name }
+    @meet_type.meet_type_jobs.sort_by { |mtj| mtj.job.name }
   end
 
   def create
@@ -22,9 +24,9 @@ class MeetTypesController < ApplicationController
 
   def edit
     (Job.all - @meet_type.jobs).each do |job|
-      @meet_type.meet_type_jobs.build(job: job, count: 0)
+      @meet_type.meet_type_jobs.build(job:, count: 0)
     end
-    @meet_type.meet_type_jobs.sort_by{ |mtj| mtj.job.name }
+    @meet_type.meet_type_jobs.sort_by { |mtj| mtj.job.name }
   end
 
   def update
@@ -44,7 +46,7 @@ class MeetTypesController < ApplicationController
   private
 
   def meet_type_params
-    params.require(:meet_type).permit(:name, meet_type_jobs_attributes: [:id, :job_id, :count])
+    params.require(:meet_type).permit(:name, meet_type_jobs_attributes: %i[id job_id count])
   end
 
   def load_meet_type

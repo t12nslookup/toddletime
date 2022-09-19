@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ConfirmationsController < Devise::ConfirmationsController
   # Remove the first skip_before_filter (:require_no_authentication) if you
   # don't want to enable logged users to access the confirmation page.
@@ -5,11 +7,11 @@ class ConfirmationsController < Devise::ConfirmationsController
   skip_before_action :authenticate_user!
 
   def index
-    if params[:approved] == "false"
-      @users = User.find_all_by_approved(false)
-    else
-      @users = User.all
-    end
+    @users = if params[:approved] == 'false'
+               User.find_all_by_approved(false)
+             else
+               User.all
+             end
   end
 
   # PUT /resource/confirmation
@@ -52,13 +54,13 @@ class ConfirmationsController < Devise::ConfirmationsController
 
   protected
 
-  def with_unconfirmed_confirmable
+  def with_unconfirmed_confirmable(&block)
     original_token = params[:confirmation_token]
     confirmation_token = Devise.token_generator.digest(User, :confirmation_token, original_token)
     @confirmable = User.find_or_initialize_with_error_by(:confirmation_token, confirmation_token)
     return if @confirmable.new_record?
 
-    @confirmable.only_if_unconfirmed { yield }
+    @confirmable.only_if_unconfirmed(&block)
   end
 
   def do_show

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MeetsController < ApplicationController
   before_action :load_meet, only: %i[edit show register update medical_conditions]
 
@@ -24,7 +26,7 @@ class MeetsController < ApplicationController
       end
     end
 
-    @leaders = Leader.joins(:leader_meet_types).where(leader_meet_types: {meet_type_id: @meet.meet_type}).in_order
+    @leaders = Leader.joins(:leader_meet_types).where(leader_meet_types: { meet_type_id: @meet.meet_type }).in_order
   end
 
   def update
@@ -46,7 +48,7 @@ class MeetsController < ApplicationController
   end
 
   def show
-    @leaders = @meet.rota_leaders.has_leader.by_leader.includes(:leader,:job).group_by(&:leader)
+    @leaders = @meet.rota_leaders.has_leader.by_leader.includes(:leader, :job).group_by(&:leader)
     # @leaders = @meet.rota_leaders.has_leader.includes(:leader,:job).
     #    sort_by{|l| l.leader.name}.
     #    group_by(&:leader)
@@ -54,17 +56,17 @@ class MeetsController < ApplicationController
 
   def index
     @meets = Meet
-    if params[:historic] == 'true'
-      @meets = @meets.in_reverse.find_historic
-    else
-      @meets = @meets.in_order.find_future
-    end
+    @meets = if params[:historic] == 'true'
+               @meets.in_reverse.find_historic
+             else
+               @meets.in_order.find_future
+             end
   end
 
   private
 
   def meet_params
-    params.require(:meet).permit(:meet_date, :meet_type_id, rota_leaders_attributes: [:id, :job_id, :leader_id])
+    params.require(:meet).permit(:meet_date, :meet_type_id, rota_leaders_attributes: %i[id job_id leader_id])
   end
 
   def load_meet

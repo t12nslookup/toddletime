@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HowHeardsController < ApplicationController
   before_action :load_how_heard, only: %i[update edit]
 

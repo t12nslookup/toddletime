@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: meets
@@ -25,8 +27,8 @@ class Meet < ApplicationRecord
   has_many :leaders, through: :leader_to_meets
   belongs_to :meet_type, inverse_of: :meets
 
-  scope :in_order, ->{ order(:meet_date) }
-  scope :in_reverse, ->{ order(meet_date: :desc) }
+  scope :in_order, -> { order(:meet_date) }
+  scope :in_reverse, -> { order(meet_date: :desc) }
 
   scope :meets_today, -> { where('meet_date = :today', today: Date.today.to_s) }
   scope :find_historic, -> { where('meet_date < :today', today: Date.today.to_s) }

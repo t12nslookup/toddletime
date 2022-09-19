@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CarerToChildrenController < ApplicationController
   def new
     @carer_to_child = CarerToChild.new

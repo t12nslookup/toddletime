@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ChildrenController < ApplicationController
-  before_action :load_child , only: %i[update edit show add_carer]
+  before_action :load_child, only: %i[update edit show add_carer]
 
   def new
     @child = Child.new registered_date: Time.now

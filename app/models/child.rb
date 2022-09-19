@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: children
@@ -26,10 +28,11 @@ class Child < ApplicationRecord
                    length: { minimum: 5 }
   validates :registered_date, presence: true
 
-  scope :search, ->(text) { where('upper(name) like ?', '%' + text.upcase + '%') }
+  scope :search, ->(text) { where('upper(name) like ?', "%#{text.upcase}%") }
   # scope :recent, ->{ joins(:meet).merge(Meet.recent) }
-  scope :recent, -> { eager_load(:meet).where('meet_date > :recent or children.created_at > :recent', { recent: (Date.today - 6.months) }) }
+  scope :recent, lambda {
+                   eager_load(:meet).where('meet_date > :recent or children.created_at > :recent', { recent: (Date.today - 6.months) })
+                 }
   scope :in_order, -> { order('name') }
-  scope :with_condition, -> { where.not( medical_conditions: ['', 'none'] ) }
-
+  scope :with_condition, -> { where.not(medical_conditions: ['', 'none']) }
 end

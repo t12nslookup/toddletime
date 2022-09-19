@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: meet_type_jobs
@@ -24,5 +26,4 @@ class MeetTypeJob < ApplicationRecord
   # validates :count, presence: true
   validates :count, :meet_type_id, :job_id, presence: true
   validates_uniqueness_of :job_id, scope: :meet_type_id
-
 end

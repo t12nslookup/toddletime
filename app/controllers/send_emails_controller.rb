@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SendEmailsController < ApplicationController
   before_action :load_email, only: %i[update edit show deliver]
   def index
@@ -25,14 +27,14 @@ class SendEmailsController < ApplicationController
     @send_email = SendEmail.new(send_email_params)
 
     # is this a meet_type specific email, or an event type
-    if @send_email.meet_type.present?
-      # meet type email
-      @carers = Carer.select { |c| c.meet_recent?(@send_email.meet_type.id) }
+    @carers = if @send_email.meet_type.present?
+                # meet type email
+                Carer.select { |c| c.meet_recent?(@send_email.meet_type.id) }
                      .select { |c| c.meet_email?(@send_email.meet_type.id) }
-    else
-      # special event email
-      @carers = Carer.meet_recent.select(&:events_email?)
-    end
+              else
+                # special event email
+                Carer.meet_recent.select(&:events_email?)
+              end
 
     @send_email.addresses = emails(@carers)
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HowContactsController < ApplicationController
   before_action :load_how_contact, only: %i[update edit]
 

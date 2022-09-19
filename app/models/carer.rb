@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: carers
@@ -33,9 +35,13 @@ class Carer < ApplicationRecord
   has_many :carer_to_how_contacts, inverse_of: :carer
   has_many :how_contacts, through: :carer_to_how_contacts
 
-  scope :search, ->(text) { where('upper(name) like ?', '%' + text.upcase + '%') }
-  scope :recent, -> { eager_load(:meets).where('meet_date > :recent or carers.created_at > :recent', { recent: (Date.today - 6.months) }) }
-  scope :meet_recent, -> { eager_load(:meets).where('meet_date > :recent or carers.created_at > :recent', { recent: (Date.today - 2.months) }) }
+  scope :search, ->(text) { where('upper(name) like ?', "%#{text.upcase}%") }
+  scope :recent, lambda {
+                   eager_load(:meets).where('meet_date > :recent or carers.created_at > :recent', { recent: (Date.today - 6.months) })
+                 }
+  scope :meet_recent, lambda {
+                        eager_load(:meets).where('meet_date > :recent or carers.created_at > :recent', { recent: (Date.today - 2.months) })
+                      }
   scope :in_order, -> { order('name') }
   validates :name, :phone, presence: true
 
@@ -61,7 +67,8 @@ class Carer < ApplicationRecord
   end
 
   def meet_recent?(meet_type_id)
-    mts = Meet.where('meet_type_id = :meet_type and meet_date > :recent', { meet_type: meet_type_id, recent: (Date.today - 2.months) })
+    mts = Meet.where('meet_type_id = :meet_type and meet_date > :recent',
+                     { meet_type: meet_type_id, recent: (Date.today - 2.months) })
     mts = Meet.where(meet_type: meet_type_id).in_order.last(6) if mts.count < 6
     (meets & mts).any?
   end
@@ -79,11 +86,11 @@ class Carer < ApplicationRecord
   end
 
   def full_email
-    '"' + name + '" <' + email + '>'
+    "\"#{name}\" <#{email}>"
   end
 
   def name_and_phone
-    '"' + name + '" <' + phone.gsub(/\s+/, '') + '>' 
+    "\"#{name}\" <#{phone.gsub(/\s+/, '')}>"
   end
 
   private

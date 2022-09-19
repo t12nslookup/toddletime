@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SendTextsController < ApplicationController
   before_action :load_text, only: %i[update edit show deliver]
   def index
@@ -11,8 +13,7 @@ class SendTextsController < ApplicationController
     @send_text.meet_type = MeetType.find(params[:meet_type_id]) if params[:meet_type_id]
   end
 
-  def show
-  end
+  def show; end
 
   def edit; end
 
@@ -20,17 +21,17 @@ class SendTextsController < ApplicationController
     @send_text = SendText.new(send_text_params)
 
     # is this a meet_type specific text, or an event type
-    if @send_text.meet_type.present?
-      # meet type text
-      @carers = Carer.select { |c| c.meet_recent?(@send_text.meet_type.id) }
+    @carers = if @send_text.meet_type.present?
+                # meet type text
+                Carer.select { |c| c.meet_recent?(@send_text.meet_type.id) }
                      .select { |c| c.meet_text?(@send_text.meet_type.id) }
-    else
-      # special event text
-      @carers = Carer.meet_recent.select(&:events_text?)
-    end
+              else
+                # special event text
+                Carer.meet_recent.select(&:events_text?)
+              end
 
     @send_text.addresses = phones(@carers)
-    @send_text.message.gsub!(%r{[^0-9A-Za-z\,\/\s@;:'.!?]}, '')
+    @send_text.message.gsub!(%r{[^0-9A-Za-z,/\s@;:'.!?]}, '')
     @send_text.message.gsub!(/\s+/, ' ')
     @send_text.message.strip!
 
@@ -44,7 +45,7 @@ class SendTextsController < ApplicationController
 
   def update
     if @send_text.update(send_text_params)
-      @send_text.message.gsub!(%r{[^0-9A-Za-z\,\/\s@;:'.!?]}, '')
+      @send_text.message.gsub!(%r{[^0-9A-Za-z,/\s@;:'.!?]}, '')
       @send_text.message.gsub!(/\s+/, ' ')
       @send_text.message.strip!
       @send_text.save
@@ -64,7 +65,7 @@ class SendTextsController < ApplicationController
     # @send_text.delivered_at = Time.now
     # @send_text.save
     url = 'https://api.thesmsworks.co.uk/v1/batch/send'
-    headers = {content_type: :json, accept: :json, 'Authorization': ENV['SMS_KEY'] }
+    headers = { content_type: :json, accept: :json, 'Authorization': ENV['SMS_KEY'] }
     payload = JSON.generate(
       sender: 'Toddletime',
       destinations: @send_text.addresses.scan(/<([^>,]*?)>/).flatten,
