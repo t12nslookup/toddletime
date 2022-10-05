@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateLeaderMeetTypes < ActiveRecord::Migration[5.2]
   def change
     create_table :leader_meet_types do |t|

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BootstrapForm
   module Helpers
     module Bootstrap
@@ -11,13 +13,13 @@ module BootstrapForm
         input << content_tag(:span, options[:append], class: 'input-group-addon') if options[:append]
         input += generate_error(name)
         options.present? &&
-          input = content_tag(:div, input, class: ["input-group", options[:input_group_class]].compact)
+          input = content_tag(:div, input, class: ['input-group', options[:input_group_class]].compact)
         input
       end
 
       def date_picker(name, options = {})
-        date = self.object.send(name)
-        format = options.delete(:format) || "%d/%b/%Y"
+        date = object.send(name)
+        format = options.delete(:format) || '%d/%b/%Y'
         options[:value] = date.strftime(format) if date
         options[:append] = content_tag(:i, nil, class: 'glyphicon glyphicon-th')
         options[:input_group_class] = 'date'

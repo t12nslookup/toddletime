@@ -10,18 +10,18 @@ class LeadersController < ApplicationController
 
   def create
     @leader = Leader.new(leader_params)
-    if params[:meet_type_id]
-      @leader.meet_types = MeetType.find(params[:meet_type_id])
-    else
-      @leader.meet_types.destroy_all
-    end
-
-    if @leader.save
-      redirect_to leaders_path
-    else
+    unless @leader.save
       load_meet_types
       render 'new'
     end
+
+    @leader.meet_types = MeetType.find(params[:meet_type_id]) if params[:meet_type_id]
+
+    unless @leader.save
+      load_meet_types
+      render 'new'
+    end
+    redirect_to leaders_path
   end
 
   def edit; end

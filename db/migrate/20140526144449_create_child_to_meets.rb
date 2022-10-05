@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateChildToMeets < ActiveRecord::Migration[5.2]
   def change
     create_table :child_to_meets do |t|

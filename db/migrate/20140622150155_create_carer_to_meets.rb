@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateCarerToMeets < ActiveRecord::Migration[5.2]
   def change
     create_table :carer_to_meets do |t|

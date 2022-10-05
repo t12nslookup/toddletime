@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateLeaderToMeets < ActiveRecord::Migration[5.2]
   def change
     create_table :leader_to_meets do |t|

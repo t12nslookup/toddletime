@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddWhatContactToCarer < ActiveRecord::Migration[5.2]
   def change
     add_reference :carers, :how_contact, index: true

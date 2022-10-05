@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateMeetTypeJobs < ActiveRecord::Migration[5.2]
   def change
     create_table :meet_type_jobs do |t|
