@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class LeadersController < ApplicationController
-  before_action :load_leader, only: %i[update edit show]
+  before_action :load_leader, only: %i[update edit show destroy]
   before_action :load_meet_types, only: %i[new edit]
 
   def new
@@ -44,6 +44,13 @@ class LeadersController < ApplicationController
 
   def index
     @leaders = Leader.active.in_order
+  end
+
+  def destroy
+    @leader.meet_types.destroy_all
+    @leader.destroy
+
+    redirect_to leaders_path
   end
 
   private

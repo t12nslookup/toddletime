@@ -11,6 +11,8 @@
           = mt.name
   = f.form_group do
     = f.primary
+    - if @leader.id
+      = link_to 'Delete Leader', @leader, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
 :javascript
   $('#date-container .input-group.date').datepicker({
     format: "dd/M/yyyy",
