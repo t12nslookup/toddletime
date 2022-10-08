@@ -7,7 +7,7 @@
 #  id           :integer          not null, primary key
 #  leader_id    :integer          indexed
 #  meet_type_id :integer          indexed
-#  expired      :integer          default("0")
+#  expired      :integer          default(0)
 #  created_at   :datetime
 #  updated_at   :datetime
 #
@@ -23,4 +23,12 @@ class LeaderMeetType < ApplicationRecord
   has_many :job
 
   validates_uniqueness_of :leader_id, scope: :meet_type_id
+
+  default_scope { where(expired: 0) }
+
+  alias really_destroy! destroy
+  # now override the method
+  def destroy
+    update_attribute(:expired, 1) # skips validations
+  end
 end

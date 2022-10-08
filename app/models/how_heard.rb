@@ -6,7 +6,7 @@
 #
 #  id            :integer          not null, primary key
 #  location_name :string(255)
-#  expired       :integer          default("0")
+#  expired       :integer          default(0)
 #  created_at    :datetime
 #  updated_at    :datetime
 #
@@ -17,4 +17,12 @@ class HowHeard < ApplicationRecord
   scope :in_order, -> { order('location_name') }
 
   validates :location_name, presence: true, uniqueness: true
+
+  default_scope { where(expired: 0) }
+
+  alias really_destroy! destroy
+  # now override the method
+  def destroy
+    update_attribute(:expired, 1) # skips validations
+  end
 end

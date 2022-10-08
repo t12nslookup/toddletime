@@ -31,4 +31,12 @@ class Leader < ApplicationRecord
   validates :name, presence: true,
                    length: { minimum: 5 }
   validates_uniqueness_of :name
+
+  default_scope { where(expired: nil) }
+
+  alias really_destroy! destroy
+  # now override the method
+  def destroy
+    update_attribute(:expired, Date.today) # skips validations
+  end
 end

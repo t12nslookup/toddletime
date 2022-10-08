@@ -5,7 +5,7 @@
 #  id           :integer          not null, primary key
 #  leader_id    :integer          indexed
 #  meet_type_id :integer          indexed
-#  expired      :integer          default("0")
+#  expired      :integer          default(0)
 #  created_at   :datetime
 #  updated_at   :datetime
 #

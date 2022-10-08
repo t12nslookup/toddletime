@@ -8,7 +8,7 @@
 #  leader_id  :integer          indexed
 #  job_id     :integer          indexed
 #  meet_id    :integer          indexed
-#  expired    :boolean          default("false")
+#  expired    :boolean          default(FALSE)
 #  created_at :datetime
 #  updated_at :datetime
 #
@@ -29,4 +29,12 @@ class RotaLeader < ApplicationRecord
   scope :filter_leader, ->(leader) { where('leader_id = ?', leader) }
 
   scope :by_leader, -> { joins(:leader).merge(Leader.in_order) }
+
+  default_scope { where(expired: false) }
+
+  alias really_destroy! destroy
+  # now override the method
+  def destroy
+    update_attribute(:exclude, true) # skips validations
+  end
 end

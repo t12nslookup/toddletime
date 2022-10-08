@@ -6,7 +6,8 @@
 #  addresses    :string
 #  message      :string
 #  meet_type_id :bigint           indexed
-#  state        :integer          default("0")
+#  state        :integer          default(0), indexed
+#  delivered_at :datetime
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #
