@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class HowHeardsController < ApplicationController
-  before_action :load_how_heard, only: %i[update edit]
+  before_action :load_how_heard, only: %i[update edit destroy]
 
   def new
     @how_heard = HowHeard.new
@@ -29,6 +29,12 @@ class HowHeardsController < ApplicationController
 
   def index
     @how_heards = HowHeard.in_order
+  end
+
+  def destroy
+    @how_heard.destroy
+
+    redirect_to how_heards_path
   end
 
   private

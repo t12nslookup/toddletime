@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CarersController < ApplicationController
-  before_action :load_carer, only: %i[update edit show add_child]
+  before_action :load_carer, only: %i[update edit show add_child destroy]
   before_action :load_multi_select, only: %i[new edit create update]
 
   def new
@@ -50,6 +50,12 @@ class CarersController < ApplicationController
   def add_child
     @children = Child.in_order
     @children = @children.search(params[:find_text]) if params[:find_text].present?
+  end
+
+  def destroy
+    @carer.destroy
+
+    redirect_to carers_path
   end
 
   private

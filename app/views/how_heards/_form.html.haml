@@ -2,5 +2,7 @@
   = f.text_field :location_name, autocomplete: :off
   = f.form_group do
     = f.primary
+    - if @how_heard.id
+      = link_to 'Delete How Heard', @how_heard, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
 %para
 = errors_for @how_heard

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ChildrenController < ApplicationController
-  before_action :load_child, only: %i[update edit show add_carer]
+  before_action :load_child, only: %i[update edit show add_carer destroy]
 
   def new
     @child = Child.new registered_date: Time.now
@@ -37,6 +37,12 @@ class ChildrenController < ApplicationController
   def add_carer
     @carers = Carer.in_order
     @carers = @carers.search(params[:find_text]) if params[:find_text].present?
+  end
+
+  def destroy
+    @child.destroy
+
+    redirect_to children_path
   end
 
   private

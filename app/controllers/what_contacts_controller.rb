@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class WhatContactsController < ApplicationController
-  before_action :load_what_contact, only: %i[update edit]
+  before_action :load_what_contact, only: %i[update edit destroy]
 
   def new
     @what_contact = WhatContact.new
@@ -29,6 +29,12 @@ class WhatContactsController < ApplicationController
 
   def index
     @what_contacts = WhatContact.in_order
+  end
+
+  def destroy
+    @what_contact.destroy
+
+    redirect_to what_contacts_path
   end
 
   private

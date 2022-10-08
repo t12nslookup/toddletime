@@ -16,5 +16,8 @@
     = f.text_field :other_heard
   = f.form_group do
     = f.primary
+    /
+      - if @carer.id
+        = link_to 'Delete Carer', @carer, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
 %para
 = errors_for @carer

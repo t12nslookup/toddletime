@@ -2,5 +2,7 @@
   = f.text_field :contact_type, autocomplete: :off
   = f.form_group do
     = f.primary
+    - if @how_contact.id
+      = link_to 'Delete How Contact', @how_contact, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
 %para
 = errors_for @how_contact

@@ -23,6 +23,6 @@ class WhatContact < ApplicationRecord
   alias really_destroy! destroy
   # now override the method
   def destroy
-    update_attribute(:exclude, 1) # skips validations
+    update_attribute(:expired, 1) # skips validations
   end
 end

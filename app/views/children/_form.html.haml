@@ -13,6 +13,9 @@
     = f.date_picker :registered_date
   = f.form_group do
     = f.primary
+    /
+      - if @child.id
+        = link_to 'Delete Child', @child, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
 :javascript
   $('#date-container .input-group.date').datepicker({
     format: "dd/M/yyyy",

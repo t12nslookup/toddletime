@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class MeetsController < ApplicationController
-  before_action :load_meet, only: %i[edit show register update medical_conditions]
+  before_action :load_meet, only: %i[edit show register update
+                                     medical_conditions destroy]
 
   def new
     @meet = Meet.new
@@ -19,7 +20,7 @@ class MeetsController < ApplicationController
 
   def edit
     if @meet.rota_leaders.count.zero? && @meet.meet_type.present?
-      MeetType.find(@meet.meet_type).meet_type_jobs.has_count.each do |mtj|
+      @meet.meet_type.meet_type_jobs.has_count.each do |mtj|
         mtj.count.times do
           @meet.rota_leaders.build(job: mtj.job)
         end
@@ -61,6 +62,12 @@ class MeetsController < ApplicationController
              else
                @meets.in_order.find_future
              end
+  end
+
+  def destroy
+    @meet.destroy
+
+    redirect_to meets_path
   end
 
   private

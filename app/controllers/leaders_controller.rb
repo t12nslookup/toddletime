@@ -49,7 +49,9 @@ class LeadersController < ApplicationController
   end
 
   def destroy
-    @leader.meet_types.destroy_all
+    # as Leaders will now expire, rather than being deleted, we shouldn't need
+    # to remove the joins from Leader to MeetType
+    # @leader.meet_types.destroy_all
     @leader.destroy
 
     redirect_to leaders_path

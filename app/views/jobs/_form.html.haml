@@ -2,5 +2,7 @@
   = f.text_field :name, autocomplete: :off
   = f.form_group do
     = f.primary
+    - if @job.id
+      = link_to 'Delete Job', @job, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
 %para
 = errors_for @job

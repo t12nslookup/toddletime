@@ -45,6 +45,14 @@ class Carer < ApplicationRecord
   scope :in_order, -> { order('name') }
   validates :name, :phone, presence: true
 
+  # default_scope { where(expired: nil) }
+  #
+  # alias really_destroy! destroy
+  # # now override the method
+  # def destroy
+  #   update_attribute(:expired, Date.today) # skips validations
+  # end
+
   def meet_email?(meet_type_id)
     meet_type = MeetType.find(meet_type_id).name.downcase.delete(' ')
     what_contact.present? &&

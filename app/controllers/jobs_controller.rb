@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class JobsController < ApplicationController
-  before_action :load_job, only: %i[update edit]
+  before_action :load_job, only: %i[update edit destroy]
 
   def new
     @job = Job.new
@@ -29,6 +29,12 @@ class JobsController < ApplicationController
 
   def index
     @jobs = Job.in_order
+  end
+
+  def destroy
+    @job.destroy
+
+    redirect_to jobs_path
   end
 
   private

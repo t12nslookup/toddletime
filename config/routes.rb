@@ -50,6 +50,7 @@
 #                                how_heard GET    /how_heards/:id(.:format)                                                                         how_heards#show
 #                                          PATCH  /how_heards/:id(.:format)                                                                         how_heards#update
 #                                          PUT    /how_heards/:id(.:format)                                                                         how_heards#update
+#                                          DELETE /how_heards/:id(.:format)                                                                         how_heards#destroy
 #                             how_contacts GET    /how_contacts(.:format)                                                                           how_contacts#index
 #                                          POST   /how_contacts(.:format)                                                                           how_contacts#create
 #                          new_how_contact GET    /how_contacts/new(.:format)                                                                       how_contacts#new
@@ -57,6 +58,7 @@
 #                              how_contact GET    /how_contacts/:id(.:format)                                                                       how_contacts#show
 #                                          PATCH  /how_contacts/:id(.:format)                                                                       how_contacts#update
 #                                          PUT    /how_contacts/:id(.:format)                                                                       how_contacts#update
+#                                          DELETE /how_contacts/:id(.:format)                                                                       how_contacts#destroy
 #                            what_contacts GET    /what_contacts(.:format)                                                                          what_contacts#index
 #                                          POST   /what_contacts(.:format)                                                                          what_contacts#create
 #                         new_what_contact GET    /what_contacts/new(.:format)                                                                      what_contacts#new
@@ -64,6 +66,7 @@
 #                             what_contact GET    /what_contacts/:id(.:format)                                                                      what_contacts#show
 #                                          PATCH  /what_contacts/:id(.:format)                                                                      what_contacts#update
 #                                          PUT    /what_contacts/:id(.:format)                                                                      what_contacts#update
+#                                          DELETE /what_contacts/:id(.:format)                                                                      what_contacts#destroy
 #                       deliver_send_email GET    /send_emails/:id/deliver(.:format)                                                                send_emails#deliver
 #                              send_emails GET    /send_emails(.:format)                                                                            send_emails#index
 #                                          POST   /send_emails(.:format)                                                                            send_emails#create
@@ -189,9 +192,9 @@ Rails.application.routes.draw do
   resources :leaders
   resources :carer_to_children, only: %i[new create]
   resources :jobs
-  resources :how_heards, only: %i[index new show create edit update]
-  resources :how_contacts, only: %i[index new show create edit update]
-  resources :what_contacts, only: %i[index new show create edit update]
+  resources :how_heards
+  resources :how_contacts
+  resources :what_contacts
   resources :send_emails, only: %i[index new show create edit update] do
     get :deliver, on: :member
   end

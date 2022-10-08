@@ -35,6 +35,6 @@ class RotaLeader < ApplicationRecord
   alias really_destroy! destroy
   # now override the method
   def destroy
-    update_attribute(:exclude, true) # skips validations
+    update_attribute(:expired, true) # skips validations
   end
 end
