@@ -200,7 +200,7 @@ GEM
       ast (~> 2.4.1)
     pg (1.4.1)
     public_suffix (4.0.7)
-    puma (5.6.4)
+    puma (5.6.7)
       nio4r (~> 2.0)
     racc (1.6.2)
     rack (2.2.7)
@@ -349,7 +349,7 @@ DEPENDENCIES
   jquery-rails
   letter_opener_web
   pg (~> 1.1)
-  puma (~> 5.0)
+  puma (~> 5.6)
   rails (~> 7.0.3, >= 7.0.3.1)
   rails-erd
   redis (~> 4.0)
