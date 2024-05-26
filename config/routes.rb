@@ -177,7 +177,7 @@
 # clear_letters POST /clear(.:format)                 letter_opener_web/letters#clear
 #        letter GET  /:id(/:style)(.:format)          letter_opener_web/letters#show
 # delete_letter POST /:id/delete(.:format)            letter_opener_web/letters#destroy
-#               GET  /:id/attachments/:file(.:format) letter_opener_web/letters#attachment
+#               GET  /:id/attachments/:file(.:format) letter_opener_web/letters#attachment {:file=>/[^\/]+/}
 
 Rails.application.routes.draw do
   devise_for :users
