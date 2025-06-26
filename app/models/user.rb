@@ -4,24 +4,24 @@
 #
 # Table name: users
 #
-#  id                     :integer          not null, primary key
-#  email                  :string(255)      default(""), not null, indexed
-#  encrypted_password     :string(255)      default(""), not null
-#  reset_password_token   :string(255)      indexed
+#  id                     :bigint           not null, primary key
+#  email                  :string           default(""), not null, indexed
+#  encrypted_password     :string           default(""), not null
+#  reset_password_token   :string           indexed
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
 #  sign_in_count          :integer          default(0), not null
 #  current_sign_in_at     :datetime
 #  last_sign_in_at        :datetime
-#  current_sign_in_ip     :string(255)
-#  last_sign_in_ip        :string(255)
-#  confirmation_token     :string(255)      indexed
+#  current_sign_in_ip     :string
+#  last_sign_in_ip        :string
+#  confirmation_token     :string           indexed
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
 #  locked_at              :datetime
-#  created_at             :datetime
-#  updated_at             :datetime
-#  username               :string(255)      indexed
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  username               :string           indexed
 #  approved               :boolean          default(FALSE), not null, indexed
 #
 
@@ -89,7 +89,7 @@ class User < ApplicationRecord
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
-    if login = conditions.delete(:login)
+    if (login = conditions.delete(:login))
       where(conditions.to_h).where(['lower(username) = :value OR lower(email) = :value',
                                     { value: login.downcase }]).first
     elsif conditions.key?(:username) || conditions.key?(:email)

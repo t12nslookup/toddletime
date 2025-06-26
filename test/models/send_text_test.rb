@@ -13,10 +13,6 @@
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #
-# Foreign Keys
-#
-#  fk_rails_...  (meet_type_id => meet_types.id)
-#
 require 'test_helper'
 
 class SendTextTest < ActiveSupport::TestCase

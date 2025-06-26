@@ -4,16 +4,11 @@
 #
 # Table name: carer_to_meets
 #
-#  id         :integer          not null, primary key
-#  carer_id   :integer          indexed
-#  meet_id    :integer          indexed
-#  created_at :datetime
-#  updated_at :datetime
-#
-# Foreign Keys
-#
-#  fk_carer_to_meet_carer  (carer_id => carers.id)
-#  fk_carer_to_meet_meet   (meet_id => meets.id)
+#  id         :bigint           not null, primary key
+#  carer_id   :bigint           indexed
+#  meet_id    :bigint           indexed
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 
 class CarerToMeet < ApplicationRecord

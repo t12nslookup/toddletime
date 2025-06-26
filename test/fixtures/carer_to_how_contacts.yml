@@ -9,11 +9,6 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
-# Foreign Keys
-#
-#  fk_rails_...  (carer_id => carers.id)
-#  fk_rails_...  (how_contact_id => how_contacts.id)
-#
 
 # This model initially had no columns defined. If you add columns to the
 # model remove the '{}' from the fixture names and add the columns immediately

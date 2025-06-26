@@ -4,17 +4,17 @@
 #
 # Table name: children
 #
-#  id                 :integer          not null, primary key
-#  name               :string(255)
-#  gender             :string(255)
+#  id                 :bigint           not null, primary key
+#  name               :string
+#  gender             :string
 #  date_of_birth      :date
-#  address            :string(255)
-#  postcode           :string(255)
-#  medical_conditions :string(255)
-#  special_needs      :string(255)
+#  address            :string
+#  postcode           :string
+#  medical_conditions :string
+#  special_needs      :string
 #  registered_date    :date
-#  created_at         :datetime
-#  updated_at         :datetime
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
 #  emergency_contact  :string
 #
 
@@ -37,7 +37,7 @@ class Child < ApplicationRecord
   scope :with_condition, -> { where.not(medical_conditions: ['', 'none']) }
 
   # default_scope { where(expired: nil) }
-  # 
+  #
   # alias really_destroy! destroy
   # # now override the method
   # def destroy

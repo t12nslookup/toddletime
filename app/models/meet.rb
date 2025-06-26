@@ -4,15 +4,11 @@
 #
 # Table name: meets
 #
-#  id           :integer          not null, primary key
+#  id           :bigint           not null, primary key
 #  meet_date    :date
-#  created_at   :datetime
-#  updated_at   :datetime
-#  meet_type_id :integer          indexed
-#
-# Foreign Keys
-#
-#  fk_meet_to_meet_type  (meet_type_id => meet_types.id)
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  meet_type_id :bigint           indexed
 #
 
 class Meet < ApplicationRecord

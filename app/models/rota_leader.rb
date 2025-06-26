@@ -4,19 +4,13 @@
 #
 # Table name: rota_leaders
 #
-#  id         :integer          not null, primary key
-#  leader_id  :integer          indexed
-#  job_id     :integer          indexed
-#  meet_id    :integer          indexed
+#  id         :bigint           not null, primary key
+#  leader_id  :bigint           indexed
+#  job_id     :bigint           indexed
+#  meet_id    :bigint           indexed
 #  expired    :boolean          default(FALSE)
-#  created_at :datetime
-#  updated_at :datetime
-#
-# Foreign Keys
-#
-#  fk_rota_leader_job     (job_id => jobs.id)
-#  fk_rota_leader_leader  (leader_id => leaders.id)
-#  fk_rota_leader_meet    (meet_id => meets.id)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 
 class RotaLeader < ApplicationRecord

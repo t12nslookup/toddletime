@@ -4,17 +4,12 @@
 #
 # Table name: carer_to_children
 #
-#  id           :integer          not null, primary key
-#  child_id     :integer          indexed
-#  carer_id     :integer          indexed
-#  relationship :string(255)
-#  created_at   :datetime
-#  updated_at   :datetime
-#
-# Foreign Keys
-#
-#  fk_carer_to_child_carer  (carer_id => carers.id)
-#  fk_carer_to_child_child  (child_id => children.id)
+#  id           :bigint           not null, primary key
+#  child_id     :bigint           indexed
+#  carer_id     :bigint           indexed
+#  relationship :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
 #
 
 class CarerToChild < ApplicationRecord

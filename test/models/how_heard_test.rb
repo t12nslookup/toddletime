@@ -4,11 +4,11 @@
 #
 # Table name: how_heards
 #
-#  id            :integer          not null, primary key
-#  location_name :string(255)
+#  id            :bigint           not null, primary key
+#  location_name :string
 #  expired       :integer          default(0)
-#  created_at    :datetime
-#  updated_at    :datetime
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
 #
 
 require 'test_helper'

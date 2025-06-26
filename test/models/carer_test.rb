@@ -18,12 +18,6 @@
 #  how_contact_id  :bigint           indexed
 #  what_contact_id :bigint           indexed
 #
-# Foreign Keys
-#
-#  fk_carer_to_how_contact   (how_contact_id => how_contacts.id)
-#  fk_carer_to_how_heard     (how_heard_id => how_heards.id)
-#  fk_carer_to_what_contact  (what_contact_id => what_contacts.id)
-#
 
 require 'test_helper'
 

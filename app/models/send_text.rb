@@ -13,10 +13,6 @@
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #
-# Foreign Keys
-#
-#  fk_rails_...  (meet_type_id => meet_types.id)
-#
 class SendText < ApplicationRecord
   belongs_to :meet_type, inverse_of: :send_texts, optional: true
 
