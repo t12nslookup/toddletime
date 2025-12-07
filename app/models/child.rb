@@ -37,7 +37,7 @@ class Child < ApplicationRecord
   scope :with_condition, -> { where.not(medical_conditions: ['', 'none']) }
 
   # default_scope { where(expired: nil) }
-  # 
+  #
   # alias really_destroy! destroy
   # # now override the method
   # def destroy
