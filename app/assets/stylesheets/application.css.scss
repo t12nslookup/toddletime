@@ -33,10 +33,15 @@ html {
 body {
   padding-top: 60px;
   background: image-url("peachlogo.png");
-  background-position: right 20px top 70px;
+  background-position: right 20px top 90px;
   background-repeat: no-repeat;
   background-height: 96px;
   background-width: 96px;
+}
+
+.row {
+  margin-right: -20px;
+  margin-left: 0px;
 }
 
 section {
