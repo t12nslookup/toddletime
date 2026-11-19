@@ -22,7 +22,16 @@
 require 'test_helper'
 
 class SendEmailTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'uses special event label when no meet type is set' do
+    assert_equal 'Special Event', SendEmail.new.meet_name
+  end
+
+  test 'uses its meet type name and orders newest records first' do
+    meet_type = create_meet_type
+    older = SendEmail.create!(meet_type: meet_type, subject: 'Older')
+    newer = SendEmail.create!(meet_type: meet_type, subject: 'Newer')
+
+    assert_equal meet_type.name, newer.meet_name
+    assert_equal [newer, older], SendEmail.in_order.limit(2).to_a
+  end
 end

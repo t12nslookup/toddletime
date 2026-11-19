@@ -35,7 +35,7 @@ class Carer < ApplicationRecord
   has_many :carer_to_how_contacts, inverse_of: :carer
   has_many :how_contacts, through: :carer_to_how_contacts
 
-  scope :search, ->(text) { where('upper(name) like ?', "%#{text.upcase}%") }
+  scope :search, ->(text) { where('upper(carers.name) like ?', "%#{text.upcase}%") }
   scope :recent, lambda {
                    eager_load(:meets).where('meet_date > :recent or carers.created_at > :recent', { recent: (Date.today - 6.months) })
                  }

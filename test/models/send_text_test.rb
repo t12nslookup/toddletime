@@ -20,7 +20,14 @@
 require 'test_helper'
 
 class SendTextTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'uses special event label when no meet type is set' do
+    assert_equal 'Special Event', SendText.new.meet_name
+  end
+
+  test 'uses its meet type name' do
+    meet_type = create_meet_type
+    text = SendText.create!(meet_type: meet_type, message: 'Meet soon')
+
+    assert_equal meet_type.name, text.meet_name
+  end
 end

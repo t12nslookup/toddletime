@@ -13,22 +13,40 @@
 %hr
 
 = bootstrap_form_for(:child_to_meet, url: meet_register_children_path, layout: :horizontal) do |f|
-  %table.table.table-condensed.table-striped.table-hover
-    %thead
-      %tr
-        %th Name
-        %th Gender
-        %th Postcode
-        %th{:class => 'text-align: center'} Select
-    %tbody
-      - @children.each do |child|
+  - if @suggested_children.exists?
+    %h2 Suggested Children
+    .table-responsive
+      %table.table.table-condensed.table-striped.table-hover
+        %thead
+          %tr
+            %th Name
+            %th Gender
+            %th Postcode
+            %th.text-center Select
+        %tbody
+          - @suggested_children.each do |child|
+            %tr
+              %td= child.name
+              %td= child.gender
+              %td= child.postcode
+              %td.text-center= check_box_tag 'child_id[]', child.id
+  %h2 Other Children
+  .table-responsive
+    %table.table.table-condensed.table-striped.table-hover
+      %thead
         %tr
-          %td= child.name
-          %td= child.gender
-          %td= child.postcode
-          %td{:align => 'center'}= check_box_tag 'child_id[]', child.id
-      %tr
-        %td{:colspan => 3}
-        %td{:align => 'center'}= f.primary "Add Children"
+          %th Name
+          %th Gender
+          %th Postcode
+          %th.text-center Select
+      %tbody
+        - @children.each do |child|
+          %tr
+            %td= child.name
+            %td= child.gender
+            %td= child.postcode
+            %td.text-center= check_box_tag 'child_id[]', child.id
+  .text-right
+    = f.primary "Add Children"
 %ul.nav.nav-pills
   %li= link_to 'New Child', new_child_path

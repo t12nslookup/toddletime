@@ -19,7 +19,11 @@
 require 'test_helper'
 
 class LeaderToMeetTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'prevents registering a leader twice for the same meet' do
+    meet = create_meet
+    leader = create_leader
+    meet.leader_to_meets.create!(leader: leader)
+
+    assert_not LeaderToMeet.new(meet: meet, leader: leader).valid?
+  end
 end

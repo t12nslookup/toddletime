@@ -28,7 +28,7 @@ class Child < ApplicationRecord
                    length: { minimum: 5 }
   validates :registered_date, presence: true
 
-  scope :search, ->(text) { where('upper(name) like ?', "%#{text.upcase}%") }
+  scope :search, ->(text) { where('upper(children.name) like ?', "%#{text.upcase}%") }
   # scope :recent, ->{ joins(:meet).merge(Meet.recent) }
   scope :recent, lambda {
                    eager_load(:meet).where('meet_date > :recent or children.created_at > :recent', { recent: (Date.today - 6.months) })

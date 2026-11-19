@@ -19,7 +19,12 @@
 require 'test_helper'
 
 class CarerToHowContactTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'destroy expires a contact preference' do
+    association = CarerToHowContact.create!(carer: create_carer, how_contact: create_how_contact)
+
+    association.destroy
+
+    assert_nil CarerToHowContact.find_by(id: association.id)
+    assert_equal 1, CarerToHowContact.unscoped.find(association.id).expired
+  end
 end

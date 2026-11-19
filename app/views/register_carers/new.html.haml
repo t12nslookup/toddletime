@@ -12,20 +12,36 @@
     .btn.btn-default= link_to 'New Carer', new_carer_path
 %hr
 = bootstrap_form_for(:carer_to_meet, url: meet_register_carers_path, layout: :horizontal) do |f|
-  %table.table.table-condensed.table-striped.table-hover
-    %thead
-      %tr
-        %th Name
-        %th Postcode
-        %th{class: 'text-align: center'} Select
-    %tbody
-      - @carers.each do |carer|
+  - if @suggested_carers.exists?
+    %h2 Suggested Carers
+    .table-responsive
+      %table.table.table-condensed.table-striped.table-hover
+        %thead
+          %tr
+            %th Name
+            %th Postcode
+            %th.text-center Select
+        %tbody
+          - @suggested_carers.each do |carer|
+            %tr
+              %td= carer.name
+              %td= carer.postcode
+              %td.text-center= check_box_tag 'carer_id[]', carer.id
+  %h2 Other Carers
+  .table-responsive
+    %table.table.table-condensed.table-striped.table-hover
+      %thead
         %tr
-          %td= carer.name
-          %td= carer.postcode
-          %td{:align => 'center'}= check_box_tag 'carer_id[]', carer.id
-      %tr
-        %td{:colspan => 2}
-        %td{:align => 'center'}= f.primary "Add Carers"
+          %th Name
+          %th Postcode
+          %th.text-center Select
+      %tbody
+        - @carers.each do |carer|
+          %tr
+            %td= carer.name
+            %td= carer.postcode
+            %td.text-center= check_box_tag 'carer_id[]', carer.id
+  .text-right
+    = f.primary "Add Carers"
 %ul.nav.nav-pills
   %li= link_to 'New Carer', new_carer_path
