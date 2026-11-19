@@ -13,7 +13,12 @@
 require 'test_helper'
 
 class JobTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'requires a unique name and sorts jobs by name' do
+    second = create_job(name: 'Zulu')
+    first = create_job(name: 'Alpha')
+
+    assert_equal [first, second], Job.in_order.to_a
+    assert_not Job.new(name: '').valid?
+    assert_not Job.new(name: first.name).valid?
+  end
 end

@@ -20,7 +20,15 @@
 require 'test_helper'
 
 class LeaderMeetTypeTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'prevents duplicate assignments and soft deletes them' do
+    leader = create_leader
+    meet_type = create_meet_type
+    association = LeaderMeetType.create!(leader: leader, meet_type: meet_type)
+
+    assert_not LeaderMeetType.new(leader: leader, meet_type: meet_type).valid?
+    association.destroy
+
+    assert_nil LeaderMeetType.find_by(id: association.id)
+    assert_equal 1, LeaderMeetType.unscoped.find(association.id).expired
+  end
 end

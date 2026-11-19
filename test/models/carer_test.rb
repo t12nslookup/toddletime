@@ -28,7 +28,37 @@
 require 'test_helper'
 
 class CarerTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'validates contact information and formats addresses' do
+    carer = create_carer(email: 'parent@example.test', phone: '0161 123 4567')
+
+    assert_equal "\"#{carer.name}\" <parent@example.test>", carer.full_email
+    assert_equal "\"#{carer.name}\" <01611234567>", carer.name_and_phone
+    assert_not Carer.new(name: 'A Name').valid?
+  end
+
+  test 'matches email and text preferences to meet and event types' do
+    meet_type = create_meet_type(name: 'Toddler Time')
+    meet_email = create_how_contact(contact_type: 'Email')
+    meet_text = create_how_contact(contact_type: 'Text')
+    carer = create_carer(what_contact: create_what_contact(contact_type: 'ToddlerTime'))
+    carer.how_contacts << [meet_email, meet_text]
+
+    assert carer.meet_email?(meet_type.id)
+    assert carer.meet_text?(meet_type.id)
+    assert carer.meet_phone?(meet_type.id)
+    assert_not carer.events_email?
+
+    event_carer = create_carer(what_contact: create_what_contact(contact_type: 'Special Events'))
+    event_carer.how_contacts << meet_email
+    assert event_carer.events_email?
+  end
+
+  test 'requires an allowed contact type to receive a meet email' do
+    meet_type = create_meet_type(name: 'Toddler Time')
+    contact = create_how_contact(contact_type: 'Email')
+    carer = create_carer(what_contact: create_what_contact(contact_type: 'Another Group'))
+    carer.how_contacts << contact
+
+    assert_not carer.meet_email?(meet_type.id)
+  end
 end

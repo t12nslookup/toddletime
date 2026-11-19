@@ -19,7 +19,12 @@
 require 'test_helper'
 
 class CarerToMeetTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'prevents registering a carer twice for the same meet' do
+    meet = create_meet
+    carer = create_carer
+    meet.carer_to_meets.create!(carer: carer)
+
+    duplicate = CarerToMeet.new(meet: meet, carer: carer)
+    assert_not duplicate.valid?
+  end
 end

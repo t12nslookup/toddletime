@@ -20,7 +20,12 @@
 require 'test_helper'
 
 class MeetTypeJobTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'has_count returns only positive job counts' do
+    meet_type = create_meet_type
+    positive = meet_type.meet_type_jobs.create!(job: create_job, count: 2)
+    zero_count = meet_type.meet_type_jobs.create!(job: create_job, count: 0)
+
+    assert zero_count.valid?
+    assert_equal [positive], MeetTypeJob.has_count.where(meet_type: meet_type).to_a
+  end
 end

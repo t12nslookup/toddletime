@@ -14,7 +14,13 @@
 require 'test_helper'
 
 class HowContactTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'requires unique contact types and soft deletes records' do
+    contact = create_how_contact(contact_type: 'Email')
+
+    assert_not HowContact.new(contact_type: 'Email').valid?
+    contact.destroy
+
+    assert_nil HowContact.find_by(id: contact.id)
+    assert_equal 1, HowContact.unscoped.find(contact.id).expired
+  end
 end
