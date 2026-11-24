@@ -4,12 +4,17 @@
 #
 # Table name: meet_type_jobs
 #
-#  id           :integer          not null, primary key
-#  job_id       :integer          indexed
-#  meet_type_id :integer          indexed
+#  id           :bigint           not null, primary key
 #  count        :integer          default(0)
-#  created_at   :datetime
-#  updated_at   :datetime
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  job_id       :bigint           indexed
+#  meet_type_id :bigint           indexed
+#
+# Indexes
+#
+#  index_meet_type_jobs_on_job_id        (job_id)
+#  index_meet_type_jobs_on_meet_type_id  (meet_type_id)
 #
 # Foreign Keys
 #

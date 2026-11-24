@@ -4,18 +4,18 @@
 #
 # Table name: children
 #
-#  id                 :integer          not null, primary key
-#  name               :string(255)
-#  gender             :string(255)
+#  id                 :bigint           not null, primary key
+#  address            :string
 #  date_of_birth      :date
-#  address            :string(255)
-#  postcode           :string(255)
-#  medical_conditions :string(255)
-#  special_needs      :string(255)
-#  registered_date    :date
-#  created_at         :datetime
-#  updated_at         :datetime
 #  emergency_contact  :string
+#  gender             :string
+#  medical_conditions :string
+#  name               :string
+#  postcode           :string
+#  registered_date    :date
+#  special_needs      :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
 #
 
 require 'test_helper'

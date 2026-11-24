@@ -2,11 +2,16 @@
 #
 # Table name: carer_to_meets
 #
-#  id         :integer          not null, primary key
-#  carer_id   :integer          indexed
-#  meet_id    :integer          indexed
-#  created_at :datetime
-#  updated_at :datetime
+#  id         :bigint           not null, primary key
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  carer_id   :bigint           indexed
+#  meet_id    :bigint           indexed
+#
+# Indexes
+#
+#  index_carer_to_meets_on_carer_id  (carer_id)
+#  index_carer_to_meets_on_meet_id   (meet_id)
 #
 # Foreign Keys
 #

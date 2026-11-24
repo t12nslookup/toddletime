@@ -10,6 +10,7 @@ class HowHeardsControllerTest < ActionController::TestCase
 
     post :create, params: { how_heard: { location_name: '' } }
     assert_response :success
+    assert_select '.invalid-feedback', text: "can't be blank"
   end
 
   test 'updates and soft deletes a source' do

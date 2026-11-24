@@ -2,6 +2,7 @@
 
 # == Route Map
 #
+# Routes for application:
 #                                   Prefix Verb   URI Pattern                                                                                       Controller#Action
 #                         new_user_session GET    /users/sign_in(.:format)                                                                          devise/sessions#new
 #                             user_session POST   /users/sign_in(.:format)                                                                          devise/sessions#create
@@ -153,11 +154,7 @@
 #           rails_conductor_inbound_emails GET    /rails/conductor/action_mailbox/inbound_emails(.:format)                                          rails/conductor/action_mailbox/inbound_emails#index
 #                                          POST   /rails/conductor/action_mailbox/inbound_emails(.:format)                                          rails/conductor/action_mailbox/inbound_emails#create
 #        new_rails_conductor_inbound_email GET    /rails/conductor/action_mailbox/inbound_emails/new(.:format)                                      rails/conductor/action_mailbox/inbound_emails#new
-#       edit_rails_conductor_inbound_email GET    /rails/conductor/action_mailbox/inbound_emails/:id/edit(.:format)                                 rails/conductor/action_mailbox/inbound_emails#edit
 #            rails_conductor_inbound_email GET    /rails/conductor/action_mailbox/inbound_emails/:id(.:format)                                      rails/conductor/action_mailbox/inbound_emails#show
-#                                          PATCH  /rails/conductor/action_mailbox/inbound_emails/:id(.:format)                                      rails/conductor/action_mailbox/inbound_emails#update
-#                                          PUT    /rails/conductor/action_mailbox/inbound_emails/:id(.:format)                                      rails/conductor/action_mailbox/inbound_emails#update
-#                                          DELETE /rails/conductor/action_mailbox/inbound_emails/:id(.:format)                                      rails/conductor/action_mailbox/inbound_emails#destroy
 # new_rails_conductor_inbound_email_source GET    /rails/conductor/action_mailbox/inbound_emails/sources/new(.:format)                              rails/conductor/action_mailbox/inbound_emails/sources#new
 #    rails_conductor_inbound_email_sources POST   /rails/conductor/action_mailbox/inbound_emails/sources(.:format)                                  rails/conductor/action_mailbox/inbound_emails/sources#create
 #    rails_conductor_inbound_email_reroute POST   /rails/conductor/action_mailbox/:inbound_email_id/reroute(.:format)                               rails/conductor/action_mailbox/reroutes#create
@@ -173,15 +170,16 @@
 #                     rails_direct_uploads POST   /rails/active_storage/direct_uploads(.:format)                                                    active_storage/direct_uploads#create
 #
 # Routes for LetterOpenerWeb::Engine:
+#        Prefix Verb URI Pattern                      Controller#Action
 #       letters GET  /                                letter_opener_web/letters#index
 # clear_letters POST /clear(.:format)                 letter_opener_web/letters#clear
 #        letter GET  /:id(/:style)(.:format)          letter_opener_web/letters#show
 # delete_letter POST /:id/delete(.:format)            letter_opener_web/letters#destroy
-#               GET  /:id/attachments/:file(.:format) letter_opener_web/letters#attachment {:file=>/[^\/]+/}
+#               GET  /:id/attachments/:file(.:format) letter_opener_web/letters#attachment {file: /[^\/]+/}
 
 Rails.application.routes.draw do
   devise_for :users
-  resources :users, only: %i[index approve lock unlock] do
+  resources :users, only: %i[index] do
     member do
       get 'approve'
       get 'lock'

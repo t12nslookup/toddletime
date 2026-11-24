@@ -60,6 +60,8 @@ Rails.application.configure do
 
   # Suppress logger output for asset requests.
   config.assets.quiet = true
+  # Resolve current assets even if production assets have been precompiled locally.
+  config.assets.resolve_with = [:environment]
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true

@@ -2,12 +2,17 @@
 #
 # Table name: leader_meet_types
 #
-#  id           :integer          not null, primary key
-#  leader_id    :integer          indexed
-#  meet_type_id :integer          indexed
+#  id           :bigint           not null, primary key
 #  expired      :integer          default(0)
-#  created_at   :datetime
-#  updated_at   :datetime
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  leader_id    :bigint           indexed
+#  meet_type_id :bigint           indexed
+#
+# Indexes
+#
+#  index_leader_meet_types_on_leader_id     (leader_id)
+#  index_leader_meet_types_on_meet_type_id  (meet_type_id)
 #
 # Foreign Keys
 #

@@ -10,18 +10,18 @@
     / [if lt IE 9]
       = javascript_include_tag 'html5shiv.min'
   %body
-    .navbar.navbar-fixed-top.navbar-inverse
-      .container-fluid
+    %header.navbar.navbar-inverse.account-bar
+      .container-fluid.account-bar-content
         - if user_signed_in?
-          .pull-left.navbar-text
-            Logged in as
+          .navbar-text.account-info{title: current_user.email}
+            %span.sr-only Signed in as
             %strong= current_user.email
-          .pull-right.navbar-text
+          .navbar-text.account-actions
             = link_to 'Edit profile', edit_user_registration_path, class: 'navbar-link'
             |
             = link_to "Logout", destroy_user_session_path, method: :delete, class: 'navbar-link'
         - else
-          .pull-right.navbar-text
+          .navbar-text.account-actions
             = link_to "Sign up", new_user_registration_path, class: 'navbar-link'
             |
             = link_to "Login", new_user_session_path, class: 'navbar-link'

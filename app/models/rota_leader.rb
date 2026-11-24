@@ -4,13 +4,19 @@
 #
 # Table name: rota_leaders
 #
-#  id         :integer          not null, primary key
-#  leader_id  :integer          indexed
-#  job_id     :integer          indexed
-#  meet_id    :integer          indexed
+#  id         :bigint           not null, primary key
 #  expired    :boolean          default(FALSE)
-#  created_at :datetime
-#  updated_at :datetime
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  job_id     :bigint           indexed
+#  leader_id  :bigint           indexed
+#  meet_id    :bigint           indexed
+#
+# Indexes
+#
+#  index_rota_leaders_on_job_id     (job_id)
+#  index_rota_leaders_on_leader_id  (leader_id)
+#  index_rota_leaders_on_meet_id    (meet_id)
 #
 # Foreign Keys
 #

@@ -6,12 +6,17 @@
 #
 #  id           :bigint           not null, primary key
 #  addresses    :string
-#  message      :string
-#  meet_type_id :bigint           indexed
-#  state        :integer          default(0), indexed
 #  delivered_at :datetime
+#  message      :string
+#  state        :integer          default(0), indexed
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  meet_type_id :bigint           indexed
+#
+# Indexes
+#
+#  index_send_texts_on_meet_type_id  (meet_type_id)
+#  index_send_texts_on_state         (state)
 #
 # Foreign Keys
 #

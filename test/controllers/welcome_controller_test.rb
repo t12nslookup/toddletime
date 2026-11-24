@@ -8,6 +8,10 @@ class WelcomeControllerTest < ActionController::TestCase
 
     assert_response :success
     assert_includes response.body, 'Hello World'
+    assert_select 'header .account-info .sr-only', text: 'Signed in as'
+    assert_select 'header .account-info strong', text: /@example\.test/
+    assert_select 'header a', text: 'Edit profile'
+    assert_select 'header a', text: 'Logout'
   end
 
   test 'redirects a signed-out visitor to sign in' do

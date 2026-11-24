@@ -2,6 +2,24 @@
 
 require 'test_helper'
 
+# == Schema Information
+#
+# Table name: meets
+#
+#  id           :bigint           not null, primary key
+#  meet_date    :date
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  meet_type_id :bigint           indexed
+#
+# Indexes
+#
+#  index_meets_on_meet_type_id  (meet_type_id)
+#
+# Foreign Keys
+#
+#  fk_meet_to_meet_type  (meet_type_id => meet_types.id)
+#
 class MeetTest < ActiveSupport::TestCase
   test 'requires a unique date' do
     meet = create_meet

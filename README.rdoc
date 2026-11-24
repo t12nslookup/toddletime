@@ -1,28 +1,28 @@
-== README
+== Toddletime
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The application uses Ruby 4.0.10 (managed by rbenv), Rails 8.1 and PostgreSQL.
+Install the Ruby version in +.ruby-version+, then run:
 
-Things you may want to cover:
+  bundle install
+  bin/rails db:prepare
+  bin/rails server
 
-* Ruby version
+Configure PostgreSQL as described in +config/database.yml+. In production,
+set +DATABASE_URL+ and configure the application's credentials and mail service.
+Rails 7.0 configuration defaults are intentionally retained to preserve existing
+behavior, including existing signed and encrypted data.
 
-* System dependencies
+Run the tests and lint with:
 
-* Configuration
+  bin/rails test
+  bundle exec rubocop
 
-* Database creation
+Refresh model and route annotations after schema or route changes with:
 
-* Database initialization
+  bundle exec annotaterb models -k --simple-indexes
+  bundle exec annotaterb routes
 
-* How to run the test suite
+Generate a Mermaid entity relationship diagram with +bundle exec rake erd+.
+For PDF output, install Graphviz and run:
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+  bundle exec rake erd generator=graphviz filetype=pdf

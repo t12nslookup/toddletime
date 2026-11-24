@@ -2,6 +2,30 @@
 
 require 'test_helper'
 
+# == Schema Information
+#
+# Table name: rota_leaders
+#
+#  id         :bigint           not null, primary key
+#  expired    :boolean          default(FALSE)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  job_id     :bigint           indexed
+#  leader_id  :bigint           indexed
+#  meet_id    :bigint           indexed
+#
+# Indexes
+#
+#  index_rota_leaders_on_job_id     (job_id)
+#  index_rota_leaders_on_leader_id  (leader_id)
+#  index_rota_leaders_on_meet_id    (meet_id)
+#
+# Foreign Keys
+#
+#  fk_rota_leader_job     (job_id => jobs.id)
+#  fk_rota_leader_leader  (leader_id => leaders.id)
+#  fk_rota_leader_meet    (meet_id => meets.id)
+#
 class RotaLeaderTest < ActiveSupport::TestCase
   test 'filters assignments with leaders and orders them by leader name' do
     meet = create_meet

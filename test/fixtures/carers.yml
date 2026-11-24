@@ -3,18 +3,24 @@
 # Table name: carers
 #
 #  id              :bigint           not null, primary key
-#  name            :string
-#  phone           :string
-#  email           :string
+#  address         :string
 #  can_contact     :integer
+#  email           :string
+#  name            :string
+#  other_heard     :string
+#  phone           :string
+#  postcode        :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  address         :string
-#  postcode        :string
-#  how_heard_id    :bigint           indexed
-#  other_heard     :string
 #  how_contact_id  :bigint           indexed
+#  how_heard_id    :bigint           indexed
 #  what_contact_id :bigint           indexed
+#
+# Indexes
+#
+#  index_carers_on_how_contact_id   (how_contact_id)
+#  index_carers_on_how_heard_id     (how_heard_id)
+#  index_carers_on_what_contact_id  (what_contact_id)
 #
 # Foreign Keys
 #

@@ -1,5 +1,9 @@
 AllCops:
+  NewCops: disable
+  TargetRubyVersion: 4.0
   Include:
+    - '**/*.rb'
+    - '**/*.rake'
     - '**/Rakefile'
     - '**/config.ru'
   Exclude:
@@ -13,11 +17,11 @@ AllCops:
 # explained at: https://github.com/bbatsov/rubocop/blob/master/config/default.yml
 
 # warning about too long lines increased to silence most warnings
-Metrics/LineLength:
+Layout/LineLength:
   Max: 280
 
 # Disable complaints about commenting classes.
-Documentation:
+Style/Documentation:
   Enabled: false
 
 # We do not care if we use old or new syntax, just enforce consistency. This
@@ -30,5 +34,3 @@ Style/HashSyntax:
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 
-Documentation:
-  Enabled: false

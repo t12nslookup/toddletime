@@ -26,12 +26,50 @@
 
 }
 
+.account-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  margin-bottom: 0;
+}
+
+.account-bar-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 16px;
+  min-height: 50px;
+  margin-top: 0;
+  padding: 8px 15px;
+}
+
+.account-bar-content::before,
+.account-bar-content::after {
+  content: none;
+}
+
+.account-bar .navbar-text {
+  float: none;
+  margin: 0;
+}
+
+.account-info {
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.account-bar .account-actions {
+  margin-left: auto;
+}
+
 html {
   overflow-y: scroll;
 }
 
 body {
-  padding-top: 60px;
   background: image-url("peachlogo.png");
   background-position: right 20px top 90px;
   background-repeat: no-repeat;

@@ -4,11 +4,16 @@
 #
 # Table name: leader_to_meets
 #
-#  id         :integer          not null, primary key
-#  meet_id    :integer          indexed
-#  leader_id  :integer          indexed
-#  created_at :datetime
-#  updated_at :datetime
+#  id         :bigint           not null, primary key
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  leader_id  :bigint           indexed
+#  meet_id    :bigint           indexed
+#
+# Indexes
+#
+#  index_leader_to_meets_on_leader_id  (leader_id)
+#  index_leader_to_meets_on_meet_id    (meet_id)
 #
 # Foreign Keys
 #

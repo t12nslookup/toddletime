@@ -2,13 +2,13 @@
 #
 # Table name: leaders
 #
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  email      :string(255)
-#  expired    :date
-#  created_at :datetime
-#  updated_at :datetime
+#  id         :bigint           not null, primary key
 #  dbs        :date
+#  email      :string
+#  expired    :date
+#  name       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
